@@ -24,7 +24,7 @@ public class Main extends Application {
 		MainForm   controller = loader.getController();
 
 		primaryStage.setTitle("Keeeeeey!");
-		primaryStage.setWidth(400);
+		primaryStage.setWidth(700);
 		primaryStage.setHeight(400);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
