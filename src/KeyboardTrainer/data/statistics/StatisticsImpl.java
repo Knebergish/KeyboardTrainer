@@ -5,7 +5,7 @@ public class StatisticsImpl implements Statistics {
 	private final int  id;
 	private final int  userId;
 	private final int  exerciseId;
-	private final long  totalTime;
+	private final long totalTime;
 	private final int  errorsCount;
 	private final long averagePressingTime;
 	

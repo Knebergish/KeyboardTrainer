@@ -8,7 +8,6 @@ import KeyboardTrainer.forms.exercise.ExerciseManager;
 import KeyboardTrainer.forms.exercise.ExerciseVisualizer;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 
