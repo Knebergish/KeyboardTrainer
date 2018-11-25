@@ -3,12 +3,12 @@ package KeyboardTrainer.data.user;
 
 public class UserImpl implements User {
 	@Override
-	public String getPassword() {
+	public String getLogin() {
 		return null;
 	}
 	
 	@Override
-	public String getLogin() {
+	public String getPassword() {
 		return null;
 	}
 	

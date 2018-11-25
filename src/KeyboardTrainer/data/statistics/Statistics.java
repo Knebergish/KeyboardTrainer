@@ -9,8 +9,6 @@ public interface Statistics extends Entity {
 	
 	int getExerciseId();
 	
-	long getTotalTime(); // миллисекунды
-	
 	int getErrorsCount();
 	
 	long getAveragePressingTime(); // миллисекунды

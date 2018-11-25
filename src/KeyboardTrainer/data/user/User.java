@@ -5,9 +5,9 @@ import KeyboardTrainer.data.Entity;
 
 
 public interface User extends Entity {
-	String getPassword(); // или getPasswordHash()
+	String getLogin();
 	
-	String getLogin(); // разрешим менять?
+	String getPassword();
 	
 	boolean isAdmin();
 }

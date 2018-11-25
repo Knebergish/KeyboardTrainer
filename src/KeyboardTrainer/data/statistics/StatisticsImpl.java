@@ -52,11 +52,6 @@ public class StatisticsImpl implements Statistics {
 	}
 	
 	@Override
-	public long getTotalTime() {
-		return totalTime;
-	}
-	
-	@Override
 	public int getErrorsCount() {
 		return errorsCount;
 	}
