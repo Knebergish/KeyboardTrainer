@@ -3,7 +3,6 @@ package KeyboardTrainer.forms.exercise;
 
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
-import KeyboardTrainer.data.statistics.StatisticsBuilder;
 import KeyboardTrainer.data.user.User;
 
 
@@ -21,12 +20,8 @@ public class ExerciseManager {
 	private int     currentLetterIndex;
 	private boolean isFinish = true;
 	
-	public ExerciseManager(User user,
-	                       Exercise exercise,
-	                       ActionHandler onErrorHandler,
-	                       ActionHandler onPressHandler,
-	                       ActionHandler onTimeUpdateHandler,
-	                       EndHandler onEndExerciseHandler) {
+	public ExerciseManager(User user, Exercise exercise, ActionHandler onErrorHandler, ActionHandler onPressHandler,
+	                       ActionHandler onTimeUpdateHandler, EndHandler onEndExerciseHandler) {
 		this.user = user;
 		this.exercise = exercise;
 		this.onErrorHandler = onErrorHandler;
@@ -81,7 +76,6 @@ public class ExerciseManager {
 		isFinish = true;
 		Statistics statistics = statisticsBuilder.stopBuild();
 		onEndExerciseHandler.endExercise(statistics);
-		exerciseVisualizer.end();
 	}
 	
 	public ExerciseVisualizer getExerciseVisualizer() {

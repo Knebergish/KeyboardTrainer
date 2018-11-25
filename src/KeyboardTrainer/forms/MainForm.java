@@ -21,12 +21,11 @@ public class MainForm {
 	public void init() {
 		UserImpl     user     = new UserImpl();
 		ExerciseImpl exercise = new ExerciseImpl();
-		exerciseManager = new ExerciseManager(user,
-		                                      exercise,
-		                                      () -> System.out.println("Error"),
+		//noinspection Convert2MethodRef
+		exerciseManager = new ExerciseManager(user, exercise, () -> System.out.println("Error"),
 		                                      () -> System.out.println("Press"),
 		                                      () -> System.out.println("Time update"),
-		                                      this::endExercise);
+		                                      (statistic) -> this.endExercise(statistic));
 		
 		exerciseVisualizer = exerciseManager.getExerciseVisualizer();
 		exerciseVisualizer.getRegion().setPrefHeight(gridPane.getHeight());
