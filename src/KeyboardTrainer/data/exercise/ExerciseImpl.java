@@ -2,7 +2,6 @@ package KeyboardTrainer.data.exercise;
 
 
 import KeyboardTrainer.data.KeyboardZone;
-import KeyboardTrainer.data.level.Level;
 
 import java.util.Set;
 
@@ -14,8 +13,8 @@ public class ExerciseImpl implements Exercise {
 	}
 	
 	@Override
-	public Level getLevel() {
-		return null;
+	public int getLevel() {
+		return -13;
 	}
 	
 	@Override

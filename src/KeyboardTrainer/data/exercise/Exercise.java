@@ -3,7 +3,6 @@ package KeyboardTrainer.data.exercise;
 
 import KeyboardTrainer.data.Entity;
 import KeyboardTrainer.data.KeyboardZone;
-import KeyboardTrainer.data.level.Level;
 
 import java.util.Set;
 
@@ -11,7 +10,7 @@ import java.util.Set;
 public interface Exercise extends Entity {
 	String getName();
 	
-	Level getLevel();
+	int getLevel();
 	
 	int getLength();
 	
