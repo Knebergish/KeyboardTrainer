@@ -2,9 +2,19 @@ package KeyboardTrainer.data;
 
 
 public enum KeyboardZone {
-	ZONE_1,
-	ZONE_2,
-	ZONE_3,
-	ZONE_4,
-	ZONE_5
+	ZONE_1(1),
+	ZONE_2(2),
+	ZONE_3(3),
+	ZONE_4(4),
+	ZONE_5(5);
+	
+	private int number;
+	
+	KeyboardZone(int number) {
+		this.number = number;
+	}
+	
+	public int getNumber() {
+		return number;
+	}
 }
