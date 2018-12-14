@@ -19,15 +19,6 @@ public class SimpleTextRandomizer {
 	private final List<Character> letters;
 	private final List<Character> digits;
 	
-	public static void main(String[] args) {
-		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(new RussianLanguage(), KeyboardZone.ZONE_1,
-		                                                           KeyboardZone.ZONE_2, KeyboardZone.ZONE_3,
-		                                                           KeyboardZone.ZONE_4);
-		String text = randomizer.generateText(300);
-		System.out.println(text.length());
-		System.out.println(text);
-	}
-	
 	public SimpleTextRandomizer(Language language, KeyboardZone... zones) {
 		List<Character> symbols = Arrays.stream(zones).parallel()
 		                                .flatMap(zone -> language.getSymbols(zone).stream())
@@ -40,6 +31,15 @@ public class SimpleTextRandomizer {
 		digits = symbols.parallelStream()
 		                .filter(Character::isDigit)
 		                .collect(Collectors.toList());
+	}
+	
+	public static void main(String[] args) {
+		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(new RussianLanguage(), KeyboardZone.ZONE_1,
+		                                                           KeyboardZone.ZONE_2, KeyboardZone.ZONE_3,
+		                                                           KeyboardZone.ZONE_4);
+		String text = randomizer.generateText(300);
+		System.out.println(text.length());
+		System.out.println(text);
 	}
 	
 	public String generateText(int length) {
@@ -65,11 +65,11 @@ public class SimpleTextRandomizer {
 		return word.toString();
 	}
 	
-	private Character getRandomSymbol(List<Character> symbols) {
-		return symbols.get(random.nextInt(symbols.size()));
-	}
-	
 	private int getNormal(int value) {
 		return (int) Math.abs(value + (random.nextGaussian() / 3) * value) + 1;
+	}
+	
+	private Character getRandomSymbol(List<Character> symbols) {
+		return symbols.get(random.nextInt(symbols.size()));
 	}
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public abstract class AbstractLanguage implements Language {
-	private final String                          name;
+	private final String                             name;
 	protected     Map<KeyboardZone, List<Character>> zonesSymbols;
 	
 	protected AbstractLanguage(String name) {
@@ -18,12 +18,12 @@ public abstract class AbstractLanguage implements Language {
 	}
 	
 	@Override
-	public String getName() {
-		return name;
+	public List<Character> getSymbols(KeyboardZone zone) {
+		return zonesSymbols.get(zone);
 	}
 	
 	@Override
-	public List<Character> getSymbols(KeyboardZone zone) {
-		return zonesSymbols.get(zone);
+	public String getName() {
+		return name;
 	}
 }
