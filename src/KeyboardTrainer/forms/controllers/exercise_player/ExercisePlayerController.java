@@ -1,17 +1,15 @@
-package KeyboardTrainer.forms;
+package KeyboardTrainer.forms.controllers.exercise_player;
 
 
 import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.user.UserImpl;
-import KeyboardTrainer.forms.exercise.ExerciseManager;
-import KeyboardTrainer.forms.exercise.ExerciseVisualizer;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 
-public class MainForm {
+public class ExercisePlayerController {
 	public  GridPane           gridPane;
 	public  Button             startButton;
 	public  Button             breakButton;
@@ -19,8 +17,9 @@ public class MainForm {
 	private ExerciseManager    exerciseManager;
 	
 	public void init() {
-		UserImpl     user     = new UserImpl();
-		ExerciseImpl exercise = new ExerciseImpl();
+		UserImpl user = new UserImpl();
+		ExerciseImpl exercise = new ExerciseImpl("TestExercise", 1, 13, "12345",
+		                                         null, 12, 100, 0);
 		//noinspection Convert2MethodRef
 		exerciseManager = new ExerciseManager(user, exercise, () -> System.out.println("Error"),
 		                                      () -> System.out.println("Press"),
@@ -35,6 +34,12 @@ public class MainForm {
 		GridPane.setMargin(exerciseVisualizer.getRegion(), new Insets(10, 10, 10, 10));
 	}
 	
+	private void endExercise(Statistics statistics) {
+		System.out.println(statistics);
+		startButton.setDisable(false);
+		breakButton.setDisable(true);
+	}
+	
 	public void startExercise() {
 		startButton.setDisable(true);
 		breakButton.setDisable(false);
@@ -44,11 +49,5 @@ public class MainForm {
 	
 	public void breakExercise() {
 		exerciseManager.endExercise();
-	}
-	
-	private void endExercise(Statistics statistics) {
-		System.out.println(statistics);
-		startButton.setDisable(false);
-		breakButton.setDisable(true);
 	}
 }

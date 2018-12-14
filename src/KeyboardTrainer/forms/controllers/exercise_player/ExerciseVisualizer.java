@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.exercise;
+package KeyboardTrainer.forms.controllers.exercise_player;
 
 
 import javafx.scene.layout.Region;
