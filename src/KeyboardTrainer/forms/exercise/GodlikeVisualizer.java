@@ -18,11 +18,10 @@ import java.util.List;
 public class GodlikeVisualizer implements ExerciseVisualizer {
 	private static final Paint  PRINTED_COLOR      = Color.gray(0.8);
 	private static final Paint  CURRENT_COLOR      = Color.gray(0.0);
-	private static final Paint  CURRENT_BAD_COLOR  = Color.rgb(255, 0, 0);
 	private static final Paint  UNPRINTED_COLOR    = Color.gray(0.1);
 	private static final String CURRENT_BACKGROUND = "hsb(90, 65%, 80%)";
 	private static final String ERROR_BACKGROUND   = "hsb(2, 80%, 100%)";
-	private static final int    FONT_SIZE          = 40;
+	private static final int    FONT_SIZE          = 20;
 	
 	private final List<Text> letters    = new ArrayList<>();
 	private final ScrollPane scrollPane = new ScrollPane();
@@ -55,10 +54,7 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 	
 	@Override
 	public void start() {
-		currentLetterIndex = 0;
-		for (Text letter : letters) {
-			letter.setFill(UNPRINTED_COLOR);
-		}
+		reset();
 		setLetterDesign(0, LetterDesign.CURRENT);
 	}
 	
@@ -83,7 +79,6 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 			}
 			
 			case CURRENT_BAD: {
-//				setLetterDesign(letter, CURRENT_BAD_COLOR, true);
 				setCurrentLetterBackground(letter, ERROR_BACKGROUND);
 				break;
 			}
@@ -130,21 +125,29 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 	
 	@Override
 	public void handleGoodKey() {
+		if (currentLetterIndex >= text.length()) {
+			return;
+		}
+		
 		setLetterDesign(currentLetterIndex, LetterDesign.PRINTED);
-		if (++currentLetterIndex == text.length()) {
-			end();
-		} else {
+		textFlow.setStyle("");
+		currentLetterIndex++;
+		if (currentLetterIndex < text.length()) {
 			setLetterDesign(currentLetterIndex, LetterDesign.CURRENT);
 		}
 	}
 	
 	@Override
 	public void handleBadKey() {
+		if (currentLetterIndex >= text.length()) {
+			return;
+		}
+		
 		setLetterDesign(currentLetterIndex, LetterDesign.CURRENT_BAD);
 	}
 	
 	@Override
-	public void end() {
+	public void reset() {
 		for (int i = 0; i < letters.size(); i++) {
 			setLetterDesign(i, LetterDesign.UNPRINTED);
 		}
