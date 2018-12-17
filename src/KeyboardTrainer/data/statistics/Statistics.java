@@ -12,4 +12,6 @@ public interface Statistics extends Entity {
 	int getErrorsCount();
 	
 	long getAveragePressingTime(); // миллисекунды
+	
+	long getTotalTime(); // миллисекунды
 }

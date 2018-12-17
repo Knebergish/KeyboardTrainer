@@ -60,4 +60,9 @@ public class StatisticsImpl implements Statistics {
 	public long getAveragePressingTime() {
 		return averagePressingTime;
 	}
+	
+	@Override
+	public long getTotalTime() {
+		return totalTime;
+	}
 }
