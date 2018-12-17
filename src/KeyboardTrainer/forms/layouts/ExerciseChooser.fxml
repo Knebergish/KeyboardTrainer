@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" minHeight="250.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
       fx:controller="KeyboardTrainer.forms.controllers.ExerciseChooserController">
-    <GridPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+    <GridPane fx:id="treeParentGridPane" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
@@ -14,11 +14,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-        <TreeView fx:id="exercisesTreeView" prefHeight="200.0" prefWidth="200.0">
-            <GridPane.margin>
-                <Insets left="5.0" right="5.0" top="10.0"/>
-            </GridPane.margin>
-        </TreeView>
         <Button fx:id="controlTestButton" mnemonicParsing="false" text="Пройти контрольный тест"
                 GridPane.halignment="RIGHT"
                 GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -32,7 +27,7 @@
             <Insets left="5.0" right="5.0"/>
         </HBox.margin>
     </Separator>
-    <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" HBox.hgrow="ALWAYS">
+    <GridPane fx:id="detailsParentGridPane" alignment="CENTER_RIGHT" GridPane.columnIndex="2" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
@@ -49,16 +44,6 @@
                 <Insets top="10.0"/>
             </GridPane.margin>
         </Label>
-        <GridPane fx:id="detailInfoGridPane" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="TOP"
-                  GridPane.vgrow="NEVER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="80.0" maxWidth="80.0"/>
-            </columnConstraints>
-            <GridPane.margin>
-                <Insets right="10.0"/>
-            </GridPane.margin>
-        </GridPane>
         <GridPane GridPane.rowIndex="2">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>

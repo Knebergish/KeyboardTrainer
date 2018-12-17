@@ -3,13 +3,17 @@ package KeyboardTrainer.forms.controllers;
 
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
-import KeyboardTrainer.forms.components.DetailsFiller;
+import KeyboardTrainer.forms.components.details.DetailsFiller;
+import KeyboardTrainer.forms.components.details.DetailsGridPane;
+import KeyboardTrainer.forms.components.details.ExerciseDetailsFiller;
+import KeyboardTrainer.forms.components.tree.exercise.ExerciseTree;
+import KeyboardTrainer.forms.components.tree.exercise.ExerciseTreeItem;
 import KeyboardTrainer.forms.controllers.exercise_player.ExercisePlayerController;
 import KeyboardTrainer.forms.general.ContentArea;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
@@ -17,12 +21,14 @@ import javafx.stage.Stage;
 
 
 public class ExerciseChooserController implements ContentArea {
-	public  GridPane                   detailInfoGridPane;
-	public  TreeView<ExerciseTreeItem> exercisesTreeView;
-	public  Button                     controlTestButton;
-	public  Button                     statisticsButton;
-	public  Button                     startExerciseButton;
-	private DetailsFiller              detailsFiller;
+	public GridPane detailsParentGridPane;
+	public Button   controlTestButton;
+	public Button   statisticsButton;
+	public Button   startExerciseButton;
+	public GridPane treeParentGridPane;
+	
+	private TreeView<ExerciseTreeItem> exercisesTreeView;
+	private DetailsFiller<Exercise>    detailsFiller;
 	
 	private Exercise selectedExercise;
 	
@@ -33,8 +39,11 @@ public class ExerciseChooserController implements ContentArea {
 	
 	@Override
 	public void init() {
-		detailsFiller = new DetailsFiller(detailInfoGridPane);
+		detailsFiller = new ExerciseDetailsFiller();
 		detailsFiller.fillDetails(null);
+		DetailsGridPane detailsGridPane = detailsFiller.getDetailsGridPane();
+		GridPane.setRowIndex(detailsGridPane, 1);
+		detailsParentGridPane.getChildren().add(detailsGridPane);
 		
 		initExerciseTreeView();
 		
@@ -42,34 +51,15 @@ public class ExerciseChooserController implements ContentArea {
 	}
 	
 	private void initExerciseTreeView() {
-		exercisesTreeView.setRoot(new TreeItem<>(null));
-		exercisesTreeView.setShowRoot(false);
-		// Учим дерево выводить уровни и упражнения
-		exercisesTreeView.setCellFactory(tv -> new TreeCell<ExerciseTreeItem>() {
-			@Override
-			protected void updateItem(ExerciseTreeItem item, boolean empty) {
-				super.updateItem(item, empty);
-				if (!empty && item != null) {
-					if (item.isExercise()) {
-						setText(item.getExercise().getName());
-					} else {
-						setText(String.valueOf("Уровень " + item.getLevel()));
-					}
-				} else {
-					setText("");
-				}
-			}
-		});
-		
-		// Обрабатываем событие выбора упражнения в дереве
-		exercisesTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+		exercisesTreeView = new ExerciseTree(exerciseTreeItem -> {
 			selectedExercise = null;
-			ExerciseTreeItem exerciseTreeItem = newValue.getValue();
-			if (exerciseTreeItem != null && exerciseTreeItem.isExercise) {
+			if (exerciseTreeItem != null && exerciseTreeItem.isExercise()) {
 				selectedExercise = exerciseTreeItem.getExercise();
 			}
 			detailsFiller.fillDetails(selectedExercise);
 		});
+		treeParentGridPane.getChildren().add(exercisesTreeView);
+		GridPane.setMargin(exercisesTreeView, new Insets(10, 5, 0, 10));
 		
 		// Тестовые данные
 		for (int i = 0; i < 4; i++) {
@@ -97,36 +87,5 @@ public class ExerciseChooserController implements ContentArea {
 		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), selectedExercise.getName(), 700, 400);
 		rootWithController.getController().init();
 		stage.show();
-	}
-	
-	
-	private class ExerciseTreeItem {
-		private final boolean  isExercise;
-		private final int      level;
-		private final Exercise exercise;
-		
-		private ExerciseTreeItem(Exercise exercise) {
-			isExercise = true;
-			this.exercise = exercise;
-			this.level = -13; // Прост весело
-		}
-		
-		private ExerciseTreeItem(int level) {
-			isExercise = false;
-			this.level = level;
-			this.exercise = null;
-		}
-		
-		public boolean isExercise() {
-			return isExercise;
-		}
-		
-		public int getLevel() {
-			return level;
-		}
-		
-		public Exercise getExercise() {
-			return exercise;
-		}
 	}
 }

@@ -20,10 +20,18 @@ public class StatisticsBuilder {
 		startTime = System.nanoTime();
 	}
 	
-	Statistics stopBuild() {
+	void incrementErrorsCount() {
+		errorsCount++;
+	}
+	
+	void incrementPressingsCount() {
+		pressingsCount++;
+	}
+	
+	Statistics getStatistics() {
 		long endTime             = System.nanoTime();
-		long totalTime           = TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
-		long averagePressingTime = totalTime / pressingsCount;
+		long totalTime           = startTime == 0 ? 0 : TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
+		long averagePressingTime = pressingsCount == 0 ? 0 : totalTime / pressingsCount;
 		
 		return new StatisticsImpl(-1,
 		                          userId,
@@ -31,14 +39,6 @@ public class StatisticsBuilder {
 		                          totalTime,
 		                          errorsCount,
 		                          averagePressingTime);
-	}
-	
-	void incrementErrorsCount() {
-		errorsCount++;
-	}
-	
-	void incrementPressingsCount() {
-		pressingsCount++;
 	}
 	
 	long getTotalTime() {
