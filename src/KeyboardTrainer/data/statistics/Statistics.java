@@ -14,4 +14,6 @@ public interface Statistics extends Entity {
 	long getAveragePressingTime(); // миллисекунды
 	
 	long getTotalTime(); // миллисекунды
+	
+	int getCompletePercents();
 }

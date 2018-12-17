@@ -1,21 +1,25 @@
 package KeyboardTrainer.forms.controllers.exercise_player;
 
 
+import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.user.UserImpl;
+import KeyboardTrainer.forms.Utils;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
+import KeyboardTrainer.forms.controllers.ExerciseResultController;
+import KeyboardTrainer.forms.general.fxml.FXMLManager;
+import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,6 +29,8 @@ public class ExercisePlayerController {
 	public GridPane gridPane;
 	public Button   breakButton;
 	
+	private Exercise exercise;
+	
 	private ExerciseVisualizer        exerciseVisualizer;
 	private ExerciseManager           exerciseManager;
 	private DetailsFiller<Statistics> statisticsDetailsFiller;
@@ -32,8 +38,8 @@ public class ExercisePlayerController {
 	public void init() {
 		// Тестовые данные
 		UserImpl user = new UserImpl();
-		ExerciseImpl exercise = new ExerciseImpl("TestExercise", 1, 13, "12345",
-		                                         null, 12, 1000, 0);
+		exercise = new ExerciseImpl("TestExercise", 1, 13, "12345",
+		                            null, 12, 1000, 0);
 		//
 		
 		//noinspection Convert2MethodRef
@@ -63,6 +69,16 @@ public class ExercisePlayerController {
 	private void endExercise(Statistics statistics) {
 		System.out.println(statistics);
 		breakButton.setDisable(true);
+		
+		RootWithController<ExerciseResultController> rootWithController =
+				FXMLManager.load("KeyboardTrainer/forms/layouts/ExerciseResult.fxml");
+		rootWithController.getController().init(exercise, statistics);
+		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), "Результаты", 300, 220);
+		stage.setResizable(false);
+		stage.show();
+		
+		Window window = gridPane.getScene().getWindow();
+		window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
 	}
 	
 	private void initExerciseVisualizer() {
@@ -72,16 +88,16 @@ public class ExercisePlayerController {
 		GridPane.setMargin(exerciseVisualizer.getRegion(), new Insets(10, 10, 10, 10));
 	}
 	
-	private void initStatisticsDetails(ExerciseImpl exercise) {
+	private void initStatisticsDetails(Exercise exercise) {
 		statisticsDetailsFiller = new DetailsFiller<>(
-				List.of(new Pair<>("Время", (Statistics stat) -> formatTime(stat.getTotalTime(), "mm:ss")),
+				List.of(new Pair<>("Время", (Statistics stat) -> Utils.formatTime(stat.getTotalTime(), "mm:ss")),
 				        new Pair<>("Ошибки",
 				                   (Statistics stat) -> stat.getErrorsCount() + " / " + exercise.getMaxErrorsCount()),
 				        new Pair<>("Ср. время нажатия",
 				                   (Statistics stat) -> {
 					                   String mask    = "s.SSS";
-					                   String current = formatTime(stat.getAveragePressingTime(), mask);
-					                   String max     = formatTime(exercise.getMaxAveragePressingTime(), mask);
+					                   String current = Utils.formatTime(stat.getAveragePressingTime(), mask);
+					                   String max     = Utils.formatTime(exercise.getMaxAveragePressingTime(), mask);
 					                   return current + " / " + max;
 				                   }))
 		);
@@ -95,11 +111,6 @@ public class ExercisePlayerController {
 		breakButton.setDisable(false);
 		exerciseManager.startExercise();
 		exerciseVisualizer.getRegion().requestFocus();
-	}
-	
-	private String formatTime(long time, String format) {
-		LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault());
-		return date.format(DateTimeFormatter.ofPattern(format));
 	}
 	
 	private void updateStatistics(Statistics statistics) {

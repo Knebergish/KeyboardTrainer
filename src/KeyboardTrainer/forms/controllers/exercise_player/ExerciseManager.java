@@ -60,6 +60,7 @@ public class ExerciseManager {
 	 * Крутое название. Кто-нибудь, придумайте другое.
 	 */
 	private void realStartExercise() {
+		statisticsBuilder.setExerciseId(exercise.getLength()); //TODO: переделать временный костыль
 		statisticsBuilder.startBuild();
 		
 		// Тикает раз в секунду и обновляет статистику

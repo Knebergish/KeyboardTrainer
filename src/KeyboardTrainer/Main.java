@@ -35,6 +35,7 @@ public class Main extends Application {
 							                           700, 400);
 					
 					                           rootWithController.getController().init();
+					                           stage.setResizable(false);
 					                           stage.show();
 				                           }));
 		generalForm.addMenuButton(new ChangeContentMenuButton("Выбор упражнения",

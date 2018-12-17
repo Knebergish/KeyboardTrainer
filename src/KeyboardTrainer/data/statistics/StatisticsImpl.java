@@ -8,6 +8,7 @@ public class StatisticsImpl implements Statistics {
 	private final long totalTime;
 	private final int  errorsCount;
 	private final long averagePressingTime;
+	private final int  completePercents;
 	
 	
 	public StatisticsImpl(int id,
@@ -15,13 +16,15 @@ public class StatisticsImpl implements Statistics {
 	                      int exerciseId,
 	                      long totalTime,
 	                      int errorsCount,
-	                      long averagePressingTime) {
+	                      long averagePressingTime,
+	                      int completePercents) {
 		this.id = id;
 		this.userId = userId;
 		this.exerciseId = exerciseId;
 		this.totalTime = totalTime;
 		this.errorsCount = errorsCount;
 		this.averagePressingTime = averagePressingTime;
+		this.completePercents = completePercents;
 	}
 	
 	@Override
@@ -64,5 +67,10 @@ public class StatisticsImpl implements Statistics {
 	@Override
 	public long getTotalTime() {
 		return totalTime;
+	}
+	
+	@Override
+	public int getCompletePercents() {
+		return completePercents;
 	}
 }
