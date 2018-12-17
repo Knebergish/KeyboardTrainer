@@ -49,6 +49,7 @@ public class ExerciseManager {
 	
 	public void startExercise() {
 		currentLetterIndex = 0;
+		statisticsBuilder.setExerciseId(exercise.getLength()); //TODO: переделать временный костыль
 		clockExecutor = Executors.newScheduledThreadPool(1);
 		isFinish = false;
 		
@@ -60,7 +61,6 @@ public class ExerciseManager {
 	 * Крутое название. Кто-нибудь, придумайте другое.
 	 */
 	private void realStartExercise() {
-		statisticsBuilder.setExerciseId(exercise.getLength()); //TODO: переделать временный костыль
 		statisticsBuilder.startBuild();
 		
 		// Тикает раз в секунду и обновляет статистику
