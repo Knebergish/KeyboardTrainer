@@ -21,7 +21,7 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 	private static final Paint  UNPRINTED_COLOR    = Color.gray(0.1);
 	private static final String CURRENT_BACKGROUND = "hsb(90, 65%, 80%)";
 	private static final String ERROR_BACKGROUND   = "hsb(2, 80%, 100%)";
-	private static final int    FONT_SIZE          = 20;
+	private static final int    FONT_SIZE          = 14;
 	
 	private final List<Text> letters    = new ArrayList<>();
 	private final ScrollPane scrollPane = new ScrollPane();
@@ -80,6 +80,20 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 		if (currentLetterIndex < text.length()) {
 			setLetterDesign(currentLetterIndex, LetterDesign.CURRENT);
 		}
+	}
+	
+	@Override
+	public void handleBadKey() {
+		if (currentLetterIndex >= text.length()) {
+			return;
+		}
+		
+		setLetterDesign(currentLetterIndex, LetterDesign.CURRENT_BAD);
+	}
+	
+	@Override
+	public Region getRegion() {
+		return scrollPane;
 	}
 	
 	private void setLetterDesign(int letterIndex, LetterDesign design) {
@@ -146,21 +160,6 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 				(b.getMaxY() - (1 - (b.getMaxY() - letterHeight) / scrollHeight) * letterHeight) / scrollHeight; // fu
 		scrollPane.setVvalue(scroll);
 	}
-	
-	@Override
-	public void handleBadKey() {
-		if (currentLetterIndex >= text.length()) {
-			return;
-		}
-		
-		setLetterDesign(currentLetterIndex, LetterDesign.CURRENT_BAD);
-	}
-	
-	@Override
-	public Region getRegion() {
-		return scrollPane;
-	}
-	
 	
 	private enum LetterDesign {
 		UNPRINTED,
