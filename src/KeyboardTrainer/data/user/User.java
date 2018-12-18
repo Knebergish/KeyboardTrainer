@@ -11,5 +11,5 @@ public interface User extends Entity {
 	
 	boolean isAdmin();
 	
-	boolean getDisabled();
+	boolean isDisabled();
 }

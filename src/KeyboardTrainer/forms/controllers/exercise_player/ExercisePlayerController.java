@@ -37,7 +37,7 @@ public class ExercisePlayerController {
 	
 	public void init() {
 		// Тестовые данные
-		UserImpl user = new UserImpl();
+		UserImpl user = new UserImpl(0, "0", "0", false, false);
 		exercise = new ExerciseImpl("TestExercise", 1, 13, "12345",
 		                            null, 12, 1000, 0);
 		//

@@ -2,28 +2,41 @@ package KeyboardTrainer.data.user;
 
 
 public class UserImpl implements User {
-	@Override
-	public String getLogin() {
-		return null;
-	}
+	private final int     id;
+	private final String  login;
+	private final String  password;
+	private final boolean isAdmin;
+	private final boolean isDisabled;
 	
-	@Override
-	public String getPassword() {
-		return null;
-	}
-	
-	@Override
-	public boolean isAdmin() {
-		return false;
-	}
-	
-	@Override
-	public boolean getDisabled() {
-		return false;
+	public UserImpl(int id, String login, String password, boolean isAdmin, boolean isDisabled) {
+		this.id = id;
+		this.login = login;
+		this.password = password;
+		this.isAdmin = isAdmin;
+		this.isDisabled = isDisabled;
 	}
 	
 	@Override
 	public int getId() {
-		return 0;
+		return id;
+	}
+	
+	@Override
+	public String getLogin() {
+		return login;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
+	
+	@Override
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	
+	public boolean isDisabled() {
+		return isDisabled;
 	}
 }
