@@ -10,4 +10,6 @@ public interface User extends Entity {
 	String getPassword();
 	
 	boolean isAdmin();
+	
+	boolean getDisabled();
 }

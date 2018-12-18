@@ -18,6 +18,11 @@ public class UserImpl implements User {
 	}
 	
 	@Override
+	public boolean getDisabled() {
+		return false;
+	}
+	
+	@Override
 	public int getId() {
 		return 0;
 	}
