@@ -16,7 +16,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
 
 
-// Нужно общее этих форм как-то переиспользовать, но как оычно некогда
+// Нужно общее этих форм как-то переиспользовать, но как обычно некогда
 @SuppressWarnings("Duplicates")
 public class ExerciseManagerController implements ContentArea {
 	public GridPane detailsParentGridPane;
