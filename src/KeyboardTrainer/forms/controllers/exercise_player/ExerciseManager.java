@@ -49,7 +49,7 @@ public class ExerciseManager {
 	
 	public void startExercise() {
 		currentLetterIndex = 0;
-		statisticsBuilder.setExerciseId(exercise.getLength()); //TODO: переделать временный костыль
+		statisticsBuilder.setExerciseId(exercise.getText().length()); //TODO: переделать временный костыль
 		clockExecutor = Executors.newScheduledThreadPool(1);
 		isFinish = false;
 		
