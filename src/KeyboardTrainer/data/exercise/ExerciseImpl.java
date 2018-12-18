@@ -3,7 +3,6 @@ package KeyboardTrainer.data.exercise;
 
 import KeyboardTrainer.data.KeyboardZone;
 
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,11 +26,26 @@ public class ExerciseImpl implements Exercise {
 		this.maxErrorsCount = maxErrorsCount;
 		this.maxAveragePressingTime = maxAveragePressingTime;
 		this.id = id;
-		
-		this.keyboardZones = new HashSet<>();
-		for (int i = 0; i < level + 1; i++) {
-			this.keyboardZones.add(KeyboardZone.valueOf("ZONE_" + (i + 1)));
-		}
+
+//		this.keyboardZones = new HashSet<>();
+//		for (int i = 0; i < level + 1; i++) {
+//			this.keyboardZones.add(KeyboardZone.valueOf("ZONE_" + (i + 1)));
+//		}
+		this.keyboardZones = keyboardZones;
+	}
+	
+	@Override
+	public String toString() {
+		return "ExerciseImpl{" +
+		       "id=" + id +
+		       ", name='" + name + '\'' +
+		       ", level=" + level +
+		       ", length=" + length +
+		       ", text='" + text + '\'' +
+		       ", keyboardZones=" + keyboardZones +
+		       ", maxErrorsCount=" + maxErrorsCount +
+		       ", maxAveragePressingTime=" + maxAveragePressingTime +
+		       '}';
 	}
 	
 	@Override
