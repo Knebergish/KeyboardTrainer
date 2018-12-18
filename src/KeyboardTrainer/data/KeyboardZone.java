@@ -14,6 +14,10 @@ public enum KeyboardZone {
 		this.number = number;
 	}
 	
+	public static KeyboardZone byNumber(int number) {
+		return KeyboardZone.valueOf("ZONE_" + number);
+	}
+	
 	public int getNumber() {
 		return number;
 	}
