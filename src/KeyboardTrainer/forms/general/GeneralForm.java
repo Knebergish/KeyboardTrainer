@@ -46,6 +46,7 @@ public class GeneralForm {
 		stage.setScene(new Scene(mainBox));
 		stage.sizeToScene();
 		stage.setResizable(false);
+		stage.setOnCloseRequest(event -> System.exit(0));
 	}
 	
 	public void show() {
