@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
+@SuppressWarnings("Duplicates")
 public class ExerciseChooserController implements ContentArea {
 	public GridPane detailsParentGridPane;
 	public Button   controlTestButton;
