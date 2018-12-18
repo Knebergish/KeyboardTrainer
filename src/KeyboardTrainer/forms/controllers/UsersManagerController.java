@@ -8,10 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
-public class AccountsManagerController implements ContentArea {
+public class UsersManagerController implements ContentArea {
 	public TextField      searchTextField;
 	public ListView<User> usersListView;
 	public Label          loginLabel;
@@ -27,10 +28,26 @@ public class AccountsManagerController implements ContentArea {
 		initUsersListView();
 		
 		deleteButton.setOnAction(event -> {
-			users.remove(selectedUser);
-			usersListView.refresh();
-			selectUser(null);
+			deleteUser(selectedUser);
 		});
+		
+		saveButton.setOnAction(event -> {
+			User user = new UserImpl(selectedUser.getId(),
+			                         selectedUser.getLogin(),
+			                         selectedUser.getPassword(),
+			                         selectedUser.isAdmin(),
+			                         disabledCheckBox.isSelected());
+			deleteUser(selectedUser);
+			users.add(user);
+			users.sort(Comparator.comparingInt(User::getId));
+			selectUser(user);
+		});
+	}
+	
+	private void deleteUser(User user) {
+		users.remove(user);
+		usersListView.refresh();
+		selectUser(null);
 	}
 	
 	private void initUsersListView() {

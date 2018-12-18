@@ -12,7 +12,7 @@ public class AdminForm extends GeneralForm {
 		addMenuButton(new ChangeContentMenuButton("Управление упражнениями",
 		                                          "KeyboardTrainer/forms/layouts/ExerciseManager.fxml"));
 		addMenuButton(new ChangeContentMenuButton("Управление аккаунтами",
-		                                          "KeyboardTrainer/forms/layouts/AccountsManager.fxml"));
+		                                          "KeyboardTrainer/forms/layouts/UsersManager.fxml"));
 		addMenuButton(new CustomActionMenuButton("Статистика",
 		                                         () -> {
 			                                         Alert alert = new Alert(Alert.AlertType.WARNING);
