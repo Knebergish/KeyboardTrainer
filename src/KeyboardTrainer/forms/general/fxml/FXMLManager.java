@@ -24,7 +24,7 @@ public class FXMLManager {
 		FXMLLoader loader = new FXMLLoader(FXMLManager.class.getClassLoader().getResource(filePath));
 		try {
 			root = loader.load();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Форма с таким именем не найдена: " + filePath, e);
 		}
 		controller = loader.getController();
