@@ -32,7 +32,7 @@ public class StatisticsBuilder {
 		long endTime             = System.nanoTime();
 		long totalTime           = startTime == 0 ? 0 : TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
 		long averagePressingTime = pressingsCount == 0 ? 0 : totalTime / pressingsCount;
-		int  completePercents    = ((pressingsCount - errorsCount) / exerciseId) * 100;
+		int  completePercents    = (int) ((((double) pressingsCount - errorsCount) / exerciseId) * 100);
 		
 		return new StatisticsImpl(-1,
 		                          userId,
