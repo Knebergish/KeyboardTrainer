@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane minHeight="-Infinity" prefHeight="295.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KeyboardTrainer.forms.controllers.ExerciseSettingsController">
+    <GridPane layoutX="9.0" layoutY="7.0" prefHeight="243.0" prefWidth="305.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Label text="Уровень сложности:" GridPane.rowIndex="1" />
+        <Label text="Длина:" GridPane.rowIndex="2" />
+        <Label text="Макс. кол-во ошибок" GridPane.rowIndex="3" />
+        <Label text="Название:" />
+        <Label text="Макс. ср. время нажатия:" GridPane.rowIndex="4" />
+        <Label text="Зоны клавиатуры:" GridPane.rowIndex="5" />
+        <Label text="Язык:" GridPane.rowIndex="6" />
+        <TextField fx:id="titleTextField" GridPane.columnIndex="1" />
+        <TextField fx:id="lengthTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="maxErrorsCountTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="maxAveragePressingTimeTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <ChoiceBox fx:id="levelChoiceBox" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <GridPane fx:id="zonesGridPane" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <CheckBox mnemonicParsing="false" text="1" />
+            <CheckBox mnemonicParsing="false" text="2" GridPane.rowIndex="1" />
+            <CheckBox mnemonicParsing="false" text="3" GridPane.rowIndex="2" />
+            <CheckBox mnemonicParsing="false" text="4" GridPane.columnIndex="1" />
+            <CheckBox mnemonicParsing="false" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </GridPane>
+        <ChoiceBox fx:id="languageChoiceBox" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    </GridPane>
+    <Button fx:id="generateTextButton" layoutX="9.0" layoutY="263.0" mnemonicParsing="false" text="Сгенерировать текст" />
+    <Button fx:id="selectFileButton" layoutX="220.0" layoutY="263.0" mnemonicParsing="false" text="Выбрать файл" />
+    <Separator layoutX="322.0" orientation="VERTICAL" prefHeight="295.0" prefWidth="0.0" />
+    <TextArea fx:id="textTextArea" layoutX="333.0" layoutY="9.0" prefHeight="236.0" prefWidth="300.0" wrapText="true" />
+    <Button fx:id="cancelButton" layoutX="333.0" layoutY="263.0" mnemonicParsing="false" text="Отменить" />
+    <Button fx:id="saveButton" layoutX="559.0" layoutY="263.0" mnemonicParsing="false" text="Сохранить" />
+</AnchorPane>

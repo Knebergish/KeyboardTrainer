@@ -1,6 +1,7 @@
 package KeyboardTrainer.forms.controllers;
 
 
+import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
@@ -9,11 +10,17 @@ import KeyboardTrainer.forms.components.details.ExerciseDetailsFiller;
 import KeyboardTrainer.forms.components.tree.exercise.ExerciseTree;
 import KeyboardTrainer.forms.components.tree.exercise.ExerciseTreeItem;
 import KeyboardTrainer.forms.general.ContentArea;
+import KeyboardTrainer.forms.general.fxml.FXMLManager;
+import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.util.Set;
 
 
 // Нужно общее этих форм как-то переиспользовать, но как обычно некогда
@@ -44,8 +51,18 @@ public class ExerciseManagerController implements ContentArea {
 		detailsParentGridPane.getChildren().add(detailsGridPane);
 		
 		initExerciseTreeView();
-
-//		editButton.setOnAction(event -> startExercise());
+		
+		addButton.setOnAction(event -> {
+			Exercise exercise = readExerciseParameters(new ExerciseImpl("",
+			                                                            4,
+			                                                            0,
+			                                                            "",
+			                                                            Set.of(KeyboardZone.ZONE_1, KeyboardZone.ZONE_4),
+			                                                            0,
+			                                                            0,
+			                                                            -1));
+			System.out.println(exercise);
+		});
 		deleteButton.setOnAction(event -> System.out.println("Нет."));
 	}
 	
@@ -73,5 +90,19 @@ public class ExerciseManagerController implements ContentArea {
 			exercisesTreeView.getRoot().getChildren().add(level);
 		}
 		//
+	}
+	
+	private Exercise readExerciseParameters(Exercise exercise) {
+		RootWithController<ExerciseSettingsController> load = FXMLManager.load(
+				"KeyboardTrainer/forms/layouts/ExerciseSettings.fxml");
+		
+		Stage stage = FXMLManager.createStage(load.getRoot(), "", 670, 320);
+		stage.sizeToScene();
+		stage.setResizable(false);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		load.getController().init(exercise);
+		stage.showAndWait();
+		
+		return load.getController().getNewExercise();
 	}
 }
