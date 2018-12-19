@@ -1,6 +1,7 @@
 package KeyboardTrainer.forms.controllers;
 
 
+import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
@@ -18,6 +19,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.util.Set;
 
 
 @SuppressWarnings("Duplicates")
@@ -67,7 +70,7 @@ public class ExerciseChooserController implements ContentArea {
 			TreeItem<ExerciseTreeItem> level = new TreeItem<>(new ExerciseTreeItem(i + 1));
 			for (int j = 0; j < 5; j++) {
 				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "12345",
-				                                         null, (j + 1) * 3,
+				                                         Set.of(KeyboardZone.byNumber(i + 1)), (j + 1) * 3,
 				                                         (j + 1) * 14, i * 4 + j);
 				TreeItem<ExerciseTreeItem> exerciseTreeItem = new TreeItem<>(new ExerciseTreeItem(exercise));
 				level.getChildren().add(exerciseTreeItem);

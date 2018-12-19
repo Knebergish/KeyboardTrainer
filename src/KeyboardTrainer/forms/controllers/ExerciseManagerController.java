@@ -57,7 +57,8 @@ public class ExerciseManagerController implements ContentArea {
 			                                                            4,
 			                                                            0,
 			                                                            "",
-			                                                            Set.of(KeyboardZone.ZONE_1, KeyboardZone.ZONE_4),
+			                                                            Set.of(KeyboardZone.ZONE_1,
+			                                                                   KeyboardZone.ZONE_4),
 			                                                            0,
 			                                                            0,
 			                                                            -1));
@@ -82,7 +83,7 @@ public class ExerciseManagerController implements ContentArea {
 			TreeItem<ExerciseTreeItem> level = new TreeItem<>(new ExerciseTreeItem(i + 1));
 			for (int j = 0; j < 5; j++) {
 				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "12345",
-				                                         null, (j + 1) * 3,
+				                                         Set.of(), (j + 1) * 3,
 				                                         (j + 1) * 14, i * 4 + j);
 				TreeItem<ExerciseTreeItem> exerciseTreeItem = new TreeItem<>(new ExerciseTreeItem(exercise));
 				level.getChildren().add(exerciseTreeItem);
