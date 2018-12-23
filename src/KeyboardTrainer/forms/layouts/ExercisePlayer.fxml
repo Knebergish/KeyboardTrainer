@@ -12,8 +12,7 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <GridPane fx:id="gridPane">
         <columnConstraints>
@@ -22,17 +21,17 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="308.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <children>
             <Button fx:id="breakButton" disable="true" mnemonicParsing="false" onAction="#breakExercise" text="Прервать"
                     GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1"
                     GridPane.valignment="CENTER"/>
+            <CheckBox mnemonicParsing="false" text="Виртуальная клавиатура" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets left="10.0"/>
+                </GridPane.margin>
+            </CheckBox>
         </children>
     </GridPane>
-    <CheckBox mnemonicParsing="false" text="Виртуальная клавиатура" GridPane.rowIndex="1">
-        <GridPane.margin>
-            <Insets left="10.0"/>
-        </GridPane.margin>
-    </CheckBox>
 </GridPane>
