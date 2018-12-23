@@ -43,15 +43,18 @@ public class ExerciseChooserController implements ContentArea {
 	
 	@Override
 	public void init() {
+		initDetailsGridPane();
+		initExerciseTreeView();
+		
+		startExerciseButton.setOnAction(event -> startExercise());
+	}
+	
+	private void initDetailsGridPane() {
 		detailsFiller = new ExerciseDetailsFiller();
 		detailsFiller.fillDetails(null);
 		DetailsGridPane detailsGridPane = detailsFiller.getDetailsGridPane();
 		GridPane.setRowIndex(detailsGridPane, 1);
 		detailsParentGridPane.getChildren().add(detailsGridPane);
-		
-		initExerciseTreeView();
-		
-		startExerciseButton.setOnAction(event -> startExercise());
 	}
 	
 	private void initExerciseTreeView() {
