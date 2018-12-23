@@ -39,4 +39,15 @@ public class UserImpl implements User {
 	public boolean isDisabled() {
 		return isDisabled;
 	}
+
+	@Override
+	public String toString() {
+		return "UserImpl{" +
+				"id=" + id +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				", isAdmin=" + isAdmin +
+				", isDisabled=" + isDisabled +
+				'}';
+	}
 }
