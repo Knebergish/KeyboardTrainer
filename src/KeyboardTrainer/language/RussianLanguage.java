@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class RussianLanguage extends AbstractLanguage {
 	public RussianLanguage() {
-		super("Russian");
+		super("Русский");
 		
 		zonesSymbols.put(KeyboardZone.ZONE_1,
 		                 Arrays.asList('к', 'е', 'н', 'г', 'а', 'п', 'р', 'о', 'м', 'и', 'т', 'ь', '4', '5', '6', '7',

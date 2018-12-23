@@ -23,6 +23,11 @@ public abstract class AbstractLanguage implements Language {
 	}
 	
 	@Override
+	public String toString() {
+		return name;
+	}
+	
+	@Override
 	public String getName() {
 		return name;
 	}
