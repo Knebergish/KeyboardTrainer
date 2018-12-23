@@ -33,6 +33,26 @@ public class ExerciseImpl implements Exercise {
 //		}
 		this.keyboardZones = keyboardZones;
 	}
+
+
+	/**
+	 * Modified version. As soon as we can achieve length value from String.lenght() method.
+	 * @author AliRakhmaev
+	 */
+	public ExerciseImpl(String name, int level, String text,
+						Set<KeyboardZone> keyboardZones, int maxErrorsCount, long maxAveragePressingTime, int id) {
+		this.name = name;
+		this.level = level;
+		this.length = text.length();
+		this.text = text;
+		this.maxErrorsCount = maxErrorsCount;
+		this.maxAveragePressingTime = maxAveragePressingTime;
+		this.id = id;
+		this.keyboardZones = keyboardZones;
+	}
+
+
+
 	
 	@Override
 	public String toString() {

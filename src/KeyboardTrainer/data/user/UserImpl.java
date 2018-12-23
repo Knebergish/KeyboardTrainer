@@ -15,8 +15,21 @@ public class UserImpl implements User {
 		this.isAdmin = isAdmin;
 		this.isDisabled = isDisabled;
 	}
-	
-	@Override
+
+
+    /**
+     * Constructor without parametrs for DAO functions. Add default values because final statement demands initialisation.
+     * @author AliRakhmaev
+     */
+    public UserImpl() {
+        id = 1;
+        login = "null";
+        password = "null";
+        isAdmin = false;
+        isDisabled = false;
+    }
+
+    @Override
 	public int getId() {
 		return id;
 	}
