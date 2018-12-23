@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -57,11 +58,17 @@ public class ExerciseManagerController implements ContentArea {
 			                                                            4,
 			                                                            0,
 			                                                            "",
-			                                                            Set.of(KeyboardZone.ZONE_1,
-			                                                                   KeyboardZone.ZONE_4),
+			                                                            Set.of(),
 			                                                            0,
 			                                                            0,
 			                                                            -1));
+			System.out.println(exercise);
+		});
+		editButton.setOnAction(event -> {
+			if (selectedExercise == null) {
+				return;
+			}
+			Exercise exercise = readExerciseParameters(selectedExercise);
 			System.out.println(exercise);
 		});
 		deleteButton.setOnAction(event -> System.out.println("Нет."));
@@ -82,8 +89,13 @@ public class ExerciseManagerController implements ContentArea {
 		for (int i = 0; i < 4; i++) {
 			TreeItem<ExerciseTreeItem> level = new TreeItem<>(new ExerciseTreeItem(i + 1));
 			for (int j = 0; j < 5; j++) {
-				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "12345",
-				                                         Set.of(), (j + 1) * 3,
+				Set<KeyboardZone> keyboardZones = new HashSet<>();
+				for (int k = 0; k < i + 1; k++) {
+					keyboardZones.add(KeyboardZone.valueOf("ZONE_" + (k + 1)));
+				}
+				
+				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "Текст " + (j + 1),
+				                                         keyboardZones, (j + 1) * 3,
 				                                         (j + 1) * 14, i * 4 + j);
 				TreeItem<ExerciseTreeItem> exerciseTreeItem = new TreeItem<>(new ExerciseTreeItem(exercise));
 				level.getChildren().add(exerciseTreeItem);
@@ -97,7 +109,7 @@ public class ExerciseManagerController implements ContentArea {
 		RootWithController<ExerciseSettingsController> load = FXMLManager.load(
 				"KeyboardTrainer/forms/layouts/ExerciseSettings.fxml");
 		
-		Stage stage = FXMLManager.createStage(load.getRoot(), "", 670, 320);
+		Stage stage = FXMLManager.createStage(load.getRoot(), "Добавление упражнения", 670, 320);
 		stage.sizeToScene();
 		stage.setResizable(false);
 		stage.initModality(Modality.APPLICATION_MODAL);
