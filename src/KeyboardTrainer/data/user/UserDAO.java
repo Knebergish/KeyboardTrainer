@@ -177,7 +177,7 @@ public class UserDAO implements DAO<User> {
 			jdbcDriverManager = JDBCDriverManager.getInstance();
 		}
 		catch (java.sql.SQLException exceptionObject) {
-			log.info("Huston!!!!");
+			log.info("Connection hasn't been created");
 		}
 		return instance;
 	}

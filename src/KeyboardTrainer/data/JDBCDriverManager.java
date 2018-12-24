@@ -1,6 +1,9 @@
 package KeyboardTrainer.data;
 
 import KeyboardTrainer.Main;
+import KeyboardTrainer.data.exercise.Exercise;
+import KeyboardTrainer.data.exercise.ExerciseDAO;
+import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.data.statistics.StatisticsImpl;
@@ -53,8 +56,22 @@ public class JDBCDriverManager {
             log.info("Huston!!!!");
         }
 
-
         /*
+        ExerciseDAO exerciseDAO = ExerciseDAO.getInstance();
+        ExerciseImpl exercise = (ExerciseImpl)exerciseDAO.getByName("second");
+        exercise.setName("secondTest");
+        exerciseDAO.set(exercise);
+        exercise = (ExerciseImpl)exerciseDAO.getByName("secondTest");
+        System.out.println(exercise.toString());
+
+        List<Exercise> list = exerciseDAO.getAll();
+
+        for (Exercise exercise: list
+        ) {
+            ExerciseImpl exercise1 = (ExerciseImpl) exercise;
+            System.out.println(exercise1.toString());
+        }
+
         StatisticsDAO statisticsDAO = StatisticsDAO.getInstance();
 
         StatisticsImpl statistics = (StatisticsImpl)statisticsDAO.get(1);

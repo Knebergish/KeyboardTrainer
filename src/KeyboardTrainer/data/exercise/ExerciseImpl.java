@@ -8,14 +8,14 @@ import java.util.Set;
 
 // Заглушка
 public class ExerciseImpl implements Exercise {
-	private final String            name;
-	private final int               level;
-	private final int               length;
-	private final String            text;
-	private final Set<KeyboardZone> keyboardZones;
-	private final int               maxErrorsCount;
-	private final long              maxAveragePressingTime;
-	private final int               id;
+	private String            name;
+	private int               level;
+	private int               length;
+	private String            text;
+	private Set<KeyboardZone> keyboardZones;
+	private int               maxErrorsCount;
+	private long              maxAveragePressingTime;
+	private int               id;
 	
 	public ExerciseImpl(String name, int level, int length, String text,
 	                    Set<KeyboardZone> keyboardZones, int maxErrorsCount, long maxAveragePressingTime, int id) {
@@ -33,8 +33,6 @@ public class ExerciseImpl implements Exercise {
 //		}
 		this.keyboardZones = keyboardZones;
 	}
-
-
 	/**
 	 * Modified version. As soon as we can achieve length value from String.lenght() method.
 	 * @author AliRakhmaev
@@ -50,8 +48,6 @@ public class ExerciseImpl implements Exercise {
 		this.id = id;
 		this.keyboardZones = keyboardZones;
 	}
-
-
 
 	
 	@Override
@@ -113,5 +109,34 @@ public class ExerciseImpl implements Exercise {
 	@Override
 	public int getId() {
 		return id;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public void setKeyboardZones(Set<KeyboardZone> keyboardZones) {
+		this.keyboardZones = keyboardZones;
+	}
+
+	public void setMaxErrorsCount(int maxErrorsCount) {
+		this.maxErrorsCount = maxErrorsCount;
+	}
+
+	public void setMaxAveragePressingTime(long maxAveragePressingTime) {
+		this.maxAveragePressingTime = maxAveragePressingTime;
 	}
 }
