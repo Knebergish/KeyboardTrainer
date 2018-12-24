@@ -32,10 +32,10 @@ public class StatisticsDAO implements DAO<Statistics> {
                     "INSERT INTO statistic (userId, exerciseId, totalTime, errorsCount, averagePressingTime, completedPercents)  VALUES(?, ?, ?, ?, ?, ?)");
             statement.setObject(1, newEntity.getUserId());
             statement.setObject(2, newEntity.getExerciseId());
-            statement.setObject(2, newEntity.getTotalTime());
-            statement.setObject(2, newEntity.getErrorsCount());
-            statement.setObject(2, newEntity.getAveragePressingTime());
-            statement.setObject(2, newEntity.getCompletePercents());
+            statement.setObject(3, newEntity.getTotalTime());
+            statement.setObject(4, newEntity.getErrorsCount());
+            statement.setObject(5, newEntity.getAveragePressingTime());
+            statement.setObject(6, newEntity.getCompletePercents());
             statement.execute();
 
             return statistics = getAll().get(getAll().size()-1);
