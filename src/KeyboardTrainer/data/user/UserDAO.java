@@ -61,8 +61,8 @@ public class UserDAO implements DAO<User> {
 			statement.execute();
 			ResultSet resultSet = statement.getResultSet();
 			user = new UserImpl(resultSet.getInt("id"), resultSet.getString("login"),
-						  		resultSet.getString("password"), Boolean.getBoolean(resultSet.getString("isAdmin")),
-								Boolean.getBoolean(resultSet.getString("isDisabled")));
+						  		resultSet.getString("password"), resultSet.getBoolean("isAdmin"),
+							    resultSet.getBoolean("isDisabled"));
 			return user;
 		}
 		catch (SQLException e) {
@@ -82,8 +82,8 @@ public class UserDAO implements DAO<User> {
 			statement.execute();
 			ResultSet resultSet = statement.getResultSet();
 			user = new UserImpl(resultSet.getInt("id"), resultSet.getString("login"),
-					resultSet.getString("password"), Boolean.getBoolean(resultSet.getString("isAdmin")),
-					Boolean.getBoolean(resultSet.getString("isDisabled")));
+					resultSet.getString("password"), resultSet.getBoolean("isAdmin"),
+					resultSet.getBoolean("isDisabled"));
 			return user;
 		}
 		catch (SQLException e) {
@@ -139,8 +139,8 @@ public class UserDAO implements DAO<User> {
 				users.add(new UserImpl(resultSet.getInt("id"),
 						resultSet.getString("login"),
 						resultSet.getString("password"),
-						resultSet.getInt("isAdmin") == 1,
-						resultSet.getInt("isDisabled") == 1 ));
+						               resultSet.getBoolean("isAdmin"),
+						               resultSet.getBoolean("isDisabled")));
 			}
 			return users;
 		}
