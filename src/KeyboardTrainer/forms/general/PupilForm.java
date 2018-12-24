@@ -22,8 +22,7 @@ public class PupilForm extends GeneralForm {
 					
 					                           Stage stage = FXMLManager.createStage(
 							                           rootWithController.getRoot(),
-							                           "Ваше следующее упражнение",
-							                           700, 400);
+							                           "Ваше следующее упражнение");
 					
 					                           rootWithController.getController().init();
 					                           stage.setResizable(false);

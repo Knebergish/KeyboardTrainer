@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 
 public class FXMLManager {
 	/**
@@ -32,20 +30,28 @@ public class FXMLManager {
 		return new RootWithController<>(root, controller);
 	}
 	
+	public static Stage createStage(Parent root, String title) {
+		return createStage(root, title, 0, 0);
+	}
+	
 	/**
 	 * Оборачивает разметку в Stage для открытия в новом окне.
 	 *
 	 * @param root   разметка
 	 * @param title  заголовок окна
 	 * @param width  ширина окна
-	 * @param heigth высота окна
+	 * @param height высота окна
 	 * @return Stage с разметкой
 	 */
-	public static Stage createStage(Parent root, String title, int width, int heigth) {
+	public static Stage createStage(Parent root, String title, int width, int height) {
 		Stage stage = new Stage();
 		stage.setTitle(title);
-		stage.setWidth(width);
-		stage.setHeight(heigth);
+		if (width > 0) {
+			stage.setWidth(width);
+		}
+		if (height > 0) {
+			stage.setHeight(height);
+		}
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		return stage;

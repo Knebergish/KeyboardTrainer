@@ -73,7 +73,7 @@ public class ExercisePlayerController {
 		RootWithController<ExerciseResultController> rootWithController =
 				FXMLManager.load("KeyboardTrainer/forms/layouts/ExerciseResult.fxml");
 		rootWithController.getController().init(exercise, statistics);
-		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), "Результаты", 300, 220);
+		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), "Результаты");
 		stage.setResizable(false);
 		stage.show();
 		

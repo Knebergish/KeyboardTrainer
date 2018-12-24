@@ -109,7 +109,7 @@ public class ExerciseManagerController implements ContentArea {
 		RootWithController<ExerciseSettingsController> load = FXMLManager.load(
 				"KeyboardTrainer/forms/layouts/ExerciseSettings.fxml");
 		
-		Stage stage = FXMLManager.createStage(load.getRoot(), "Добавление упражнения", 670, 320);
+		Stage stage = FXMLManager.createStage(load.getRoot(), "Добавление упражнения");
 		stage.sizeToScene();
 		stage.setResizable(false);
 		stage.initModality(Modality.APPLICATION_MODAL);
