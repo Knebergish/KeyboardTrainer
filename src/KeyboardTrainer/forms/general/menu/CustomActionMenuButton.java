@@ -1,7 +1,7 @@
 package KeyboardTrainer.forms.general.menu;
 
 
-import KeyboardTrainer.forms.controllers.exercise_player.ActionHandler;
+import KeyboardTrainer.forms.controllers.ActionHandler;
 
 
 /**
