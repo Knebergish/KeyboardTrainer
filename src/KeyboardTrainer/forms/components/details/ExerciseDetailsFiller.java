@@ -3,6 +3,7 @@ package KeyboardTrainer.forms.components.details;
 
 import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
+import KeyboardTrainer.forms.Utils;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class ExerciseDetailsFiller extends DetailsFiller<Exercise> {
 		                                                     .collect(Collectors.joining(", "))),
 		              new Pair<>("Макс. кол-во ошибок", exercise -> String.valueOf(exercise.getMaxErrorsCount())),
 		              new Pair<>("Макс. ср. время нажатия клавиш",
-		                         exercise -> String.valueOf(exercise.getMaxAveragePressingTime())),
-		              new Pair<>("Язык", exercise -> String.valueOf("Русский"))));
+		                         exercise -> Utils.formatTime(exercise.getMaxAveragePressingTime(), "s.SSS")),
+                      new Pair<>("Язык", exercise -> String.valueOf("Русский"))));
 		
 	}
 }
