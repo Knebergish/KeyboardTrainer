@@ -2,14 +2,14 @@ package KeyboardTrainer.forms.controllers;
 
 
 import KeyboardTrainer.data.user.User;
+import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.data.user.UserImpl;
 import KeyboardTrainer.forms.general.ContentArea;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class UsersManagerController implements ContentArea {
@@ -27,27 +27,9 @@ public class UsersManagerController implements ContentArea {
 	public void init() {
 		initUsersListView();
 		
-		deleteButton.setOnAction(event -> {
-			deleteUser(selectedUser);
-		});
-		
-		saveButton.setOnAction(event -> {
-			User user = new UserImpl(selectedUser.getId(),
-			                         selectedUser.getLogin(),
-			                         selectedUser.getPassword(),
-			                         selectedUser.isAdmin(),
-			                         disabledCheckBox.isSelected());
-			deleteUser(selectedUser);
-			users.add(user);
-			users.sort(Comparator.comparingInt(User::getId));
-			selectUser(user);
-		});
-	}
-	
-	private void deleteUser(User user) {
-		users.remove(user);
-		usersListView.refresh();
-		selectUser(null);
+		searchTextField.setOnKeyTyped(event -> updateUsersListView());
+		deleteButton.setOnAction(event -> deleteSelectedUser());
+		saveButton.setOnAction(event -> saveSelectedUser());
 	}
 	
 	private void initUsersListView() {
@@ -64,37 +46,65 @@ public class UsersManagerController implements ContentArea {
 			}
 		});
 		usersListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			selectUser(newValue);
+			selectedUser = newValue;
+			updateSelectedUserDetails();
 		});
 		
-		
-		users = new ArrayList<>();
-		// Тестовые данные
-		for (int i = 0; i < 10; i++) {
-			User user = new UserImpl(i,
-			                         "Пользователь " + i,
-			                         String.valueOf(i * 10 + i),
-			                         false,
-			                         i % 2 == 0);
-			
-			users.add(user);
-		}
-		usersListView.setItems(FXCollections.observableList(users));
-		//
+		users = UserDAO.getInstance().getAll();
+		updateUsersListView();
 	}
 	
-	private void selectUser(User user) {
-		selectedUser = user;
+	private void updateUsersListView() {
+		User temp = selectedUser;
 		
+		List<User> filteredUsers = filterUsers();
+		usersListView.setItems(FXCollections.observableList(filteredUsers));
+		usersListView.refresh();
+		
+		selectedUser = temp;
+	}
+	
+	private List<User> filterUsers() {
+		return users.parallelStream()
+		            .filter(user -> user.getLogin()
+		                                .toLowerCase()
+		                                .contains(searchTextField.getText().toLowerCase()))
+		            .collect(Collectors.toList());
+	}
+	
+	private void deleteSelectedUser() {
+		users.remove(selectedUser);
+		UserDAO.getInstance().delete(selectedUser.getId());
+		selectedUser = null;
+		
+		updateUsersListView();
+		updateSelectedUserDetails();
+	}
+	
+	private void saveSelectedUser() {
+		User user = new UserImpl(selectedUser.getId(),
+		                         selectedUser.getLogin(),
+		                         selectedUser.getPassword(),
+		                         selectedUser.isAdmin(),
+		                         disabledCheckBox.isSelected());
+		UserDAO.getInstance().set(user);
+		users.set(users.indexOf(selectedUser), user);
+		
+		updateUsersListView();
+		selectedUser = user;
+		usersListView.getSelectionModel().select(selectedUser);
+	}
+	
+	private void updateSelectedUserDetails() {
 		String  login;
 		boolean disabled;
 		
-		if (user == null) {
+		if (selectedUser == null) {
 			login = "";
 			disabled = false;
 		} else {
-			login = user.getLogin();
-			disabled = user.isDisabled();
+			login = selectedUser.getLogin();
+			disabled = selectedUser.isDisabled();
 		}
 		
 		loginLabel.setText(login);
