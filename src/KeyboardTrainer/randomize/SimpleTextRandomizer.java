@@ -5,25 +5,25 @@ import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.language.Language;
 import KeyboardTrainer.language.RussianLanguage;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
 public class SimpleTextRandomizer {
 	private static final int AVERAGE_WORD_LENGTH   = 5;
-	private static final int AVERAGE_NUMBER_LENGTH = 3;
+	private static final int AVERAGE_NUMBER_LENGTH = 2;
 	
 	private final Random          random = new Random();
 	private final List<Character> letters;
 	private final List<Character> digits;
 	
-	public SimpleTextRandomizer(Language language, KeyboardZone... zones) {
-		List<Character> symbols = Arrays.stream(zones).parallel()
-		                                .flatMap(zone -> language.getSymbols(zone).stream())
-		                                .distinct()
-		                                .collect(Collectors.toList());
+	public SimpleTextRandomizer(Language language, Set<KeyboardZone> zones) {
+		List<Character> symbols = zones.parallelStream()
+		                               .flatMap(zone -> language.getSymbols(zone).stream())
+		                               .distinct()
+		                               .collect(Collectors.toList());
 		
 		letters = symbols.parallelStream()
 		                 .filter(Character::isLetter)
@@ -34,9 +34,10 @@ public class SimpleTextRandomizer {
 	}
 	
 	public static void main(String[] args) {
-		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(new RussianLanguage(), KeyboardZone.ZONE_1,
-		                                                           KeyboardZone.ZONE_2, KeyboardZone.ZONE_3,
-		                                                           KeyboardZone.ZONE_4);
+		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(new RussianLanguage(), Set.of(KeyboardZone.ZONE_1,
+		                                                                                         KeyboardZone.ZONE_2,
+		                                                                                         KeyboardZone.ZONE_3,
+		                                                                                         KeyboardZone.ZONE_4));
 		String text = randomizer.generateText(300);
 		System.out.println(text.length());
 		System.out.println(text);
