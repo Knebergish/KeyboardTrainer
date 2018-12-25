@@ -1,8 +1,8 @@
 package KeyboardTrainer.forms.controllers;
 
 
-import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
+import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
@@ -20,8 +20,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 // Нужно общее этих форм как-то переиспользовать, но как обычно некогда
@@ -55,7 +57,7 @@ public class ExerciseManagerController implements ContentArea {
 		
 		addButton.setOnAction(event -> {
 			Exercise exercise = readExerciseParameters(new ExerciseImpl("",
-			                                                            4,
+			                                                            1,
 			                                                            0,
 			                                                            "",
 			                                                            Set.of(),
@@ -85,24 +87,18 @@ public class ExerciseManagerController implements ContentArea {
 		treeParentGridPane.getChildren().add(exercisesTreeView);
 		GridPane.setMargin(exercisesTreeView, new Insets(10, 5, 0, 10));
 		
-		// Тестовые данные
+		Map<Integer, List<Exercise>> levels = ExerciseDAO.getInstance().getAll().parallelStream()
+		                                                 .collect(Collectors.groupingBy(Exercise::getLevel));
 		for (int i = 0; i < 4; i++) {
 			TreeItem<ExerciseTreeItem> level = new TreeItem<>(new ExerciseTreeItem(i + 1));
-			for (int j = 0; j < 5; j++) {
-				Set<KeyboardZone> keyboardZones = new HashSet<>();
-				for (int k = 0; k < i + 1; k++) {
-					keyboardZones.add(KeyboardZone.valueOf("ZONE_" + (k + 1)));
-				}
-				
-				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "Текст " + (j + 1),
-				                                         keyboardZones, (j + 1) * 3,
-				                                         (j + 1) * 14, i * 4 + j);
+			//TODO: ввести для упражнений свойство, упорядочивающее их в пределах уровня
+			List<Exercise> exercises = levels.get(i + 1);
+			for (Exercise exercise : exercises) {
 				TreeItem<ExerciseTreeItem> exerciseTreeItem = new TreeItem<>(new ExerciseTreeItem(exercise));
 				level.getChildren().add(exerciseTreeItem);
 			}
 			exercisesTreeView.getRoot().getChildren().add(level);
 		}
-		//
 	}
 	
 	private Exercise readExerciseParameters(Exercise exercise) {
