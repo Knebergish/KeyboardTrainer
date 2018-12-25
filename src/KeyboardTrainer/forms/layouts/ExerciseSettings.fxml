@@ -47,13 +47,11 @@
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <CheckBox mnemonicParsing="false" text="1" />
             <CheckBox mnemonicParsing="false" text="2" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" text="3" GridPane.rowIndex="2" />
-            <CheckBox mnemonicParsing="false" text="4" GridPane.columnIndex="1" />
-            <CheckBox mnemonicParsing="false" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox mnemonicParsing="false" text="3" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <CheckBox mnemonicParsing="false" text="4" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         </GridPane>
         <ChoiceBox fx:id="languageChoiceBox" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
     </GridPane>
