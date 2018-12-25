@@ -27,7 +27,7 @@ public class ExerciseDAO implements DAO<Exercise> {
         int resultNumber = 0;
             Iterator<KeyboardZone> itr = exercise.getKeyboardZones().iterator();
             while (itr.hasNext()) {
-                resultNumber += Math.pow(10,itr.next().getNumber());
+                resultNumber += Math.pow(10,itr.next().getNumber() - 1);
             }
             return resultNumber;
     }
@@ -57,13 +57,13 @@ public class ExerciseDAO implements DAO<Exercise> {
         Exercise exercise;
         try {
             PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
-                    "INSERT INTO exercise((name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime) VALUES(?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO exercise(name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime) VALUES(?, ?, ?, ?, ?, ?)");
             statement.setObject(1, newEntity.getName());
             statement.setObject(2, newEntity.getLevel());
-            statement.setObject(4, newEntity.getText());
-            statement.setObject(5, createNumberFromZones(newEntity));
-            statement.setObject(6, newEntity.getMaxErrorsCount());
-            statement.setObject(7, newEntity.getMaxAveragePressingTime());
+            statement.setObject(3, newEntity.getText());
+            statement.setObject(4, createNumberFromZones(newEntity));
+            statement.setObject(5, newEntity.getMaxErrorsCount());
+            statement.setObject(6, newEntity.getMaxAveragePressingTime());
             statement.execute();
 
             return exercise = getByName(newEntity.getName());
