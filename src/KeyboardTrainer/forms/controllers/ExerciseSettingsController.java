@@ -154,7 +154,6 @@ public class ExerciseSettingsController {
 					                                                   getCharsInZone(
 							                                                   languageChoiceBox.getSelectionModel()
 							                                                                    .getSelectedItem()));
-					zonesFromText.remove(null); //TODO: подумать над пробелом и символом перевода строки
 					return zonesFromText.parallelStream().allMatch(selectedKeyboardZones::contains);
 				},
 				            "Текст содержит символы из невыбранных зон.",
@@ -268,6 +267,7 @@ public class ExerciseSettingsController {
 		                                                .filter(chars -> chars.contains(c))
 		                                                .findFirst()
 		                                                .orElse(null)))
+		           .filter(Objects::nonNull)
 		           .collect(Collectors.toSet());
 	}
 	
