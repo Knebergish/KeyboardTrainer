@@ -126,8 +126,8 @@ public class ExerciseSettingsController {
 				new Checker(() -> Integer.valueOf(maxErrorsCountTextField.getText()) <=
 				                  (double) textTextArea.getText().length() * 0.1,
 				            "Максимальное количество ошибок не может превышать 10% от длины упражнения.",
-				            "Для данного текста количество ошибок должно быть не более "
-				            + ((double) textTextArea.getText().length() * 0.1)),
+				            "Для данного текста количество ошибок должно быть не более ",
+				            () -> String.valueOf((int) ((double) textTextArea.getText().length() * 0.1))),
 				new Checker(() -> Integer.valueOf(maxAveragePressingTimeTextField.getText()) >= 100,
 				            "Слишком малое среднее время нажатия клавиш.",
 				            "Среднее время нажатия клавиш должно быть не менее 100 мс."),
@@ -147,7 +147,18 @@ public class ExerciseSettingsController {
 					                   .allMatch(allValidCharacters::contains);
 				},
 				            "Текст содержит недопустимые символы.",
-				            "Удалите из текста недопустимые символы."),
+				            "Удалите из текста недопустимые символы: ",
+				            () -> {
+					            List<Character> allValidCharacters = getAllValidCharacters(
+							            getCharsInZone(languageChoiceBox.getSelectionModel().getSelectedItem()));
+					            return textTextArea.getText().chars().parallel()
+					                               .mapToObj(c -> (char) c)
+					                               .map(Character::toLowerCase)
+					                               .filter(c -> !allValidCharacters.contains(c))
+					                               .map(Object::toString)
+					                               .collect(Collectors.joining(", "));
+				            }
+				),
 				new Checker(() -> {
 					Set<KeyboardZone> selectedKeyboardZones = getSelectedKeyboardZones();
 					Set<KeyboardZone> zonesFromText = getZonesFromText(textTextArea.getText(),
@@ -157,7 +168,16 @@ public class ExerciseSettingsController {
 					return zonesFromText.parallelStream().allMatch(selectedKeyboardZones::contains);
 				},
 				            "Текст содержит символы из невыбранных зон.",
-				            "Выберите все используемые в тексте зоны.")
+				            "Выберите все используемые в тексте зоны: ",
+				            () -> getZonesFromText(textTextArea.getText(),
+				                                   getCharsInZone(
+						                                   languageChoiceBox.getSelectionModel()
+						                                                    .getSelectedItem())).parallelStream()
+				                                                                                .map(Object::toString)
+				                                                                                .sorted()
+				                                                                                .collect(
+						                                                                                Collectors.joining(
+								                                                                                ", ")))
 		                                 ));
 	}
 	

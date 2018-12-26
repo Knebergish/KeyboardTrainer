@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 
 import java.util.List;
 import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
 
 
 public class Validator {
@@ -36,14 +37,21 @@ public class Validator {
 	}
 	
 	public static class Checker {
-		private final BooleanSupplier condition;
-		private final String          errorHeader;
-		private final String          errorText;
+		private final BooleanSupplier  condition;
+		private final String           errorHeader;
+		private final String           errorText;
+		private final Supplier<String> addedToText;
+		
 		
 		public Checker(BooleanSupplier condition, String errorHeader, String errorText) {
+			this(condition, errorHeader, errorText, null);
+		}
+		
+		public Checker(BooleanSupplier condition, String errorHeader, String errorText, Supplier<String> addedToText) {
 			this.condition = condition;
 			this.errorHeader = errorHeader;
 			this.errorText = errorText;
+			this.addedToText = addedToText;
 		}
 		
 		/**
@@ -58,7 +66,11 @@ public class Validator {
 		}
 		
 		public String getErrorText() {
-			return errorText;
+			if (addedToText != null) {
+				return errorText + addedToText.get();
+			} else {
+				return errorText;
+			}
 		}
 	}
 }
