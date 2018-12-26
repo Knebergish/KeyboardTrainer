@@ -31,7 +31,9 @@ public abstract class GenericTree<T> extends TreeView<T> {
 		
 		// Обрабатываем событие выбора объекта в дереве
 		this.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			selectionHandler.accept(newValue.getValue());
+			if (newValue != null) {
+				selectionHandler.accept(newValue.getValue());
+			}
 		});
 	}
 	
