@@ -1,9 +1,8 @@
 package KeyboardTrainer.forms.controllers;
 
 
-import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
-import KeyboardTrainer.data.exercise.ExerciseImpl;
+import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
 import KeyboardTrainer.forms.components.details.ExerciseDetailsFiller;
@@ -20,7 +19,9 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @SuppressWarnings("Duplicates")
@@ -68,19 +69,24 @@ public class ExerciseChooserController implements ContentArea {
 		treeParentGridPane.getChildren().add(exercisesTreeView);
 		GridPane.setMargin(exercisesTreeView, new Insets(10, 5, 0, 10));
 		
-		// Тестовые данные
+		updateTreeItems();
+	}
+	
+	private void updateTreeItems() {
+		exercisesTreeView.getRoot().getChildren().clear();
+		
+		Map<Integer, List<Exercise>> levels = ExerciseDAO.getInstance().getAll().parallelStream()
+		                                                 .collect(Collectors.groupingBy(Exercise::getLevel));
 		for (int i = 0; i < 4; i++) {
 			TreeItem<ExerciseTreeItem> level = new TreeItem<>(new ExerciseTreeItem(i + 1));
-			for (int j = 0; j < 5; j++) {
-				ExerciseImpl exercise = new ExerciseImpl("Упражнение " + (j + 1), i, (j + 1) * 5, "12345",
-				                                         Set.of(KeyboardZone.byNumber(i + 1)), (j + 1) * 3,
-				                                         (j + 1) * 14, i * 4 + j);
+			//TODO: ввести для упражнений свойство, упорядочивающее их в пределах уровня
+			List<Exercise> exercises = levels.get(i + 1);
+			for (Exercise exercise : exercises) {
 				TreeItem<ExerciseTreeItem> exerciseTreeItem = new TreeItem<>(new ExerciseTreeItem(exercise));
 				level.getChildren().add(exerciseTreeItem);
 			}
 			exercisesTreeView.getRoot().getChildren().add(level);
 		}
-		//
 	}
 	
 	private void startExercise() {
