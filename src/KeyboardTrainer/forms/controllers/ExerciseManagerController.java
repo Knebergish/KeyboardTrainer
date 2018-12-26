@@ -64,14 +64,16 @@ public class ExerciseManagerController implements ContentArea {
 			                                                            0,
 			                                                            0,
 			                                                            -1));
-			System.out.println(exercise);
+			ExerciseDAO.getInstance().create(exercise);
+			updateTreeItems();
 		});
 		editButton.setOnAction(event -> {
 			if (selectedExercise == null) {
 				return;
 			}
 			Exercise exercise = readExerciseParameters(selectedExercise);
-			System.out.println(exercise);
+			ExerciseDAO.getInstance().set(exercise);
+			updateTreeItems();
 		});
 		deleteButton.setOnAction(event -> System.out.println("Нет."));
 	}
@@ -86,6 +88,12 @@ public class ExerciseManagerController implements ContentArea {
 		});
 		treeParentGridPane.getChildren().add(exercisesTreeView);
 		GridPane.setMargin(exercisesTreeView, new Insets(10, 5, 0, 10));
+		
+		updateTreeItems();
+	}
+	
+	private void updateTreeItems() {
+		exercisesTreeView.getRoot().getChildren().clear();
 		
 		Map<Integer, List<Exercise>> levels = ExerciseDAO.getInstance().getAll().parallelStream()
 		                                                 .collect(Collectors.groupingBy(Exercise::getLevel));

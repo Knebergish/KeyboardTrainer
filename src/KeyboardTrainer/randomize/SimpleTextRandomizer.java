@@ -3,7 +3,6 @@ package KeyboardTrainer.randomize;
 
 import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.language.Language;
-import KeyboardTrainer.language.RussianLanguage;
 
 import java.util.List;
 import java.util.Random;
@@ -34,10 +33,10 @@ public class SimpleTextRandomizer {
 	}
 	
 	public static void main(String[] args) {
-		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(new RussianLanguage(), Set.of(KeyboardZone.ZONE_1,
-		                                                                                         KeyboardZone.ZONE_2,
-		                                                                                         KeyboardZone.ZONE_3,
-		                                                                                         KeyboardZone.ZONE_4));
+		SimpleTextRandomizer randomizer = new SimpleTextRandomizer(Language.RUSSIAN, Set.of(KeyboardZone.ZONE_1,
+		                                                                                    KeyboardZone.ZONE_2,
+		                                                                                    KeyboardZone.ZONE_3,
+		                                                                                    KeyboardZone.ZONE_4));
 		String text = randomizer.generateText(300);
 		System.out.println(text.length());
 		System.out.println(text);
