@@ -108,7 +108,13 @@ public class ExerciseSettingsController {
 				new Checker(() -> titleTextField.getText().length() >= 3,
 				            "Слишком короткое название упражнения.",
 				            "Название упражнения должно быть не менее 3-х символов."),
-				new Checker(() -> ExerciseDAO.getInstance().getByName(titleTextField.getText()) == null,
+				new Checker(() -> {
+					if (exercise.getId() == -1 || !exercise.getName().equals(titleTextField.getText())) {
+						return ExerciseDAO.getInstance().getByName(titleTextField.getText()) == null;
+					} else {
+						return true;
+					}
+				},
 				            "Упражнение с таким названием уже существует.",
 				            "Придумайте другое название упражнения."),
 				new Checker(() -> textTextArea.getText().length() >= 25,
