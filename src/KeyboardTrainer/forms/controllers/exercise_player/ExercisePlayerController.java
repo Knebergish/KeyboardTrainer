@@ -12,6 +12,7 @@ import KeyboardTrainer.forms.controllers.ExerciseResultController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.application.Platform;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -50,6 +51,8 @@ public class ExercisePlayerController {
 		
 		initExerciseVisualizer();
 		initStatisticsDetails(exercise);
+		
+		GridPane.setHalignment(breakButton, HPos.RIGHT);
 		
 		// Если об этом станет известно широкому кругу лиц, плохо будет всем, так что не распространяйтесь.
 		// 1) Метод init отрабатывает ДО полной отрисовки формы, т.е. некоторые её компоненты ещё не полностью смасштабированы.

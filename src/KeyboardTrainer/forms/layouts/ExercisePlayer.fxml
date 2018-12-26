@@ -26,7 +26,11 @@
         <children>
             <Button fx:id="breakButton" disable="true" mnemonicParsing="false" onAction="#breakExercise" text="Прервать"
                     GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1"
-                    GridPane.valignment="CENTER"/>
+                    GridPane.valignment="CENTER">
+                <GridPane.margin>
+                    <Insets right="5.0"/>
+                </GridPane.margin>
+            </Button>
             <CheckBox mnemonicParsing="false" text="Виртуальная клавиатура" GridPane.rowIndex="1">
                 <GridPane.margin>
                     <Insets left="10.0"/>
