@@ -2,7 +2,6 @@ package KeyboardTrainer.forms.controllers.exercise_player;
 
 
 import KeyboardTrainer.data.exercise.Exercise;
-import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.user.UserImpl;
 import KeyboardTrainer.forms.Utils;
@@ -36,11 +35,10 @@ public class ExercisePlayerController {
 	private ExerciseManager           exerciseManager;
 	private DetailsFiller<Statistics> statisticsDetailsFiller;
 	
-	public void init() {
+	public void init(Exercise exercise) {
 		// Тестовые данные
 		UserImpl user = new UserImpl(0, "0", "0", false, false);
-		exercise = new ExerciseImpl("TestExercise", 1, 13, "12345",
-		                            null, 12, 1000, 0);
+		this.exercise = exercise;
 		//
 		
 		//noinspection Convert2MethodRef

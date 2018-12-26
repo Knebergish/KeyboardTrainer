@@ -98,7 +98,7 @@ public class ExerciseChooserController implements ContentArea {
 				"KeyboardTrainer/forms/layouts/ExercisePlayer.fxml");
 		
 		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), selectedExercise.getName());
-		rootWithController.getController().init();
+		rootWithController.getController().init(selectedExercise);
 		stage.show();
 	}
 }

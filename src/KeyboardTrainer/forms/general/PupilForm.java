@@ -1,6 +1,7 @@
 package KeyboardTrainer.forms.general;
 
 
+import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.forms.controllers.exercise_player.ExercisePlayerController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
@@ -24,7 +25,11 @@ public class PupilForm extends GeneralForm {
 							                           rootWithController.getRoot(),
 							                           "Ваше следующее упражнение");
 					
-					                           rootWithController.getController().init();
+					                           rootWithController.getController().init(
+					                           		//TODO: искать первое непройденное
+							                           new ExerciseImpl("TestExercise", 1, 13,
+							                                            "12345", null, 12,
+							                                            1000, 0));
 					                           stage.setResizable(false);
 					                           stage.show();
 				                           }));
