@@ -143,6 +143,7 @@ public class ExerciseSettingsController {
 							getCharsInZone(languageChoiceBox.getSelectionModel().getSelectedItem()));
 					return textTextArea.getText().chars().parallel()
 					                   .mapToObj(c -> (char) c)
+					                   .map(Character::toLowerCase)
 					                   .allMatch(allValidCharacters::contains);
 				},
 				            "Текст содержит недопустимые символы.",
