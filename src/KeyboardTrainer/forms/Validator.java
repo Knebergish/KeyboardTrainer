@@ -18,7 +18,7 @@ public class Validator {
 	/**
 	 * @return false - значит проверка провалена.
 	 */
-	public boolean validateAndAlert() {
+	public boolean validateOrAlert() {
 		Checker failedChecker = null;
 		for (Checker checker : checkers) {
 			if (!checker.check()) {

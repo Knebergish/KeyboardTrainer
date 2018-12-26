@@ -50,7 +50,7 @@ public class RegistrationController implements LoginController {
 	}
 	
 	private void register() {
-		if (validator.validateAndAlert()) {
+		if (validator.validateOrAlert()) {
 			User newUser = new UserImpl(-1, loginTextField.getText(), primoPasswordField.getText(),
 			                            false, false);
 			newUser = UserDAO.getInstance().create(newUser);
