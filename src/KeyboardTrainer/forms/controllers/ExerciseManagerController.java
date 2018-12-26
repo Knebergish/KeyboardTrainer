@@ -75,7 +75,10 @@ public class ExerciseManagerController implements ContentArea {
 			ExerciseDAO.getInstance().set(exercise);
 			updateTreeItems();
 		});
-		deleteButton.setOnAction(event -> System.out.println("Нет."));
+		deleteButton.setOnAction(event -> {
+			ExerciseDAO.getInstance().delete(selectedExercise.getId());
+			updateTreeItems();
+		});
 	}
 	
 	private void initExerciseTreeView() {
