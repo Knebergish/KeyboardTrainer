@@ -40,7 +40,8 @@ public class ExerciseSettingsController {
 	public TextArea            textTextArea;
 	
 	private Exercise  newExercise;
-	private Validator validator;
+	private Validator textValidator; // Ну не text, а проверки для возможности генерации текста, но и не только для неё
+	private Validator otherValidator;
 	
 	public void init(Exercise exercise) {
 		newExercise = null;
@@ -50,7 +51,9 @@ public class ExerciseSettingsController {
 		}
 		
 		languageChoiceBox.getItems().add(Language.RUSSIAN);
+		//TODO: плюс ENGLISH
 		
+		// Устанавливаем ограничения на ввод символов для полей, предназначенных только для чисел
 		UnaryOperator<TextFormatter.Change> integerFilter = change -> {
 			String newText = change.getControlNewText();
 			if (newText.matches("([1-9][0-9]*)?")) {
@@ -59,7 +62,7 @@ public class ExerciseSettingsController {
 			return null;
 		};
 		lengthTextField.setTextFormatter(
-				new TextFormatter<>(new IntegerStringConverter(), 0, integerFilter));
+				new TextFormatter<>(new IntegerStringConverter(), null, integerFilter));
 		maxErrorsCountTextField.setTextFormatter(
 				new TextFormatter<>(new IntegerStringConverter(), 0, integerFilter));
 		maxAveragePressingTimeTextField.setTextFormatter(
@@ -71,7 +74,7 @@ public class ExerciseSettingsController {
 		lengthTextField.setText(String.valueOf(exercise.getLength()));
 		maxErrorsCountTextField.setText(String.valueOf(exercise.getMaxErrorsCount()));
 		maxAveragePressingTimeTextField.setText(String.valueOf(exercise.getMaxAveragePressingTime()));
-		levelChoiceBox.getSelectionModel().select(exercise.getLevel() - 1);
+		levelChoiceBox.getSelectionModel().select(exercise.getLevel());
 		setSelectedKeyboardZones(exercise.getKeyboardZones());
 		languageChoiceBox.getSelectionModel().select(Language.RUSSIAN); //TODO: добавить язык в упражнение
 		textTextArea.setText(exercise.getText());
@@ -81,14 +84,14 @@ public class ExerciseSettingsController {
 		generateTextButton.setOnAction(event -> generateText());
 		selectFileButton.setOnAction(event -> loadTextFromFile());
 		saveButton.setOnAction(event -> {
-			if (!validator.validateOrAlert()) {
+			if (!textValidator.validateOrAlert() || !otherValidator.validateOrAlert()) {
 				return;
 			}
 			
 			Set<KeyboardZone> zones = getSelectedKeyboardZones();
 			
 			newExercise = new ExerciseImpl(titleTextField.getText(),
-			                               levelChoiceBox.getValue(),
+			                               levelChoiceBox.getValue() - 1,
 			                               textTextArea.getText().length(),
 			                               textTextArea.getText(),
 			                               zones,
@@ -104,7 +107,18 @@ public class ExerciseSettingsController {
 			window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
 		});
 		
-		validator = new Validator(List.of(
+		textValidator = new Validator(List.of(
+				new Checker(() -> Integer.valueOf(lengthTextField.getText()) >= 25,
+				            "Слишком маленькая длина упражнения.",
+				            "Длина упражнения должна быть не менее 25-и символов."),
+				new Checker(() -> Integer.valueOf(lengthTextField.getText()) <= 300,
+				            "Слишком большая длина упражнения.",
+				            "Длина упражнения должна быть не более 300 символов."),
+				new Checker(() -> levelChoiceBox.getSelectionModel().getSelectedIndex() + 1
+				                  == getSelectedKeyboardZones().size(),
+				            "Выбранный уровень не совпадает с количеством выбранных зон клавиатуры.",
+				            "Выберите требуемое количество зон клавиатуры или измените уровень упражнения.")));
+		otherValidator = new Validator(List.of(
 				new Checker(() -> titleTextField.getText().length() >= 3,
 				            "Слишком короткое название упражнения.",
 				            "Название упражнения должно быть не менее 3-х символов."),
@@ -117,12 +131,6 @@ public class ExerciseSettingsController {
 				},
 				            "Упражнение с таким названием уже существует.",
 				            "Придумайте другое название упражнения."),
-				new Checker(() -> textTextArea.getText().length() >= 25,
-				            "Слишком короткий текст упражнения.",
-				            "Длина упражнения должна быть не менее 25-и символов."),
-				new Checker(() -> textTextArea.getText().length() <= 300,
-				            "Слишком длинный текст упражнения.",
-				            "Длина упражнения должна быть не более 300 символов."),
 				new Checker(() -> Integer.valueOf(maxErrorsCountTextField.getText()) <=
 				                  (double) textTextArea.getText().length() * 0.1,
 				            "Максимальное количество ошибок не может превышать 10% от длины упражнения.",
@@ -134,10 +142,6 @@ public class ExerciseSettingsController {
 				new Checker(() -> Integer.valueOf(maxAveragePressingTimeTextField.getText()) <= 4000,
 				            "Слишком большое среднее время нажатия клавиш.",
 				            "Среднее время нажатия клавиш должно быть не более 4000 мс."),
-				new Checker(() -> levelChoiceBox.getSelectionModel().getSelectedIndex() + 1
-				                  == getSelectedKeyboardZones().size(),
-				            "Выбранный уровень не совпадает с количеством выбранных зон клавиатуры.",
-				            "Выберите требуемое количество зон клавиатуры или измените уровень упражнения."),
 				new Checker(() -> {
 					List<Character> allValidCharacters = getAllValidCharacters(
 							getCharsInZone(languageChoiceBox.getSelectionModel().getSelectedItem()));
@@ -177,8 +181,7 @@ public class ExerciseSettingsController {
 				                                                                                .sorted()
 				                                                                                .collect(
 						                                                                                Collectors.joining(
-								                                                                                ", ")))
-		                                 ));
+								                                                                                ", ")))));
 	}
 	
 	private void updateTextLength() {
@@ -186,10 +189,15 @@ public class ExerciseSettingsController {
 	}
 	
 	private void generateText() {
+		if (!textValidator.validateOrAlert()) {
+			return;
+		}
+		
 		SimpleTextRandomizer simpleTextRandomizer = new SimpleTextRandomizer(languageChoiceBox.getValue(),
 		                                                                     getSelectedKeyboardZones());
 		textTextArea.setText(simpleTextRandomizer.generateText(Integer.parseInt(lengthTextField.getText())));
 		updateTextLength();
+		setMaxAvailableErrors();
 	}
 	
 	private void loadTextFromFile() {
@@ -230,6 +238,11 @@ public class ExerciseSettingsController {
 		
 		textTextArea.setText(trueText);
 		updateTextLength();
+		setMaxAvailableErrors();
+	}
+	
+	private void setMaxAvailableErrors() {
+		maxErrorsCountTextField.setText(String.valueOf((int) ((double) textTextArea.getText().length() * 0.1)));
 	}
 	
 	/**
