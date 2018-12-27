@@ -36,6 +36,10 @@ public class AuthorizationController implements LoginController {
 			AlertFormManager.showAlert(Alert.AlertType.ERROR, "Неверные данные",
 			                           "Пользователь с такими логином и паролем отсутствует.",
 			                           "Попробуйте повторить ввод данных.", null);
+		} else if (userByLogin.isDisabled()) {
+			AlertFormManager.showAlert(Alert.AlertType.ERROR, "Ты не пройдёшь!",
+			                           "Ваш аккаунт заблокирован.",
+			                           "Для разблокировки вашего аккаунта обратитесь к администратору.", null);
 		} else {
 			loginUser.accept(userByLogin);
 		}
