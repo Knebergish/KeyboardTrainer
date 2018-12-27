@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.controllers.exercise_player;
+package KeyboardTrainer.forms.controllers.exercise.player;
 
 
 import KeyboardTrainer.data.statistics.Statistics;

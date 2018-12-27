@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.controllers.exercise_player;
+package KeyboardTrainer.forms.controllers.exercise.player;
 
 
 import KeyboardTrainer.data.exercise.Exercise;
@@ -7,7 +7,7 @@ import KeyboardTrainer.data.user.UserImpl;
 import KeyboardTrainer.forms.Utils;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
-import KeyboardTrainer.forms.controllers.ExerciseResultController;
+import KeyboardTrainer.forms.controllers.exercise.ExerciseResultController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.application.Platform;

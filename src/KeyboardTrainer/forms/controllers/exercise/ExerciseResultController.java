@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.controllers;
+package KeyboardTrainer.forms.controllers.exercise;
 
 
 import KeyboardTrainer.data.exercise.Exercise;

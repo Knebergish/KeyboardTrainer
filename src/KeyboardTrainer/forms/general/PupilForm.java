@@ -2,7 +2,8 @@ package KeyboardTrainer.forms.general;
 
 
 import KeyboardTrainer.data.exercise.ExerciseImpl;
-import KeyboardTrainer.forms.controllers.exercise_player.ExercisePlayerController;
+import KeyboardTrainer.forms.controllers.exercise.player.ExercisePlayerController;
+import KeyboardTrainer.forms.controllers.exercise.tree.ExerciseChooserController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
@@ -26,7 +27,7 @@ public class PupilForm extends GeneralForm {
 							                           "Ваше следующее упражнение");
 					
 					                           rootWithController.getController().init(
-					                           		//TODO: искать первое непройденное
+							                           //TODO: искать первое непройденное
 							                           new ExerciseImpl("TestExercise", 1, 13,
 							                                            "12345", null, 12,
 							                                            1000, 0));
@@ -34,7 +35,8 @@ public class PupilForm extends GeneralForm {
 					                           stage.show();
 				                           }));
 		addMenuButton(new ChangeContentMenuButton("Выбор упражнения",
-		                                          "KeyboardTrainer/forms/layouts/ExerciseChooser.fxml"));
+		                                          "KeyboardTrainer/forms/layouts/ExerciseGeneral.fxml",
+		                                          new ExerciseChooserController()));
 		addMenuButton(new CustomActionMenuButton("Статистика",
 		                                         () -> {
 			                                         Alert alert = new Alert(Alert.AlertType.WARNING);

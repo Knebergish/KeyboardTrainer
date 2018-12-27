@@ -14,9 +14,13 @@ public class ChangeContentMenuButton extends MenuButton {
 	private Parent root;
 	
 	public ChangeContentMenuButton(String text, String formName) {
+		this(text, formName, null);
+	}
+	
+	public ChangeContentMenuButton(String text, String formName, ContentArea controller) {
 		super(text);
 		
-		RootWithController<ContentArea> rootWithController = FXMLManager.load(formName);
+		RootWithController<ContentArea> rootWithController = FXMLManager.load(formName, controller);
 		if (rootWithController.getController() != null) {
 			rootWithController.getController().init();
 		}
