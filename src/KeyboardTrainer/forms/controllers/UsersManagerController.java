@@ -50,7 +50,9 @@ public class UsersManagerController implements ContentArea {
 			updateSelectedUserDetails();
 		});
 		
-		users = UserDAO.getInstance().getAll();
+		users = UserDAO.getInstance().getAll().parallelStream()
+		               .filter(user -> !user.isAdmin())
+		               .collect(Collectors.toList());
 		updateUsersListView();
 	}
 	
