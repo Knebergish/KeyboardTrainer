@@ -20,8 +20,7 @@ public class PupilForm extends GeneralForm {
 				new CustomActionMenuButton("Продолжить",
 				                           () -> {
 					                           RootWithController<ExercisePlayerController> rootWithController =
-							                           FXMLManager.load(
-									                           "KeyboardTrainer/forms/layouts/ExercisePlayer.fxml");
+							                           FXMLManager.load("ExercisePlayer");
 					
 					                           Stage stage = FXMLManager.createStage(
 							                           rootWithController.getRoot(),
@@ -40,8 +39,7 @@ public class PupilForm extends GeneralForm {
 					                           stage.setResizable(false);
 					                           stage.show();
 				                           }));
-		addMenuButton(new ChangeContentMenuButton("Выбор упражнения",
-		                                          "KeyboardTrainer/forms/layouts/ExerciseGeneral.fxml",
+		addMenuButton(new ChangeContentMenuButton("Выбор упражнения", "ExerciseGeneral",
 		                                          new ExerciseChooserController()));
 		addMenuButton(new CustomActionMenuButton("Статистика",
 		                                         () -> {
@@ -52,7 +50,6 @@ public class PupilForm extends GeneralForm {
 					                                         "Данная форма пока недоступна, вернитесь позже.");
 			                                         alert.show();
 		                                         }));
-		addMenuButton(new ChangeContentMenuButton("Справка",
-		                                          "KeyboardTrainer/forms/layouts/Logo.fxml"));
+		addMenuButton(new ChangeContentMenuButton("Справка", "Logo"));
 	}
 }

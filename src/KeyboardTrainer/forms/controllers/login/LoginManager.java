@@ -33,8 +33,7 @@ public class LoginManager {
 	
 	private void showForm(String formName, String title, ActionHandler otherActionHandler,
 	                      EventHandler<WindowEvent> onCloseRequest) {
-		String                              path  = "KeyboardTrainer/forms/layouts/" + formName + ".fxml";
-		RootWithController<LoginController> load  = FXMLManager.load(path);
+		RootWithController<LoginController> load  = FXMLManager.load(formName);
 		Stage                               stage = FXMLManager.createStage(load.getRoot(), title);
 		
 		load.getController().init(user -> {

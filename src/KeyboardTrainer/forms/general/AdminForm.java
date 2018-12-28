@@ -10,11 +10,10 @@ import javafx.scene.control.Alert;
 public class AdminForm extends GeneralForm {
 	public AdminForm() {
 		setTitle("Лучшая админ-панель");
-		addMenuButton(new ChangeContentMenuButton("Управление упражнениями",
-		                                          "KeyboardTrainer/forms/layouts/ExerciseGeneral.fxml",
+		addMenuButton(new ChangeContentMenuButton("Управление упражнениями", "ExerciseGeneral",
 		                                          new ExerciseManagerController()));
 		addMenuButton(new ChangeContentMenuButton("Управление аккаунтами",
-		                                          "KeyboardTrainer/forms/layouts/UsersManager.fxml"));
+		                                          "UsersManager"));
 		addMenuButton(new CustomActionMenuButton("Статистика",
 		                                         () -> {
 			                                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -24,7 +23,6 @@ public class AdminForm extends GeneralForm {
 					                                         "Данная форма пока недоступна, вернитесь позже.");
 			                                         alert.show();
 		                                         }));
-		addMenuButton(new ChangeContentMenuButton("Справка",
-		                                          "KeyboardTrainer/forms/layouts/Logo.fxml"));
+		addMenuButton(new ChangeContentMenuButton("Справка", "Logo"));
 	}
 }

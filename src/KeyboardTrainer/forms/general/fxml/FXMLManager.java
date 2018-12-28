@@ -15,15 +15,16 @@ public class FXMLManager {
 	/**
 	 * Загружает разметку из файла.
 	 *
-	 * @param filePath   путь к файлу с разметкой
+	 * @param fileName   имя файла с разметкой
 	 * @param <T>        тип контроллера к этой разметке
 	 * @param controller контроллер, если он не задан в разметке
 	 * @return разметка и контроллер к ней
 	 */
-	public static <T> RootWithController<T> load(String filePath, T controller) {
+	public static <T> RootWithController<T> load(String fileName, T controller) {
 		final Parent root;
 		
-		FXMLLoader loader = new FXMLLoader(FXMLManager.class.getClassLoader().getResource(filePath));
+		String     filePath = "KeyboardTrainer/forms/layouts/" + fileName + ".fxml";
+		FXMLLoader loader   = new FXMLLoader(FXMLManager.class.getClassLoader().getResource(filePath));
 		if (controller != null) {
 			loader.setController(controller);
 			controller = loader.getController();

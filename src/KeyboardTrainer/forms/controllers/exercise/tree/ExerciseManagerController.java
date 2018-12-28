@@ -62,8 +62,7 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 	}
 	
 	private Exercise readExerciseParameters(Exercise exercise) {
-		RootWithController<ExerciseSettingsController> load = FXMLManager.load(
-				"KeyboardTrainer/forms/layouts/ExerciseSettings.fxml");
+		RootWithController<ExerciseSettingsController> load = FXMLManager.load("ExerciseSettings");
 		
 		Stage stage = FXMLManager.createStage(load.getRoot(), "Добавление упражнения");
 		stage.sizeToScene();
