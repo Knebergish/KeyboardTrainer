@@ -12,8 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 
-public class ExerciseManager {
-	private final User                 user;
+class ExerciseManager {
 	private final Exercise             exercise;
 	private final Consumer<Statistics> onUpdateStatistics;
 	private final EndHandler           onEndExerciseHandler;
@@ -26,14 +25,13 @@ public class ExerciseManager {
 	private boolean                  isStarted;
 	private boolean                  isFinish;
 	
-	public ExerciseManager(User user,
-	                       Exercise exercise,
-	                       Consumer<Statistics> onUpdateStatistics,
-	                       EndHandler onEndExerciseHandler) {
+	ExerciseManager(User user,
+	                Exercise exercise,
+	                Consumer<Statistics> onUpdateStatistics,
+	                EndHandler onEndExerciseHandler) {
 		isStarted = false;
 		isFinish = true;
 		
-		this.user = user;
 		this.exercise = exercise;
 		this.onUpdateStatistics = onUpdateStatistics;
 		this.onEndExerciseHandler = onEndExerciseHandler;
@@ -47,9 +45,9 @@ public class ExerciseManager {
 		exerciseVisualizer = new GodlikeVisualizer(exercise.getText());
 	}
 	
-	public void startExercise() {
+	void startExercise() {
 		currentLetterIndex = 0;
-		statisticsBuilder.setExerciseId(exercise.getText().length()); //TODO: переделать временный костыль
+		statisticsBuilder.setExerciseId(exercise.getId());
 		clockExecutor = Executors.newScheduledThreadPool(1);
 		isFinish = false;
 		
@@ -70,7 +68,7 @@ public class ExerciseManager {
 		                                  TimeUnit.SECONDS);
 	}
 	
-	public void handleKey(String key) {
+	void handleKey(String key) {
 		if (isFinish) {
 			return;
 		}
@@ -112,7 +110,7 @@ public class ExerciseManager {
 		       || currentStatistics.getAveragePressingTime() >= exercise.getMaxAveragePressingTime();
 	}
 	
-	public void endExercise() {
+	void endExercise() {
 		isStarted = false;
 		isFinish = true;
 		clockExecutor.shutdown();
@@ -120,7 +118,7 @@ public class ExerciseManager {
 		onEndExerciseHandler.endExercise(statistics);
 	}
 	
-	public ExerciseVisualizer getExerciseVisualizer() {
+	ExerciseVisualizer getExerciseVisualizer() {
 		return exerciseVisualizer;
 	}
 }
