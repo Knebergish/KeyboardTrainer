@@ -25,6 +25,7 @@ public class Main extends Application {
 	}
 	
 	private void showGeneralForm(User user) {
+		Session.setLoggedUser(user);
 		GeneralForm generalForm = user.isAdmin() ? new AdminForm() : new PupilForm();
 		generalForm.show();
 	}
