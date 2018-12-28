@@ -24,18 +24,22 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 		tertioButton.setText("Редактировать");
 		
 		primoButton.setOnAction(event -> {
-			Exercise exercise = readExerciseParameters(new ExerciseImpl("",
-			                                                            0,
-			                                                            "",
-			                                                            Set.of(),
-			                                                            0,
-			                                                            0,
-			                                                            -1,
-			                                                            Language.RUSSIAN));
-			ExerciseDAO.getInstance().create(exercise);
-			exercisesTreeView.addExercise(exercise);
-			exercisesTreeView.selectExercise(exercise);
-			selectedExercise = exercise;
+			Exercise newExercise = readExerciseParameters(new ExerciseImpl("",
+			                                                               0,
+			                                                               "",
+			                                                               Set.of(),
+			                                                               0,
+			                                                               0,
+			                                                               -1,
+			                                                               Language.RUSSIAN));
+			if (newExercise == null) {
+				return;
+			}
+			
+			ExerciseDAO.getInstance().create(newExercise);
+			exercisesTreeView.addExercise(newExercise);
+			exercisesTreeView.selectExercise(newExercise);
+			selectedExercise = newExercise;
 		});
 		secundoButton.setOnAction(event -> {
 			ExerciseDAO.getInstance().delete(selectedExercise.getId());
