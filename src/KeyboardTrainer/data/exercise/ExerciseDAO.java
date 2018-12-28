@@ -3,6 +3,7 @@ package KeyboardTrainer.data.exercise;
 import KeyboardTrainer.data.DAO;
 import KeyboardTrainer.data.JDBCDriverManager;
 import KeyboardTrainer.data.KeyboardZone;
+import KeyboardTrainer.language.Language;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,13 +58,14 @@ public class ExerciseDAO implements DAO<Exercise> {
         Exercise exercise;
         try {
             PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
-                    "INSERT INTO exercise(name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime) VALUES(?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO exercise(name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime, language) VALUES(?, ?, ?, ?, ?, ?, ?)");
             statement.setObject(1, newEntity.getName());
             statement.setObject(2, newEntity.getLevel());
             statement.setObject(3, newEntity.getText());
             statement.setObject(4, createNumberFromZones(newEntity));
             statement.setObject(5, newEntity.getMaxErrorsCount());
             statement.setObject(6, newEntity.getMaxAveragePressingTime());
+	        statement.setObject(7, newEntity.getLanguage().toString());
             statement.execute();
 
             return exercise = getByName(newEntity.getName());
@@ -84,14 +86,19 @@ public class ExerciseDAO implements DAO<Exercise> {
     public Exercise get(int id) {
         Exercise exercise;
         try (PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
-                "SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime FROM exercise WHERE id = ?")) {
+                "SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime, language FROM exercise WHERE id = ?")) {
             statement.setObject(1, id);
             statement.execute();
 
             ResultSet resultSet = statement.getResultSet();
-            exercise = new ExerciseImpl(resultSet.getString("name"), resultSet.getInt("level"),
-                    resultSet.getString("text"), createZonesFromNumber(resultSet.getInt("keyboardZone")),
-                    resultSet.getInt("maxErrorCount"), resultSet.getLong("maxAveragePressingTime"), resultSet.getInt("id"));
+            exercise = new ExerciseImpl(resultSet.getString("name"),
+                                        resultSet.getInt("level"),
+                                        resultSet.getString("text"),
+                                        createZonesFromNumber(resultSet.getInt("keyboardZone")),
+                                        resultSet.getInt("maxErrorCount"),
+                                        resultSet.getLong("maxAveragePressingTime"),
+                                        resultSet.getInt("id"),
+                                        Language.valueOf(resultSet.getString("language")));
             return exercise;
         }
         catch (SQLException e) {
@@ -103,14 +110,19 @@ public class ExerciseDAO implements DAO<Exercise> {
     public Exercise getByName(String name) {
         Exercise exercise;
         try (PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
-                "SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime FROM exercise WHERE name = ?")) {
+                "SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime, language FROM exercise WHERE name = ?")) {
             statement.setObject(1, name);
             statement.execute();
 
             ResultSet resultSet = statement.getResultSet();
-            exercise = new ExerciseImpl(resultSet.getString("name"), resultSet.getInt("level"),
-                    resultSet.getString("text"), createZonesFromNumber(resultSet.getInt("keyboardZone")),
-                    resultSet.getInt("maxErrorCount"), resultSet.getLong("maxAveragePressingTime"), resultSet.getInt("id"));
+	        exercise = new ExerciseImpl(resultSet.getString("name"),
+	                                    resultSet.getInt("level"),
+	                                    resultSet.getString("text"),
+	                                    createZonesFromNumber(resultSet.getInt("keyboardZone")),
+	                                    resultSet.getInt("maxErrorCount"),
+	                                    resultSet.getLong("maxAveragePressingTime"),
+	                                    resultSet.getInt("id"),
+	                                    Language.valueOf(resultSet.getString("language")));
             return exercise;
         }
         catch (SQLException e) {
@@ -122,7 +134,7 @@ public class ExerciseDAO implements DAO<Exercise> {
     @Override
     public void set(Exercise entity) {
         try (PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
-                "UPDATE exercise SET  name = ?, level = ?, text = ?, keyboardZone = ?, maxErrorCount = ?, maxAveragePressingTime = ? WHERE id = ?;")) {
+                "UPDATE exercise SET  name = ?, level = ?, text = ?, keyboardZone = ?, maxErrorCount = ?, maxAveragePressingTime = ?, language = ? WHERE id = ?;")) {
             statement.setObject(1, entity.getName());
             statement.setObject(2, entity.getLevel());
             statement.setObject(3, entity.getText());
@@ -130,6 +142,7 @@ public class ExerciseDAO implements DAO<Exercise> {
             statement.setObject(5, entity.getMaxErrorsCount());
             statement.setObject(6, entity.getMaxAveragePressingTime());
             statement.setObject(7, entity.getId());
+	        statement.setObject(8, entity.getLanguage().toString());
             statement.execute();
         }
         catch (SQLException e) {
@@ -156,11 +169,16 @@ public class ExerciseDAO implements DAO<Exercise> {
     public List<Exercise> getAll() {
         try (Statement statement = jdbcDriverManager.getConnection().createStatement()) {
             List<Exercise> users = new ArrayList<Exercise>();
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime FROM exercise");
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, level, text, keyboardZone, maxErrorCount, maxAveragePressingTime, language FROM exercise");
             while (resultSet.next()) {
-                users.add(new ExerciseImpl(resultSet.getString("name"), resultSet.getInt("level"),
-                        resultSet.getString("text"), createZonesFromNumber(resultSet.getInt("keyboardZone")),
-                        resultSet.getInt("maxErrorCount"), resultSet.getLong("maxAveragePressingTime"), resultSet.getInt("id")));
+                users.add(new ExerciseImpl(resultSet.getString("name"),
+                                           resultSet.getInt("level"),
+                                           resultSet.getString("text"),
+                                           createZonesFromNumber(resultSet.getInt("keyboardZone")),
+                                           resultSet.getInt("maxErrorCount"),
+                                           resultSet.getLong("maxAveragePressingTime"),
+                                           resultSet.getInt("id"),
+                                           Language.valueOf(resultSet.getString("language"))));
             }
             return users;
         }

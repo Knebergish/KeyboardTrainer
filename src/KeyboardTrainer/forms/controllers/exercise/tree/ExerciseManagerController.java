@@ -7,6 +7,7 @@ import KeyboardTrainer.data.exercise.ExerciseImpl;
 import KeyboardTrainer.forms.controllers.exercise.ExerciseSettingsController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
+import KeyboardTrainer.language.Language;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,12 +26,12 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 		primoButton.setOnAction(event -> {
 			Exercise exercise = readExerciseParameters(new ExerciseImpl("",
 			                                                            0,
-			                                                            0,
 			                                                            "",
 			                                                            Set.of(),
 			                                                            0,
 			                                                            0,
-			                                                            -1));
+			                                                            -1,
+			                                                            Language.RUSSIAN));
 			ExerciseDAO.getInstance().create(exercise);
 			exercisesTreeView.addExercise(exercise);
 			exercisesTreeView.selectExercise(exercise);

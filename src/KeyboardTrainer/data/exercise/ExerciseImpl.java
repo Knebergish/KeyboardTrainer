@@ -2,6 +2,7 @@ package KeyboardTrainer.data.exercise;
 
 
 import KeyboardTrainer.data.KeyboardZone;
+import KeyboardTrainer.language.Language;
 
 import java.util.Set;
 
@@ -15,24 +16,14 @@ public class ExerciseImpl implements Exercise {
 	private int               maxErrorsCount;
 	private long              maxAveragePressingTime;
 	private int               id;
+	private Language          language;
 	
-	public ExerciseImpl(String name, int level, int length, String text,
-	                    Set<KeyboardZone> keyboardZones, int maxErrorsCount, long maxAveragePressingTime, int id) {
-		this.name = name;
-		this.level = level;
-		this.length = length;
-		this.text = text;
-		this.maxErrorsCount = maxErrorsCount;
-		this.maxAveragePressingTime = maxAveragePressingTime;
-		this.id = id;
-		this.keyboardZones = keyboardZones;
-	}
 	/**
 	 * Modified version. As soon as we can achieve length value from String.lenght() method.
 	 * @author AliRakhmaev
 	 */
-	public ExerciseImpl(String name, int level, String text,
-						Set<KeyboardZone> keyboardZones, int maxErrorsCount, long maxAveragePressingTime, int id) {
+	public ExerciseImpl(String name, int level, String text, Set<KeyboardZone> keyboardZones, int maxErrorsCount,
+	                    long maxAveragePressingTime, int id, Language language) {
 		this.name = name;
 		this.level = level;
 		this.length = text.length();
@@ -41,6 +32,7 @@ public class ExerciseImpl implements Exercise {
 		this.maxAveragePressingTime = maxAveragePressingTime;
 		this.id = id;
 		this.keyboardZones = keyboardZones;
+		this.language = language;
 	}
 
 	
@@ -55,6 +47,7 @@ public class ExerciseImpl implements Exercise {
 		       ", keyboardZones=" + keyboardZones +
 		       ", maxErrorsCount=" + maxErrorsCount +
 		       ", maxAveragePressingTime=" + maxAveragePressingTime +
+		       ", language=" + language.toString() +
 		       '}';
 	}
 	
@@ -97,6 +90,11 @@ public class ExerciseImpl implements Exercise {
 	public int getId() {
 		return id;
 	}
+	
+	@Override
+	public Language getLanguage() {
+		return null;
+	}
 
 
 	public void setName(String name) {
@@ -125,5 +123,10 @@ public class ExerciseImpl implements Exercise {
 
 	public void setMaxAveragePressingTime(long maxAveragePressingTime) {
 		this.maxAveragePressingTime = maxAveragePressingTime;
+	}
+	
+	
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 }

@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.File;
@@ -51,7 +52,18 @@ public class ExerciseSettingsController {
 		}
 		
 		languageChoiceBox.getItems().add(Language.RUSSIAN);
-		//TODO: плюс ENGLISH
+		languageChoiceBox.getItems().add(Language.ENGLISH);
+		languageChoiceBox.converterProperty().set(new StringConverter<>() {
+			@Override
+			public String toString(Language language) {
+				return language.getName();
+			}
+			
+			@Override
+			public Language fromString(String s) {
+				return Language.valueOf(s);
+			}
+		});
 		
 		// Устанавливаем ограничения на ввод символов для полей, предназначенных только для чисел
 		UnaryOperator<TextFormatter.Change> integerFilter = change -> {
@@ -76,7 +88,7 @@ public class ExerciseSettingsController {
 		maxAveragePressingTimeTextField.setText(String.valueOf(exercise.getMaxAveragePressingTime()));
 		levelChoiceBox.getSelectionModel().select(exercise.getLevel());
 		setSelectedKeyboardZones(exercise.getKeyboardZones());
-		languageChoiceBox.getSelectionModel().select(Language.RUSSIAN); //TODO: добавить язык в упражнение
+		languageChoiceBox.getSelectionModel().select(exercise.getLanguage());
 		textTextArea.setText(exercise.getText());
 		
 		textTextArea.setOnKeyTyped(keyEvent -> updateTextLength());
@@ -92,12 +104,12 @@ public class ExerciseSettingsController {
 			
 			newExercise = new ExerciseImpl(titleTextField.getText(),
 			                               levelChoiceBox.getValue() - 1,
-			                               textTextArea.getText().length(),
 			                               textTextArea.getText(),
 			                               zones,
 			                               Integer.valueOf(maxErrorsCountTextField.getText()),
 			                               Integer.valueOf(maxAveragePressingTimeTextField.getText()),
-			                               exercise.getId());
+			                               exercise.getId(),
+			                               languageChoiceBox.getSelectionModel().getSelectedItem());
 			
 			Window window = titleTextField.getScene().getWindow();
 			window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));

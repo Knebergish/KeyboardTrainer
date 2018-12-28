@@ -23,7 +23,7 @@ public class ExerciseDetailsFiller extends DetailsFiller<Exercise> {
 		              new Pair<>("Макс. кол-во ошибок", exercise -> String.valueOf(exercise.getMaxErrorsCount())),
 		              new Pair<>("Макс. ср. время нажатия клавиш",
 		                         exercise -> Utils.formatTime(exercise.getMaxAveragePressingTime(), "s.SSS")),
-                      new Pair<>("Язык", exercise -> String.valueOf("Русский"))));
+                      new Pair<>("Язык", exercise -> exercise.getLanguage().getName())));
 		
 	}
 }

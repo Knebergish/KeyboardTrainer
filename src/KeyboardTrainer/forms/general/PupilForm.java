@@ -8,6 +8,7 @@ import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
 import KeyboardTrainer.forms.general.menu.CustomActionMenuButton;
+import KeyboardTrainer.language.Language;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -28,9 +29,14 @@ public class PupilForm extends GeneralForm {
 					
 					                           rootWithController.getController().init(
 							                           //TODO: искать первое непройденное
-							                           new ExerciseImpl("TestExercise", 1, 13,
-							                                            "12345", null, 12,
-							                                            1000, 0));
+							                           new ExerciseImpl("TestExercise",
+							                                            1,
+							                                            "12345",
+							                                            null,
+							                                            12,
+							                                            1000,
+							                                            -1,
+							                                            Language.RUSSIAN));
 					                           stage.setResizable(false);
 					                           stage.show();
 				                           }));

@@ -19,7 +19,18 @@ public enum Language {
 	                          KeyboardZone.ZONE_4,
 	                          Arrays.asList('й', 'ф', 'я', 'ё', 'з', 'ж', 'х', 'э', 'ъ', '1', '0', '!', ')', '-', '=',
 	                                        '_', '+', '.', ',')
-	                         ));
+	                         )),
+	ENGLISH("Английский", Map.of(KeyboardZone.ZONE_1,
+	                             Arrays.asList('r', 't', 'y', 'u', 'f', 'g', 'h', 'j', 'v', 'b', 'n', 'm', '4', '5',
+	                                           '6', '7', '$', '%', '^', '&'),
+	                             KeyboardZone.ZONE_2,
+	                             Arrays.asList('e', 'd', 'c', 'i', 'k', ',', '3', '8', '#', '*'),
+	                             KeyboardZone.ZONE_3,
+	                             Arrays.asList('w', 's', 'x', 'o', 'l', '.', '2', '9', '@', '('),
+	                             KeyboardZone.ZONE_4,
+	                             Arrays.asList('q', 'a', 'z', '`', 'p', ';', '[', '\'', ']', '1', '0', '!', ')', '-',
+	                                           '=', '_', '+', '/', '?')
+	                            ));
 	
 	private final String                             name;
 	protected     Map<KeyboardZone, List<Character>> zonesSymbols;
@@ -32,10 +43,6 @@ public enum Language {
 	
 	public List<Character> getSymbols(KeyboardZone zone) {
 		return zonesSymbols.get(zone);
-	}
-	
-	public String toString() {
-		return name;
 	}
 	
 	public String getName() {
