@@ -23,6 +23,6 @@ public class AdminForm extends GeneralForm {
 					                                         "Данная форма пока недоступна, вернитесь позже.");
 			                                         alert.show();
 		                                         }));
-		addMenuButton(new ChangeContentMenuButton("Справка", "Logo"));
+		addMenuButton(new ChangeContentMenuButton("Справка", "About"));
 	}
 }

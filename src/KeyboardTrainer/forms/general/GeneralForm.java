@@ -1,6 +1,8 @@
 package KeyboardTrainer.forms.general;
 
 
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import KeyboardTrainer.forms.general.menu.MenuButton;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 /**
  * Общая форма, содержащая область с кнопками меню и область для вывода контента.
  */
-public class GeneralForm {
+public abstract class GeneralForm {
 	private final Stage      stage;
 	private final GridPane   menuGridPane;
 	private final AnchorPane contentPane;
@@ -46,6 +48,9 @@ public class GeneralForm {
 		stage.sizeToScene();
 		stage.setResizable(false);
 		stage.setOnCloseRequest(event -> System.exit(0));
+		
+		RootWithController<Object> logo = FXMLManager.load("Logo");
+		setContent(logo.getRoot());
 	}
 	
 	public void show() {
