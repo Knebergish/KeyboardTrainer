@@ -1,9 +1,9 @@
 package KeyboardTrainer.forms.general.menu;
 
 
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import KeyboardTrainer.forms.general.ContentArea;
-import KeyboardTrainer.forms.general.fxml.FXMLManager;
-import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.scene.Parent;
 
 

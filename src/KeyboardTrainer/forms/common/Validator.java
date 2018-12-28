@@ -1,7 +1,6 @@
-package KeyboardTrainer.forms;
+package KeyboardTrainer.forms.common;
 
 
-import KeyboardTrainer.forms.general.AlertFormManager;
 import javafx.scene.control.Alert;
 
 import java.util.List;

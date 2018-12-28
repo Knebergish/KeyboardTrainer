@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.general.fxml;
+package KeyboardTrainer.forms.common.fxml;
 
 
 import javafx.scene.Parent;

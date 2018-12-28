@@ -4,7 +4,7 @@ package KeyboardTrainer.forms.controllers.exercise;
 import KeyboardTrainer.Session;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
-import KeyboardTrainer.forms.Utils;
+import KeyboardTrainer.forms.common.Utils;
 import KeyboardTrainer.forms.controllers.statistics.StatisticsMagic;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

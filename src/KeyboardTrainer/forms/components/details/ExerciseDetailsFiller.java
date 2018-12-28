@@ -3,7 +3,7 @@ package KeyboardTrainer.forms.components.details;
 
 import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
-import KeyboardTrainer.forms.Utils;
+import KeyboardTrainer.forms.common.Utils;
 import javafx.util.Pair;
 
 import java.util.List;

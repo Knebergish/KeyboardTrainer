@@ -3,8 +3,8 @@ package KeyboardTrainer.forms.controllers.login;
 
 import KeyboardTrainer.data.user.User;
 import KeyboardTrainer.forms.controllers.ActionHandler;
-import KeyboardTrainer.forms.general.fxml.FXMLManager;
-import KeyboardTrainer.forms.general.fxml.RootWithController;
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;

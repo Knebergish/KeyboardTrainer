@@ -4,8 +4,8 @@ package KeyboardTrainer.forms.controllers.exercise.tree;
 import KeyboardTrainer.Session;
 import KeyboardTrainer.forms.controllers.exercise.player.ExercisePlayerController;
 import KeyboardTrainer.forms.controllers.statistics.StatisticsMagic;
-import KeyboardTrainer.forms.general.fxml.FXMLManager;
-import KeyboardTrainer.forms.general.fxml.RootWithController;
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import javafx.stage.Stage;
 
 

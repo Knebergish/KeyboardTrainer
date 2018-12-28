@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms;
+package KeyboardTrainer.forms.common;
 
 
 import java.time.Instant;

@@ -4,7 +4,7 @@ package KeyboardTrainer.forms.controllers.login;
 import KeyboardTrainer.data.user.User;
 import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.forms.controllers.ActionHandler;
-import KeyboardTrainer.forms.general.AlertFormManager;
+import KeyboardTrainer.forms.common.AlertFormManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.general;
+package KeyboardTrainer.forms.common;
 
 
 import javafx.event.EventHandler;

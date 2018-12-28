@@ -6,8 +6,8 @@ import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.data.user.User;
-import KeyboardTrainer.forms.general.fxml.FXMLManager;
-import KeyboardTrainer.forms.general.fxml.RootWithController;
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import javafx.stage.Stage;
 
 import java.util.Comparator;
