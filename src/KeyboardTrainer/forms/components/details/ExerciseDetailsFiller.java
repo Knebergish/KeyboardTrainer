@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class ExerciseDetailsFiller extends DetailsFiller<Exercise> {
 	public ExerciseDetailsFiller() {
-		super(List.of(new Pair<>("Длина текста", exercise -> String.valueOf(exercise.getLength())),
+		super(List.of(new Pair<>("Длина текста", (Exercise exercise) -> String.valueOf(exercise.getLength())),
 		              new Pair<>("Зоны клавиатуры", exercise -> exercise.getKeyboardZones()
 		                                                                .parallelStream()
 		                                                                .map(KeyboardZone::getNumber)
