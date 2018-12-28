@@ -17,13 +17,11 @@ import java.util.Map;
 
 
 public class DetailsGridPane extends GridPane {
-	private final int ROW_HEIGHT = 20;
-	
 	// Список полей для вывода информации на форму
 	private final Map<String, Label> detailLabels;
 	
 	
-	public DetailsGridPane(List<String> rowsNames) {
+	DetailsGridPane(List<String> rowsNames) {
 		detailLabels = new HashMap<>();
 		
 		ColumnConstraints primoColumn = new ColumnConstraints();
@@ -41,13 +39,14 @@ public class DetailsGridPane extends GridPane {
 		
 		// Создаём необходимое количество строк в таблице и вставляем в них поля
 		for (int i = 0; i < rowsNames.size(); i++) {
-			Label key   = new Label(rowsNames.get(i) + ":");
+			Label key   = new Label(rowsNames.get(i));
+			key.setWrapText(true);
 			Label value = new Label("");
+			value.setWrapText(true);
 			
 			detailLabels.put(rowsNames.get(i), value);
 			
 			RowConstraints rowConstraints = new RowConstraints();
-			rowConstraints.setPrefHeight(ROW_HEIGHT);
 			this.getRowConstraints().add(rowConstraints);
 			this.add(key, 0, i);
 			this.add(value, 1, i);
@@ -62,12 +61,9 @@ public class DetailsGridPane extends GridPane {
 			control.setStyle(
 					"-fx-background-color: -fx-background; -fx-padding: 0 0 0 5; -fx-text-alignment: left");
 		}
-		
-		// Обрезаем лишнюю высоту
-		this.setMaxHeight(detailLabels.size() * ROW_HEIGHT);
 	}
 	
-	public void setValue(String key, String value) {
+	void setValue(String key, String value) {
 		detailLabels.get(key).setText(value);
 	}
 }

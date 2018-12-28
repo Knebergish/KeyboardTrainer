@@ -13,17 +13,18 @@ import java.util.stream.Collectors;
 
 public class ExerciseDetailsFiller extends DetailsFiller<Exercise> {
 	public ExerciseDetailsFiller() {
-		super(List.of(new Pair<>("Длина", (Exercise exercise) -> String.valueOf(exercise.getLength())),
-		              new Pair<>("Зоны", exercise -> exercise.getKeyboardZones()
-		                                                     .parallelStream()
-		                                                     .map(KeyboardZone::getNumber)
-		                                                     .sorted()
-		                                                     .map(Objects::toString)
-		                                                     .collect(Collectors.joining(", "))),
-		              new Pair<>("Макс. кол-во ошибок", exercise -> String.valueOf(exercise.getMaxErrorsCount())),
-		              new Pair<>("Макс. ср. время нажатия клавиш",
+		super(List.of(new Pair<>("Длина текста", exercise -> String.valueOf(exercise.getLength())),
+		              new Pair<>("Зоны клавиатуры", exercise -> exercise.getKeyboardZones()
+		                                                                .parallelStream()
+		                                                                .map(KeyboardZone::getNumber)
+		                                                                .sorted()
+		                                                                .map(Objects::toString)
+		                                                                .collect(Collectors.joining(", "))),
+		              new Pair<>("Максимальное количество ошибок",
+		                         exercise -> String.valueOf(exercise.getMaxErrorsCount())),
+		              new Pair<>("Максимальное среднее время нажатия клавиш",
 		                         exercise -> Utils.formatTime(exercise.getMaxAveragePressingTime(), "s.SSS")),
-                      new Pair<>("Язык", exercise -> exercise.getLanguage().getName())));
+		              new Pair<>("Язык", exercise -> exercise.getLanguage().getName())));
 		
 	}
 }
