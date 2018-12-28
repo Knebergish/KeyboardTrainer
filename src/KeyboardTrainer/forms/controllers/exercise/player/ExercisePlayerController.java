@@ -12,6 +12,7 @@ import KeyboardTrainer.forms.controllers.exercise.ExerciseResultController;
 import KeyboardTrainer.forms.general.fxml.FXMLManager;
 import KeyboardTrainer.forms.general.fxml.RootWithController;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -27,8 +28,10 @@ import java.util.TimerTask;
 
 
 public class ExercisePlayerController {
-	public GridPane gridPane;
-	public Button   breakButton;
+	@FXML
+	private GridPane gridPane;
+	@FXML
+	private Button   breakButton;
 	
 	private Exercise exercise;
 	

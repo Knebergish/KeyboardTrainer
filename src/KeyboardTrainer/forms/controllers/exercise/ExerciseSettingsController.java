@@ -10,6 +10,7 @@ import KeyboardTrainer.forms.Validator.Checker;
 import KeyboardTrainer.forms.general.AlertFormManager;
 import KeyboardTrainer.language.Language;
 import KeyboardTrainer.randomize.SimpleTextRandomizer;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -27,18 +28,30 @@ import java.util.stream.Collectors;
 
 
 public class ExerciseSettingsController {
-	public TextField           titleTextField;
-	public TextField           lengthTextField;
-	public TextField           maxErrorsCountTextField;
-	public TextField           maxAveragePressingTimeTextField;
-	public ChoiceBox<Integer>  levelChoiceBox;
-	public ChoiceBox<Language> languageChoiceBox;
-	public GridPane            zonesGridPane;
-	public Button              generateTextButton;
-	public Button              selectFileButton;
-	public Button              cancelButton;
-	public Button              saveButton;
-	public TextArea            textTextArea;
+	@FXML
+	private TextField           titleTextField;
+	@FXML
+	private TextField           lengthTextField;
+	@FXML
+	private TextField           maxErrorsCountTextField;
+	@FXML
+	private TextField           maxAveragePressingTimeTextField;
+	@FXML
+	private ChoiceBox<Integer>  levelChoiceBox;
+	@FXML
+	private ChoiceBox<Language> languageChoiceBox;
+	@FXML
+	private GridPane            zonesGridPane;
+	@FXML
+	private Button              generateTextButton;
+	@FXML
+	private Button              selectFileButton;
+	@FXML
+	private Button              cancelButton;
+	@FXML
+	private Button              saveButton;
+	@FXML
+	private TextArea            textTextArea;
 	
 	private Exercise  newExercise;
 	private Validator textValidator; // Ну не text, а проверки для возможности генерации текста, но и не только для неё
@@ -327,15 +340,15 @@ public class ExerciseSettingsController {
 		                    .collect(Collectors.toSet());
 	}
 	
+	public Exercise getNewExercise() {
+		return newExercise;
+	}
+	
 	private void setSelectedKeyboardZones(Set<KeyboardZone> zones) {
 		zonesGridPane.getChildren().stream()
 		             .filter(node -> !node.isDisabled())
 		             .map(node -> (CheckBox) node)
 		             .filter(checkBox -> zones.contains(KeyboardZone.byNumber(Integer.valueOf(checkBox.getText()))))
 		             .forEach(checkBox -> checkBox.setSelected(true));
-	}
-	
-	public Exercise getNewExercise() {
-		return newExercise;
 	}
 }

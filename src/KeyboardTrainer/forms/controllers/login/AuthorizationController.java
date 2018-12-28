@@ -5,6 +5,7 @@ import KeyboardTrainer.data.user.User;
 import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.forms.controllers.ActionHandler;
 import KeyboardTrainer.forms.general.AlertFormManager;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -14,10 +15,14 @@ import java.util.function.Consumer;
 
 
 public class AuthorizationController implements LoginController {
-	public TextField     loginTextField;
-	public PasswordField passwordTextField;
-	public Button        loginButton;
-	public Button        registerButton;
+	@FXML
+	private TextField     loginTextField;
+	@FXML
+	private PasswordField passwordTextField;
+	@FXML
+	private Button        loginButton;
+	@FXML
+	private Button        registerButton;
 	
 	private Consumer<User> loginUser;
 	

@@ -6,6 +6,7 @@ import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.data.user.UserImpl;
 import KeyboardTrainer.forms.general.ContentArea;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.List;
@@ -13,12 +14,18 @@ import java.util.stream.Collectors;
 
 
 public class UsersManagerController implements ContentArea {
-	public TextField      searchTextField;
-	public ListView<User> usersListView;
-	public Label          loginLabel;
-	public CheckBox       disabledCheckBox;
-	public Button         deleteButton;
-	public Button         saveButton;
+	@FXML
+	private TextField      searchTextField;
+	@FXML
+	private ListView<User> usersListView;
+	@FXML
+	private Label          loginLabel;
+	@FXML
+	private CheckBox       disabledCheckBox;
+	@FXML
+	private Button         deleteButton;
+	@FXML
+	private Button         saveButton;
 	
 	private List<User> users;
 	private User       selectedUser;

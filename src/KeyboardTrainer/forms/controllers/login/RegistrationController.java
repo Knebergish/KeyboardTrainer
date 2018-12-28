@@ -7,6 +7,7 @@ import KeyboardTrainer.data.user.UserImpl;
 import KeyboardTrainer.forms.Validator;
 import KeyboardTrainer.forms.Validator.Checker;
 import KeyboardTrainer.forms.controllers.ActionHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,11 +17,16 @@ import java.util.function.Consumer;
 
 
 public class RegistrationController implements LoginController {
-	public TextField     loginTextField;
-	public PasswordField primoPasswordField;
-	public PasswordField secundoPasswordField;
-	public Button        registerButton;
-	public Button        cancelButton;
+	@FXML
+	private TextField     loginTextField;
+	@FXML
+	private PasswordField primoPasswordField;
+	@FXML
+	private PasswordField secundoPasswordField;
+	@FXML
+	private Button        registerButton;
+	@FXML
+	private Button        cancelButton;
 	
 	private Consumer<User> loginUser;
 	private Validator      validator;

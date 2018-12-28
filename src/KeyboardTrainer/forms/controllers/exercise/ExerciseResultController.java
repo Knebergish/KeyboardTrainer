@@ -6,6 +6,7 @@ import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.forms.Utils;
 import KeyboardTrainer.forms.controllers.statistics.StatisticsMagic;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Window;
@@ -13,13 +14,20 @@ import javafx.stage.WindowEvent;
 
 
 public class ExerciseResultController {
-	public Label  titleLabel;
-	public Label  totalTimeLabel;
-	public Label  errorsCountLabel;
-	public Label  averagePressingTimeLabel;
-	public Button toMenuButton;
-	public Button toStatisticsButton;
-	public Label  completePercentsLabel;
+	@FXML
+	private Label  titleLabel;
+	@FXML
+	private Label  totalTimeLabel;
+	@FXML
+	private Label  errorsCountLabel;
+	@FXML
+	private Label  averagePressingTimeLabel;
+	@FXML
+	private Button toMenuButton;
+	@FXML
+	private Button toStatisticsButton;
+	@FXML
+	private Label  completePercentsLabel;
 	
 	public void init(Exercise exercise, Statistics statistics) {
 		titleLabel.setText("Упражнение " + (statistics.getCompletePercents() == 100 ? "" : "не ") + "пройдено!");

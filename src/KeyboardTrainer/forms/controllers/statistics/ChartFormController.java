@@ -2,6 +2,7 @@ package KeyboardTrainer.forms.controllers.statistics;
 
 
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Tooltip;
@@ -14,8 +15,10 @@ import java.util.List;
  * Очень умно конструирует график на форме.
  */
 public class ChartFormController {
-	private static final double     ANCHOR = 10;
-	public               AnchorPane anchorPane;
+	private static final double ANCHOR = 10;
+	
+	@FXML
+	private AnchorPane anchorPane;
 	
 	<T extends Number> void setChart(List<T> itemsX, Integer minX, Integer maxX, String XAxisText,
 	                                 List<T> itemsY, Integer minY, Integer maxY, String YAxisText) {
