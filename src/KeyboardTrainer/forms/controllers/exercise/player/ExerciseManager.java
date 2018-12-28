@@ -39,15 +39,15 @@ class ExerciseManager {
 		text = exercise.getText();
 		
 		statisticsBuilder = new StatisticsBuilder();
-		statisticsBuilder.setUserId(user.getId());
-		statisticsBuilder.setExerciseId(exercise.getId());
+		statisticsBuilder.setUserId(user);
+		statisticsBuilder.setExerciseId(exercise);
 		
 		exerciseVisualizer = new GodlikeVisualizer(exercise.getText());
 	}
 	
 	void startExercise() {
 		currentLetterIndex = 0;
-		statisticsBuilder.setExerciseId(exercise.getId());
+		statisticsBuilder.setExerciseId(exercise);
 		clockExecutor = Executors.newScheduledThreadPool(1);
 		isFinish = false;
 		
