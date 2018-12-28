@@ -34,6 +34,7 @@ public class DetailsGridPane extends GridPane {
 		secundoColumn.setMaxWidth(80);
 		this.getColumnConstraints().add(secundoColumn);
 		
+		GridPane.setFillHeight(this, false);
 		GridPane.setValignment(this, VPos.TOP);
 		GridPane.setMargin(this, new Insets(10, 10, 0, 0));
 		

@@ -36,7 +36,7 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <Label text="Информация об упражнении" GridPane.halignment="CENTER" GridPane.valignment="TOP">
