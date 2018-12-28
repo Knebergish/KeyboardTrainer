@@ -18,10 +18,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-//		LoginManager loginManager = new LoginManager(this::showGeneralForm);
-//		loginManager.startLogin();
-//		new AdminForm().show();
-		new PupilForm().show();
+		LoginManager loginManager = new LoginManager(this::showGeneralForm);
+		loginManager.startLogin();
 	}
 	
 	private void showGeneralForm(User user) {
