@@ -93,7 +93,7 @@ public class ExerciseImpl implements Exercise {
 	
 	@Override
 	public Language getLanguage() {
-		return null;
+		return language;
 	}
 
 
