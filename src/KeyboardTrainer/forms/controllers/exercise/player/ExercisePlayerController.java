@@ -4,7 +4,7 @@ package KeyboardTrainer.forms.controllers.exercise.player;
 import KeyboardTrainer.Session;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
-import KeyboardTrainer.data.user.UserImpl;
+import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.forms.Utils;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
@@ -65,7 +65,8 @@ public class ExercisePlayerController {
 	}
 	
 	private void endExercise(Statistics statistics) {
-		System.out.println(statistics);
+		statistics = StatisticsDAO.getInstance().create(statistics);
+		
 		breakButton.setDisable(true);
 		
 		RootWithController<ExerciseResultController> rootWithController =

@@ -1,9 +1,11 @@
 package KeyboardTrainer.forms.controllers.exercise;
 
 
+import KeyboardTrainer.Session;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.forms.Utils;
+import KeyboardTrainer.forms.controllers.statistics.StatisticsMagic;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Window;
@@ -32,5 +34,7 @@ public class ExerciseResultController {
 			Window window = titleLabel.getScene().getWindow();
 			window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
 		});
+		toStatisticsButton.setOnAction(
+				event -> StatisticsMagic.showUserStatisticsForExercise(Session.getLoggedUser(), exercise));
 	}
 }
