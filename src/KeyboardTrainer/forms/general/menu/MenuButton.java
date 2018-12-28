@@ -12,7 +12,7 @@ import javafx.scene.text.TextAlignment;
 public abstract class MenuButton extends Button {
 	protected GeneralForm generalForm;
 	
-	public MenuButton(String text) {
+	MenuButton(String text) {
 		super(text);
 		setPrefWidth(100);
 		setPrefHeight(50);

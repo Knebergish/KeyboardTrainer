@@ -45,10 +45,6 @@ class StatisticsBuilder {
 		                          completePercents);
 	}
 	
-	long getTotalTime() {
-		return System.nanoTime() - startTime;
-	}
-	
 	void setExerciseId(Exercise exercise) {
 		this.exercise = exercise;
 	}

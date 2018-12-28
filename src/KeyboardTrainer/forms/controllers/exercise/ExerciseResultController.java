@@ -22,7 +22,7 @@ public class ExerciseResultController {
 	public void init(Exercise exercise, Statistics statistics) {
 		titleLabel.setText("Упражнение " + (statistics.getCompletePercents() == 100 ? "" : "не ") + "пройдено!");
 		totalTimeLabel.setText(Utils.formatTime(statistics.getTotalTime(), "mm:ss"));
-		errorsCountLabel.setText(String.valueOf(statistics.getErrorsCount() + " / " + exercise.getMaxErrorsCount()));
+		errorsCountLabel.setText(statistics.getErrorsCount() + " / " + exercise.getMaxErrorsCount());
 		averagePressingTimeLabel.setText(Utils.formatTime(statistics.getAveragePressingTime(), "s.SSS")
 		                                 + " / "
 		                                 + Utils.formatTime(exercise.getMaxAveragePressingTime(), "s.SSS"));

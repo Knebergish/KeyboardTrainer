@@ -16,14 +16,13 @@ import javafx.stage.Stage;
  */
 public class GeneralForm {
 	private final Stage      stage;
-	private final VBox       mainBox;
 	private final GridPane   menuGridPane;
 	private final AnchorPane contentPane;
 	
 	private int currentButtonNumber;
 	
 	
-	public GeneralForm() {
+	GeneralForm() {
 		currentButtonNumber = 0;
 		
 		menuGridPane = new GridPane();
@@ -39,7 +38,7 @@ public class GeneralForm {
 		contentPane.setMinHeight(300);
 		contentPane.setPrefWidth(600);
 		
-		mainBox = new VBox();
+		VBox mainBox = new VBox();
 		mainBox.getChildren().addAll(menuGridPane, separator, contentPane);
 		
 		stage = new Stage();
@@ -53,7 +52,7 @@ public class GeneralForm {
 		stage.show();
 	}
 	
-	public void addMenuButton(MenuButton button) {
+	void addMenuButton(MenuButton button) {
 		ColumnConstraints columnConstraints = new ColumnConstraints();
 		columnConstraints.setHalignment(HPos.CENTER);
 		columnConstraints.setHgrow(Priority.SOMETIMES);
@@ -61,18 +60,6 @@ public class GeneralForm {
 		
 		button.setGeneralForm(this);
 		menuGridPane.add(button, currentButtonNumber++, 0);
-	}
-	
-	public VBox getMainBox() {
-		return mainBox;
-	}
-	
-	public GridPane getMenuGridPane() {
-		return menuGridPane;
-	}
-	
-	public Pane getContentPane() {
-		return contentPane;
 	}
 	
 	public Stage getStage() {
@@ -88,7 +75,7 @@ public class GeneralForm {
 		contentPane.getChildren().add(root);
 	}
 	
-	public void setTitle(String title) {
+	void setTitle(String title) {
 		stage.setTitle(title);
 	}
 }

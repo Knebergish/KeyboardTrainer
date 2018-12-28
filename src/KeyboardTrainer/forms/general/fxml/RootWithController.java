@@ -13,7 +13,7 @@ public class RootWithController<T> {
 	private final Parent root;
 	private final T      controller;
 	
-	public RootWithController(Parent root, T controller) {
+	RootWithController(Parent root, T controller) {
 		this.root = root;
 		this.controller = controller;
 	}

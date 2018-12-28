@@ -14,18 +14,16 @@
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES"/>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-        <children>
-            <ListView fx:id="usersListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                <GridPane.margin>
-                    <Insets bottom="7.0" left="10.0" right="5.0"/>
-                </GridPane.margin>
-            </ListView>
-            <TextField fx:id="searchTextField" promptText="Поиск">
-                <GridPane.margin>
-                    <Insets left="10.0" right="5.0"/>
-                </GridPane.margin>
-            </TextField>
-        </children>
+        <ListView fx:id="usersListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets bottom="7.0" left="10.0" right="5.0"/>
+            </GridPane.margin>
+        </ListView>
+        <TextField fx:id="searchTextField" promptText="Поиск">
+            <GridPane.margin>
+                <Insets left="10.0" right="5.0"/>
+            </GridPane.margin>
+        </TextField>
     </GridPane>
     <Separator orientation="VERTICAL" prefWidth="0.0">
         <HBox.margin>
@@ -78,31 +76,27 @@
                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <children>
-                <GridPane>
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="218.0"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                    <children>
-                        <Label text="Логин:"/>
-                        <Label fx:id="loginLabel" GridPane.columnIndex="1"/>
-                    </children>
-                    <GridPane.margin>
-                        <Insets top="5.0"/>
-                    </GridPane.margin>
-                </GridPane>
-                <CheckBox fx:id="disabledCheckBox" mnemonicParsing="false" text="Заблокирован" GridPane.rowIndex="1"/>
-            </children>
             <padding>
                 <Insets left="10.0" right="10.0"/>
             </padding>
             <GridPane.margin>
                 <Insets right="10.0"/>
             </GridPane.margin>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="218.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <GridPane.margin>
+                    <Insets top="5.0"/>
+                </GridPane.margin>
+                <Label text="Логин:"/>
+                <Label fx:id="loginLabel" GridPane.columnIndex="1"/>
+            </GridPane>
+            <CheckBox fx:id="disabledCheckBox" mnemonicParsing="false" text="Заблокирован" GridPane.rowIndex="1"/>
         </GridPane>
     </GridPane>
 </HBox>

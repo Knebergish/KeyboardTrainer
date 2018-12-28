@@ -42,7 +42,7 @@ public class ExercisePlayerController {
 		exerciseManager = new ExerciseManager(Session.getLoggedUser(),
 		                                      exercise,
 		                                      this::updateStatistics,
-		                                      (statistic) -> this.endExercise(statistic));
+		                                      this::endExercise);
 		
 		initExerciseVisualizer();
 		initStatisticsDetails(exercise);

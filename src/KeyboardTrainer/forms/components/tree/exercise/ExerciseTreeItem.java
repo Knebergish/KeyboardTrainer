@@ -9,13 +9,13 @@ public class ExerciseTreeItem {
 	private final int      level;
 	private final Exercise exercise;
 	
-	public ExerciseTreeItem(Exercise exercise) {
+	ExerciseTreeItem(Exercise exercise) {
 		isExercise = true;
 		this.exercise = exercise;
 		this.level = -13; // Прост весело
 	}
 	
-	public ExerciseTreeItem(int level) {
+	ExerciseTreeItem(int level) {
 		isExercise = false;
 		this.level = level;
 		this.exercise = null;

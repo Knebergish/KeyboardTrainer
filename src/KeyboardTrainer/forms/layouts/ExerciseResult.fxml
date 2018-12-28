@@ -8,63 +8,60 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="190.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KeyboardTrainer.forms.controllers.exercise.ExerciseResultController">
+<GridPane prefHeight="190.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="KeyboardTrainer.forms.controllers.exercise.ExerciseResultController">
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" text="Label">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <GridPane GridPane.rowIndex="1">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="332.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="268.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Label text="Время прохождения: " GridPane.halignment="RIGHT" />
-                <Label text="Количество ошибок: " GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                <Label text="Среднее время нажатия: " GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                <Label text="Пройдено: " GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                <Label fx:id="totalTimeLabel" GridPane.columnIndex="1" />
-                <Label fx:id="errorsCountLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="averagePressingTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="completePercentsLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            </children>
-        </GridPane>
-        <GridPane prefHeight="130.0" prefWidth="600.0" GridPane.rowIndex="2">
-            <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Button fx:id="toMenuButton" mnemonicParsing="false" prefWidth="100.0" text="Главное меню">
-                    <GridPane.margin>
-                        <Insets right="5.0" />
-                    </GridPane.margin>
-                </Button>
-                <Button fx:id="toStatisticsButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Статистика" GridPane.columnIndex="1">
-                    <GridPane.margin>
-                        <Insets left="5.0" />
-                    </GridPane.margin>
-                </Button>
-            </children>
-        </GridPane>
-    </children>
+    <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" text="Label">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <GridPane GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="332.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="268.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Label text="Время прохождения: " GridPane.halignment="RIGHT"/>
+        <Label text="Количество ошибок: " GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+        <Label text="Среднее время нажатия: " GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+        <Label text="Пройдено: " GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+        <Label fx:id="totalTimeLabel" GridPane.columnIndex="1"/>
+        <Label fx:id="errorsCountLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="averagePressingTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label fx:id="completePercentsLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+    <GridPane prefHeight="130.0" prefWidth="600.0" GridPane.rowIndex="2">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Button fx:id="toMenuButton" mnemonicParsing="false" prefWidth="100.0" text="Главное меню">
+            <GridPane.margin>
+                <Insets right="5.0"/>
+            </GridPane.margin>
+        </Button>
+        <Button fx:id="toStatisticsButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
+                text="Статистика" GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets left="5.0"/>
+            </GridPane.margin>
+        </Button>
+    </GridPane>
 </GridPane>

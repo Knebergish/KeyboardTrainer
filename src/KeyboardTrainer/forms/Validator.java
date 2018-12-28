@@ -57,15 +57,15 @@ public class Validator {
 		/**
 		 * @return false - значит не прошёл проверку.
 		 */
-		public boolean check() {
+		boolean check() {
 			return condition.getAsBoolean();
 		}
 		
-		public String getErrorHeader() {
+		String getErrorHeader() {
 			return errorHeader;
 		}
 		
-		public String getErrorText() {
+		String getErrorText() {
 			if (addedToText != null) {
 				return errorText + addedToText.get();
 			} else {
