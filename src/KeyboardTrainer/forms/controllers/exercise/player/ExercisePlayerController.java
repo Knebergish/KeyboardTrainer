@@ -6,11 +6,11 @@ import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.forms.common.Utils;
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
+import KeyboardTrainer.forms.common.fxml.RootWithController;
 import KeyboardTrainer.forms.components.details.DetailsFiller;
 import KeyboardTrainer.forms.components.details.DetailsGridPane;
 import KeyboardTrainer.forms.controllers.exercise.ExerciseResultController;
-import KeyboardTrainer.forms.common.fxml.FXMLManager;
-import KeyboardTrainer.forms.common.fxml.RootWithController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -51,6 +51,13 @@ public class ExercisePlayerController {
 		initStatisticsDetails(exercise);
 		
 		GridPane.setHalignment(breakButton, HPos.RIGHT);
+		
+		gridPane.getScene().getWindow().setOnCloseRequest(event -> {
+			                                                  if (!exerciseManager.isFinish()) {
+				                                                  exerciseManager.breakExercise();
+			                                                  }
+		                                                  }
+		                                                 );
 		
 		// Если об этом станет известно широкому кругу лиц, плохо будет всем, так что не распространяйтесь.
 		// 1) Метод init отрабатывает ДО полной отрисовки формы, т.е. некоторые её компоненты ещё не полностью смасштабированы.
@@ -120,6 +127,7 @@ public class ExercisePlayerController {
 	}
 	
 	public void breakExercise() {
-		exerciseManager.endExercise();
+		Window window = gridPane.getScene().getWindow();
+		window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
 	}
 }

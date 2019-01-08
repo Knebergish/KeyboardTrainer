@@ -111,14 +111,22 @@ class ExerciseManager {
 	}
 	
 	void endExercise() {
-		isStarted = false;
-		isFinish = true;
-		clockExecutor.shutdown();
+		breakExercise();
 		Statistics statistics = statisticsBuilder.getStatistics();
 		onEndExerciseHandler.endExercise(statistics);
 	}
 	
+	void breakExercise() {
+		isStarted = false;
+		isFinish = true;
+		clockExecutor.shutdown();
+	}
+	
 	ExerciseVisualizer getExerciseVisualizer() {
 		return exerciseVisualizer;
+	}
+	
+	boolean isFinish() {
+		return isFinish;
 	}
 }
