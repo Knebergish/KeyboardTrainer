@@ -11,7 +11,7 @@ public class AdminForm extends GeneralForm {
 	public AdminForm() {
 		setTitle("Лучшая админ-панель");
 		addMenuButton(new ChangeContentMenuButton("Управление упражнениями", "ExerciseGeneral",
-		                                          new ExerciseManagerController()));
+		                                          ExerciseManagerController::new));
 		addMenuButton(new ChangeContentMenuButton("Управление аккаунтами",
 		                                          "UsersManager"));
 		addMenuButton(new CustomActionMenuButton("Статистика",

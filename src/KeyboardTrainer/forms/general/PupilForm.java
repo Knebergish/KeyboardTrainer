@@ -21,9 +21,9 @@ public class PupilForm extends GeneralForm {
 		addMenuButton(
 				new CustomActionMenuButton("Продолжить", this::continueAction));
 		addMenuButton(new ChangeContentMenuButton("Выбор упражнения", "ExerciseGeneral",
-		                                          new ExerciseChooserController()));
+		                                          ExerciseChooserController::new));
 		addMenuButton(new ChangeContentMenuButton("Статистика", "AverageStatistics",
-		                                          getAverageStatisticsController()));
+		                                          this::getAverageStatisticsController));
 		addMenuButton(new ChangeContentMenuButton("Справка", "About"));
 	}
 	

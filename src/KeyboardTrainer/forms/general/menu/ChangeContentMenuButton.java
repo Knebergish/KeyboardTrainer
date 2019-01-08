@@ -4,31 +4,33 @@ package KeyboardTrainer.forms.general.menu;
 import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.common.fxml.RootWithController;
 import KeyboardTrainer.forms.general.ContentArea;
-import javafx.scene.Parent;
+
+import java.util.function.Supplier;
 
 
 /**
  * Кнопка меню, меняющая содержимое главной формы.
  */
 public class ChangeContentMenuButton extends MenuButton {
-	private Parent root;
+	private String                formName;
+	private Supplier<ContentArea> controllerSupplier;
 	
 	public ChangeContentMenuButton(String text, String formName) {
-		this(text, formName, null);
+		this(text, formName, () -> null);
 	}
 	
-	public ChangeContentMenuButton(String text, String formName, ContentArea controller) {
+	public ChangeContentMenuButton(String text, String formName, Supplier<ContentArea> controllerSupplier) {
 		super(text);
-		
-		RootWithController<ContentArea> rootWithController = FXMLManager.load(formName, controller);
-		if (rootWithController.getController() != null) {
-			rootWithController.getController().init();
-		}
-		root = rootWithController.getRoot();
+		this.formName = formName;
+		this.controllerSupplier = controllerSupplier;
 	}
 	
 	@Override
 	protected void action() {
-		generalForm.setContent(root);
+		RootWithController<ContentArea> rootWithController = FXMLManager.load(formName, controllerSupplier.get());
+		if (rootWithController.getController() != null) {
+			rootWithController.getController().init();
+		}
+		generalForm.setContent(rootWithController.getRoot());
 	}
 }
