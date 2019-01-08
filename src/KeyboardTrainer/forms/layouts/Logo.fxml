@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea">
-    <Label alignment="CENTER" contentDisplay="CENTER" text="Здесь могла быть ваша реклама" textAlignment="CENTER"
-           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-           AnchorPane.topAnchor="0.0">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
-</AnchorPane>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fitHeight="300.0" pickOnBounds="true" preserveRatio="true" smooth="false" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0">
+        <Image url="file:res/logo.jpg"/>
+    </ImageView>
+</VBox>

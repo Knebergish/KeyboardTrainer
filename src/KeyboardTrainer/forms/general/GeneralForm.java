@@ -9,6 +9,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -38,12 +39,14 @@ public abstract class GeneralForm {
 		
 		contentPane = new AnchorPane();
 		contentPane.setMinHeight(300);
+		contentPane.setMaxHeight(300);
 		contentPane.setPrefWidth(600);
 		
 		VBox mainBox = new VBox();
 		mainBox.getChildren().addAll(menuGridPane, separator, contentPane);
 		
 		stage = new Stage();
+		stage.getIcons().add(new Image("file:res/icon.jpg"));
 		stage.setScene(new Scene(mainBox));
 		stage.sizeToScene();
 		stage.setResizable(false);

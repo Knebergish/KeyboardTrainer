@@ -4,6 +4,7 @@ package KeyboardTrainer.forms.common.fxml;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -57,6 +58,8 @@ public class FXMLManager {
 	public static Stage createStage(Parent root, String title, int width, int height) {
 		Stage stage = new Stage();
 		stage.setTitle(title);
+		stage.getIcons().add(new Image("file:res/icon.jpg"));
+		
 		if (width > 0) {
 			stage.setWidth(width);
 		}
