@@ -1,7 +1,6 @@
 package KeyboardTrainer.forms.controllers.statistics;
 
 
-import KeyboardTrainer.data.Entity;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.statistics.Statistics;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
@@ -10,7 +9,6 @@ import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.common.fxml.RootWithController;
 import javafx.stage.Stage;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,11 +16,8 @@ import java.util.stream.IntStream;
 
 public class StatisticsMagic {
 	public static void showUserStatisticsForExercise(User user, Exercise exercise) {
-		List<Statistics> statistics = StatisticsDAO.getInstance().getAll().parallelStream()
-		                                           .filter(s -> s.getUserId() == user.getId())
-		                                           .filter(s -> s.getExerciseId() == exercise.getId())
-		                                           .sorted(Comparator.comparingInt(Entity::getId))
-		                                           .collect(Collectors.toList());
+		List<Statistics> statistics =
+				StatisticsDAO.getInstance().getUserStatisticsForExercise(user.getId(), exercise.getId());
 		
 		List<Integer> errors = statistics.parallelStream()
 		                                 .map(Statistics::getErrorsCount)

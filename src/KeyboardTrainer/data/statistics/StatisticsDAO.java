@@ -1,8 +1,9 @@
 package KeyboardTrainer.data.statistics;
 
+
 import KeyboardTrainer.data.DAO;
 import KeyboardTrainer.data.JDBCDriverManager;
-import KeyboardTrainer.data.user.UserImpl;
+import KeyboardTrainer.forms.controllers.statistics.AverageStatistics;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,11 @@ public class StatisticsDAO implements DAO<Statistics> {
     private static StatisticsDAO instance;
     private static JDBCDriverManager jdbcDriverManager;
     private static Logger log = Logger.getLogger(StatisticsDAO.class.getName());
-
+    
+    private String averageStatisticsQuery = "select AVG(errorsCount) as averageErrorsCount,\n"
+                                            + "    AVG(averagePressingTime) as averagePressingTime,\n"
+                                            + "    AVG(totalTime) as averageTotalTime from statistic\n ";
+    
     /**
      * @author AliRakhmaev
      * @return Ввиду требования возвращения нового объекта из базы данных, потребовалось идти на хитрость:
@@ -135,5 +140,61 @@ public class StatisticsDAO implements DAO<Statistics> {
             log.info("Connection hasn't been created");
         }
         return instance;
+    }
+    
+    public List<Statistics> getUserStatisticsForExercise(int userId, int exerciseId){
+        try (PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
+                "select * from statistic where userId = ? AND exerciseId = ? order by id;")) {
+            statement.setInt(1, userId);
+            statement.setInt(2, exerciseId);
+            
+            List<Statistics> statistics = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                statistics.add(new StatisticsImpl(resultSet.getInt("id"),
+                                                  resultSet.getInt("userId"),
+                                                  resultSet.getInt("exerciseId"),
+                                                  resultSet.getLong("totalTime"),
+                                                  resultSet.getInt("errorsCount"),
+                                                  resultSet.getLong("averagePressingTime"),
+                                                  resultSet.getInt("completedPercents")));
+            }
+            return statistics;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+    
+    public AverageStatistics getAverageUserStatisticsForExercise(int userId, int exerciseId) {
+        String condition = String.format("where userId = %d AND exerciseId = %d;", userId, exerciseId);
+        return getAverageStatistics(condition);
+    }
+    
+    public AverageStatistics getAverageStatisticsForUser(int userId) {
+        String condition = String.format("where userId = %d;", userId);
+        return getAverageStatistics(condition);
+    }
+    
+    public AverageStatistics getAverageStatisticsForExercise(int exerciseId) {
+        String condition = String.format("where exerciseId = %d;", exerciseId);
+        return getAverageStatistics(condition);
+    }
+    
+    private AverageStatistics getAverageStatistics(String condition) {
+        try (Statement statement = jdbcDriverManager.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery(averageStatisticsQuery + condition);
+            
+            AverageStatistics averageStat = new AverageStatistics();
+            averageStat.setAverageErrorsCount(resultSet.getDouble(1));
+            averageStat.setAveragePressingTime(resultSet.getDouble(2));
+            averageStat.setAverageTotalTime(resultSet.getDouble(3));
+            
+            return averageStat;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
