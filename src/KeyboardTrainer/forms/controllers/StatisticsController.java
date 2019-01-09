@@ -7,7 +7,7 @@ import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.data.user.User;
 import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.forms.common.fxml.FXMLManager;
-import KeyboardTrainer.forms.components.UsersListVBox;
+import KeyboardTrainer.forms.components.UsersList;
 import KeyboardTrainer.forms.components.tree.exercise.ExerciseTree;
 import KeyboardTrainer.forms.controllers.statistics.AverageStatistics;
 import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
@@ -72,14 +72,14 @@ public class StatisticsController implements ContentArea {
 	}
 	
 	private void initUsersListVBox() {
-		UsersListVBox usersListVBox = new UsersListVBox(user -> {
+		UsersList usersList = new UsersList(user -> {
 			selectedUser = user;
 			updateButtonsDisable();
 		});
-		usersListVBox.setUsersList(UserDAO.getInstance().getAll().parallelStream()
-		                                  .filter(user -> !user.isAdmin())
-		                                  .collect(Collectors.toList()));
-		componentsGridPane.add(usersListVBox, 1, 0);
+		usersList.setUsersList(UserDAO.getInstance().getAll().parallelStream()
+		                              .filter(user -> !user.isAdmin())
+		                              .collect(Collectors.toList()));
+		componentsGridPane.add(usersList, 1, 0);
 	}
 	
 	private void initExerciseTree() {

@@ -4,7 +4,7 @@ package KeyboardTrainer.forms.controllers;
 import KeyboardTrainer.data.user.User;
 import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.data.user.UserImpl;
-import KeyboardTrainer.forms.components.UsersListVBox;
+import KeyboardTrainer.forms.components.UsersList;
 import KeyboardTrainer.forms.general.ContentArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,15 +27,15 @@ public class UsersManagerController implements ContentArea {
 	@FXML
 	private Button   saveButton;
 	
-	private UsersListVBox usersListVBox;
+	private UsersList usersList;
 	
 	@Override
 	public void init() {
-		usersListVBox = new UsersListVBox(this::updateSelectedUserDetails);
-		usersListVBox.setUsersList(UserDAO.getInstance().getAll().parallelStream()
-		                                  .filter(user -> !user.isAdmin())
-		                                  .collect(Collectors.toList()));
-		mainHBox.getChildren().add(0, usersListVBox);
+		usersList = new UsersList(this::updateSelectedUserDetails);
+		usersList.setUsersList(UserDAO.getInstance().getAll().parallelStream()
+		                              .filter(user -> !user.isAdmin())
+		                              .collect(Collectors.toList()));
+		mainHBox.getChildren().add(0, usersList);
 		
 		deleteButton.setOnAction(event -> deleteSelectedUser());
 		saveButton.setOnAction(event -> saveSelectedUser());
@@ -43,12 +43,12 @@ public class UsersManagerController implements ContentArea {
 	
 	
 	private void deleteSelectedUser() {
-		UserDAO.getInstance().delete(usersListVBox.getSelectedUser().getId());
-		usersListVBox.deleteUser(usersListVBox.getSelectedUser());
+		UserDAO.getInstance().delete(usersList.getSelectedUser().getId());
+		usersList.deleteUser(usersList.getSelectedUser());
 	}
 	
 	private void saveSelectedUser() {
-		User selectedUser = usersListVBox.getSelectedUser();
+		User selectedUser = usersList.getSelectedUser();
 		User updatedUser = new UserImpl(selectedUser.getId(),
 		                                selectedUser.getLogin(),
 		                                selectedUser.getPassword(),
@@ -56,7 +56,7 @@ public class UsersManagerController implements ContentArea {
 		                                disabledCheckBox.isSelected());
 		UserDAO.getInstance().set(updatedUser);
 		
-		usersListVBox.saveUser(selectedUser, updatedUser);
+		usersList.saveUser(selectedUser, updatedUser);
 	}
 	
 	private void updateSelectedUserDetails(User selectedUser) {

@@ -27,7 +27,7 @@ public abstract class AbstractExerciseTreeController implements ContentArea {
 	@FXML
 	protected Button   tertioButton;
 	
-	protected ExerciseTree            exercisesTreeView;
+	protected ExerciseTree            exercisesTree;
 	protected DetailsFiller<Exercise> detailsFiller;
 	
 	protected Exercise selectedExercise;
@@ -52,7 +52,7 @@ public abstract class AbstractExerciseTreeController implements ContentArea {
 	}
 	
 	private void initExerciseTreeView() {
-		exercisesTreeView = new ExerciseTree(exerciseTreeItem -> {
+		exercisesTree = new ExerciseTree(exerciseTreeItem -> {
 			selectedExercise = null;
 			if (exerciseTreeItem != null && exerciseTreeItem.isExercise()) {
 				selectedExercise = exerciseTreeItem.getExercise();
@@ -64,11 +64,11 @@ public abstract class AbstractExerciseTreeController implements ContentArea {
 			}
 			detailsFiller.fillDetails(selectedExercise);
 		});
-		treeParentGridPane.getChildren().add(exercisesTreeView);
-		GridPane.setMargin(exercisesTreeView, new Insets(10, 10, 0, 10));
+		treeParentGridPane.getChildren().add(exercisesTree);
+		GridPane.setMargin(exercisesTree, new Insets(10, 10, 0, 10));
 		treeParentGridPane.setMinWidth(300);
 		treeParentGridPane.setMaxWidth(300);
 		
-		exercisesTreeView.setExercises(ExerciseDAO.getInstance().getAll());
+		exercisesTree.setExercises(ExerciseDAO.getInstance().getAll());
 	}
 }

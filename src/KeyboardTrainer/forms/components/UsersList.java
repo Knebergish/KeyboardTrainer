@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 
-public class UsersListVBox extends VBox {
+public class UsersList extends VBox {
 	private TextField      searchTextField;
 	private ListView<User> usersListView;
 	
@@ -22,7 +22,7 @@ public class UsersListVBox extends VBox {
 	private User       selectedUser;
 	
 	
-	public UsersListVBox(Consumer<User> selectionHandler) {
+	public UsersList(Consumer<User> selectionHandler) {
 		initSearchTextField();
 		initUsersListView(selectionHandler);
 		

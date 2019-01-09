@@ -37,13 +37,13 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 			}
 			
 			ExerciseDAO.getInstance().create(newExercise);
-			exercisesTreeView.addExercise(newExercise);
-			exercisesTreeView.selectExercise(newExercise);
+			exercisesTree.addExercise(newExercise);
+			exercisesTree.selectExercise(newExercise);
 			selectedExercise = newExercise;
 		});
 		secundoButton.setOnAction(event -> {
 			ExerciseDAO.getInstance().delete(selectedExercise.getId());
-			exercisesTreeView.removeExercise(selectedExercise);
+			exercisesTree.removeExercise(selectedExercise);
 		});
 		tertioButton.setOnAction(event -> {
 			if (selectedExercise == null) {
@@ -54,13 +54,13 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 				return;
 			}
 			ExerciseDAO.getInstance().set(exercise);
-			exercisesTreeView.getRoot().getChildren()
-			                 .filtered(item -> item.getValue().isExercise()
+			exercisesTree.getRoot().getChildren()
+			             .filtered(item -> item.getValue().isExercise()
 			                                   && item.getValue().getExercise() == selectedExercise);
 			
-			exercisesTreeView.removeExercise(selectedExercise);
-			exercisesTreeView.addExercise(exercise);
-			exercisesTreeView.selectExercise(exercise);
+			exercisesTree.removeExercise(selectedExercise);
+			exercisesTree.addExercise(exercise);
+			exercisesTree.selectExercise(exercise);
 			selectedExercise = exercise;
 		});
 	}
