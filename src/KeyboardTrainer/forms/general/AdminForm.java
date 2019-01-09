@@ -14,15 +14,7 @@ public class AdminForm extends GeneralForm {
 		                                          ExerciseManagerController::new));
 		addMenuButton(new ChangeContentMenuButton("Управление аккаунтами",
 		                                          "UsersManager"));
-		addMenuButton(new CustomActionMenuButton("Статистика",
-		                                         () -> {
-			                                         Alert alert = new Alert(Alert.AlertType.WARNING);
-			                                         alert.setTitle("Внимание");
-			                                         alert.setHeaderText("Ведутся технические работы");
-			                                         alert.setContentText(
-					                                         "Данная форма пока недоступна, вернитесь позже.");
-			                                         alert.show();
-		                                         }));
+		addMenuButton(new ChangeContentMenuButton("Статистика", "Statistics"));
 		addMenuButton(new ChangeContentMenuButton("Справка", "About"));
 	}
 }
