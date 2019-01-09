@@ -104,13 +104,17 @@ class ExerciseManager {
 		}
 	}
 	
-	private boolean checkEndExercise(Statistics currentStatistics) {
+	private synchronized boolean checkEndExercise(Statistics currentStatistics) {
 		return currentLetterIndex >= text.length()
 		       || currentStatistics.getErrorsCount() >= exercise.getMaxErrorsCount()
 		       || currentStatistics.getAveragePressingTime() >= exercise.getMaxAveragePressingTime();
 	}
 	
-	void endExercise() {
+	private synchronized void endExercise() {
+		if (isFinish) {
+			return;
+		}
+		
 		breakExercise();
 		Statistics statistics = statisticsBuilder.getStatistics();
 		onEndExerciseHandler.endExercise(statistics);
