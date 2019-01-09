@@ -65,7 +65,9 @@ public abstract class AbstractExerciseTreeController implements ContentArea {
 			detailsFiller.fillDetails(selectedExercise);
 		});
 		treeParentGridPane.getChildren().add(exercisesTreeView);
-		GridPane.setMargin(exercisesTreeView, new Insets(10, 5, 0, 10));
+		GridPane.setMargin(exercisesTreeView, new Insets(10, 10, 0, 10));
+		treeParentGridPane.setMinWidth(300);
+		treeParentGridPane.setMaxWidth(300);
 		
 		exercisesTreeView.setExercises(ExerciseDAO.getInstance().getAll());
 	}
