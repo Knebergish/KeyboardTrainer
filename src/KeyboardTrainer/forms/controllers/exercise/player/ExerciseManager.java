@@ -19,6 +19,7 @@ class ExerciseManager {
 	private final String               text;
 	private final StatisticsBuilder    statisticsBuilder;
 	private final ExerciseVisualizer   exerciseVisualizer;
+	private final KeyboardVisualizer   keyboardVisualizer;
 	
 	private ScheduledExecutorService clockExecutor;
 	private int                      currentLetterIndex;
@@ -43,6 +44,7 @@ class ExerciseManager {
 		statisticsBuilder.setExerciseId(exercise);
 		
 		exerciseVisualizer = new GodlikeVisualizer(exercise.getText());
+		keyboardVisualizer = new KeyboardVisualizer(580); //TODO: проклятые размеры
 	}
 	
 	void startExercise() {
@@ -52,6 +54,7 @@ class ExerciseManager {
 		isFinish = false;
 		
 		exerciseVisualizer.start();
+		keyboardVisualizer.drawGoodKey(text.charAt(0));
 	}
 	
 	/**
@@ -82,8 +85,12 @@ class ExerciseManager {
 		    || (isEndLine(currentLetter) && isEndLine(key))) {
 			exerciseVisualizer.handleGoodKey();
 			currentLetterIndex++;
+			if (currentLetterIndex < text.length()) {
+				keyboardVisualizer.drawGoodKey(text.charAt(currentLetterIndex));
+			}
 		} else {
 			exerciseVisualizer.handleBadKey();
+			keyboardVisualizer.drawBadKey(text.charAt(currentLetterIndex));
 			statisticsBuilder.incrementErrorsCount();
 		}
 		statisticsBuilder.incrementPressingsCount();
@@ -132,5 +139,9 @@ class ExerciseManager {
 	
 	boolean isFinish() {
 		return isFinish;
+	}
+	
+	public KeyboardVisualizer getKeyboardVisualizer() {
+		return keyboardVisualizer;
 	}
 }

@@ -15,8 +15,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
@@ -29,14 +32,18 @@ import java.util.TimerTask;
 
 public class ExercisePlayerController {
 	@FXML
+	private CheckBox virtualKeyboardCheckBox;
+	@FXML
+	private GridPane mainGridPane;
+	@FXML
 	private GridPane gridPane;
 	@FXML
 	private Button   breakButton;
 	
 	private Exercise exercise;
 	
-	private ExerciseVisualizer        exerciseVisualizer;
 	private ExerciseManager           exerciseManager;
+	private ExerciseVisualizer        exerciseVisualizer;
 	private DetailsFiller<Statistics> statisticsDetailsFiller;
 	
 	public void init(Exercise exercise) {
@@ -72,6 +79,28 @@ public class ExercisePlayerController {
 				Platform.runLater(() -> startExercise());
 			}
 		}, 100);
+		
+		KeyboardVisualizer keyboardVisualizer = exerciseManager.getKeyboardVisualizer();
+		GridPane.setHalignment(keyboardVisualizer, HPos.CENTER);
+		GridPane.setValignment(keyboardVisualizer, VPos.TOP);
+		GridPane.setMargin(keyboardVisualizer, new Insets(10, 0, 0, 0));
+		mainGridPane.add(keyboardVisualizer, 0, 1);
+		
+		virtualKeyboardCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+			final int d      = 210; //TODO: проклятые размеры
+			final int height = newValue ? d : 0;
+			
+			RowConstraints rowConstraints = mainGridPane.getRowConstraints().get(1);
+			rowConstraints.setMinHeight(height);
+			rowConstraints.setPrefHeight(height);
+			rowConstraints.setMaxHeight(height);
+			mainGridPane.getRowConstraints().set(1, rowConstraints);
+			
+			double newHeight = mainGridPane.getScene().getWindow().getHeight() + (newValue ? d : -d);
+			mainGridPane.getScene().getWindow().setHeight(newHeight);
+		});
+		
+		gridPane.getScene().setOnKeyTyped(keyEvent -> exerciseManager.handleKey(keyEvent.getCharacter()));
 	}
 	
 	private void endExercise(Statistics statistics) {
@@ -93,7 +122,6 @@ public class ExercisePlayerController {
 	private void initExerciseVisualizer() {
 		exerciseVisualizer = exerciseManager.getExerciseVisualizer();
 		gridPane.getChildren().add(exerciseVisualizer.getRegion());
-		gridPane.getScene().setOnKeyTyped(keyEvent -> exerciseManager.handleKey(keyEvent.getCharacter()));
 		GridPane.setMargin(exerciseVisualizer.getRegion(), new Insets(10, 10, 10, 10));
 	}
 	
