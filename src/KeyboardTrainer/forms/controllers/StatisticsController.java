@@ -13,6 +13,7 @@ import KeyboardTrainer.forms.controllers.statistics.AverageStatistics;
 import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
 import KeyboardTrainer.forms.general.ContentArea;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -76,14 +77,16 @@ public class StatisticsController implements ContentArea {
 			selectedUser = user;
 			updateButtonsDisable();
 		});
+		
 		usersList.setUsersList(UserDAO.getInstance().getAll().parallelStream()
 		                              .filter(user -> !user.isAdmin())
 		                              .collect(Collectors.toList()));
+		usersList.setPadding(new Insets(10,10,0,10));
 		componentsGridPane.add(usersList, 1, 0);
 	}
 	
 	private void initExerciseTree() {
-		ExerciseTree exerciseTree = new ExerciseTree(exerciseTreeItem -> {
+		ExerciseTree exercisesTree = new ExerciseTree(exerciseTreeItem -> {
 			if (exerciseTreeItem != null && exerciseTreeItem.isExercise()) {
 				selectedExercise = exerciseTreeItem.getExercise();
 			} else {
@@ -91,8 +94,9 @@ public class StatisticsController implements ContentArea {
 			}
 			updateButtonsDisable();
 		});
-		exerciseTree.setExercises(ExerciseDAO.getInstance().getAll());
-		componentsGridPane.add(exerciseTree, 0, 0);
+		exercisesTree.setExercises(ExerciseDAO.getInstance().getAll());
+		GridPane.setMargin(exercisesTree, new Insets(10, 10, 0, 10));
+		componentsGridPane.add(exercisesTree, 0, 0);
 	}
 	
 	private void updateButtonsDisable() {
