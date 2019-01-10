@@ -28,10 +28,7 @@ public class ExerciseChooserController extends AbstractExerciseTreeController {
 			return;
 		}
 		
-		RootWithController<ExercisePlayerController> rootWithController = FXMLManager.load("ExercisePlayer");
-		
-		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), selectedExercise.getName());
-		rootWithController.getController().init(selectedExercise);
+		Stage stage = Utils.getExercisePlayerStage(selectedExercise);
 		stage.show();
 	}
 }

@@ -70,7 +70,6 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 		
 		Stage stage = FXMLManager.createStage(load.getRoot(), "Добавление упражнения");
 		stage.sizeToScene();
-		stage.setResizable(false);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		load.getController().init(exercise);
 		stage.showAndWait();

@@ -59,6 +59,7 @@ public class FXMLManager {
 		Stage stage = new Stage();
 		stage.setTitle(title);
 		stage.getIcons().add(new Image("file:res/icon.jpg"));
+		stage.setResizable(false);
 		
 		if (width > 0) {
 			stage.setWidth(width);

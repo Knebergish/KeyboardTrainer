@@ -5,9 +5,7 @@ import KeyboardTrainer.Session;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
-import KeyboardTrainer.forms.common.fxml.FXMLManager;
-import KeyboardTrainer.forms.common.fxml.RootWithController;
-import KeyboardTrainer.forms.controllers.exercise.player.ExercisePlayerController;
+import KeyboardTrainer.forms.common.Utils;
 import KeyboardTrainer.forms.controllers.exercise.tree.ExerciseChooserController;
 import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
@@ -30,13 +28,7 @@ public class PupilForm extends GeneralForm {
 	private void continueAction() {
 		Exercise exercise = ExerciseDAO.getInstance().getFirstNotPassedExercise(Session.getLoggedUser().getId());
 		
-		RootWithController<ExercisePlayerController> load = FXMLManager.load("ExercisePlayer");
-		
-		Stage stage = FXMLManager.createStage(load.getRoot(), exercise.getName());
-		stage.setResizable(false);
-		
-		load.getController().init(exercise);
-		
+		Stage stage = Utils.getExercisePlayerStage(exercise);
 		stage.show();
 	}
 	
