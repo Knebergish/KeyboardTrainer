@@ -5,12 +5,13 @@ import KeyboardTrainer.data.KeyboardZone;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
+import KeyboardTrainer.forms.common.AlertFormManager;
 import KeyboardTrainer.forms.common.Validator;
 import KeyboardTrainer.forms.common.Validator.Checker;
-import KeyboardTrainer.forms.common.AlertFormManager;
 import KeyboardTrainer.language.Language;
 import KeyboardTrainer.randomize.SimpleTextRandomizer;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -60,10 +61,12 @@ public class ExerciseSettingsController {
 	public void init(Exercise exercise) {
 		newExercise = null;
 		
+		// Заполняем список номеров уровней
 		for (int i = 1; i < 5; i++) {
 			levelChoiceBox.getItems().add(i);
 		}
 		
+		// Заполняем список доступных языков
 		languageChoiceBox.getItems().add(Language.RUSSIAN);
 		languageChoiceBox.getItems().add(Language.ENGLISH);
 		languageChoiceBox.converterProperty().set(new StringConverter<>() {
@@ -93,7 +96,6 @@ public class ExerciseSettingsController {
 		maxAveragePressingTimeTextField.setTextFormatter(
 				new TextFormatter<>(new IntegerStringConverter(), 100, integerFilter));
 		
-		
 		// Заполнение полей данными из инициализирующего упражнения
 		titleTextField.setText(exercise.getName());
 		lengthTextField.setText(String.valueOf(exercise.getLength()));
@@ -104,8 +106,16 @@ public class ExerciseSettingsController {
 		languageChoiceBox.getSelectionModel().select(exercise.getLanguage());
 		textTextArea.setText(exercise.getText());
 		
+		// Добавляем вслывающие подсказки с символами из зон
+		updateZonesTooltips(languageChoiceBox.getValue());
+		languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			updateZonesTooltips(newValue);
+		});
+		
+		// Автоматическое обновление длины текста
 		textTextArea.setOnKeyTyped(keyEvent -> updateTextLength());
 		
+		// Задаём действия для кнопок
 		generateTextButton.setOnAction(event -> generateText());
 		selectFileButton.setOnAction(event -> loadTextFromFile());
 		saveButton.setOnAction(event -> {
@@ -132,6 +142,7 @@ public class ExerciseSettingsController {
 			window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
 		});
 		
+		// Создаём валидаторы введённых параметров
 		textValidator = new Validator(List.of(
 				new Checker(() -> Integer.valueOf(lengthTextField.getText()) >= 25,
 				            "Слишком маленькая длина упражнения.",
@@ -209,6 +220,18 @@ public class ExerciseSettingsController {
 								                                                                                ", ")))));
 	}
 	
+	private void updateZonesTooltips(Language newValue) {
+		for (Node node : zonesGridPane.getChildren()) {
+			CheckBox        checkBox = (CheckBox) node;
+			KeyboardZone    zone     = KeyboardZone.byNumber(Integer.valueOf(checkBox.getText()));
+			List<Character> symbols  = newValue.getSymbols(zone);
+			String text = symbols.parallelStream()
+			                     .map(Objects::toString)
+			                     .collect(Collectors.joining(", "));
+			checkBox.setTooltip(new Tooltip(text));
+		}
+	}
+	
 	private void updateTextLength() {
 		lengthTextField.setText(String.valueOf(textTextArea.getText().length()));
 	}
@@ -227,6 +250,7 @@ public class ExerciseSettingsController {
 	
 	private void loadTextFromFile() {
 		FileChooser fileChooser = new FileChooser();
+		fileChooser.setInitialDirectory(new File("."));
 		fileChooser.setTitle("Выбор файла с текстом");
 		FileChooser.ExtensionFilter extFilter =
 				new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
