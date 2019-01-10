@@ -188,6 +188,24 @@ public class ExerciseDAO implements DAO<Exercise> {
             return Collections.emptyList();
         }
     }
+    
+    public Exercise getFirstNotPassedExercise(int userId) {
+        try (PreparedStatement statement = jdbcDriverManager.getConnection().prepareStatement(
+                "select id from exercise \n"
+                + "where not id in (select distinct exerciseId from statistic "
+                + "                 where userId = ? and completedPercents = 100) \n"
+                + "order by level, id \n"
+                + "limit 1;")) {
+            statement.setObject(1, userId);
+            statement.execute();
+            
+            ResultSet resultSet = statement.getResultSet();
+            return get(resultSet.getInt(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public static ExerciseDAO getInstance() {
         if (instance == null) {

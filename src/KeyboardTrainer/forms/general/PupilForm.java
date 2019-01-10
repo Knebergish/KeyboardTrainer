@@ -2,7 +2,8 @@ package KeyboardTrainer.forms.general;
 
 
 import KeyboardTrainer.Session;
-import KeyboardTrainer.data.exercise.ExerciseImpl;
+import KeyboardTrainer.data.exercise.Exercise;
+import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.data.statistics.StatisticsDAO;
 import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.common.fxml.RootWithController;
@@ -11,7 +12,6 @@ import KeyboardTrainer.forms.controllers.exercise.tree.ExerciseChooserController
 import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
 import KeyboardTrainer.forms.general.menu.CustomActionMenuButton;
-import KeyboardTrainer.language.Language;
 import javafx.stage.Stage;
 
 
@@ -28,22 +28,14 @@ public class PupilForm extends GeneralForm {
 	}
 	
 	private void continueAction() {
+		Exercise exercise = ExerciseDAO.getInstance().getFirstNotPassedExercise(Session.getLoggedUser().getId());
+		
 		RootWithController<ExercisePlayerController> load = FXMLManager.load("ExercisePlayer");
 		
-		Stage stage = FXMLManager.createStage(load.getRoot(), "Ваше следующее упражнение");
+		Stage stage = FXMLManager.createStage(load.getRoot(), exercise.getName());
 		stage.setResizable(false);
 		
-		load.getController().init(
-				//TODO: искать первое непройденное
-				new ExerciseImpl("TestExercise",
-				                 1,
-				                 "12345",
-				                 null,
-				                 12,
-				                 1000,
-				                 -1,
-				                 Language.RUSSIAN));
-		
+		load.getController().init(exercise);
 		
 		stage.show();
 	}
