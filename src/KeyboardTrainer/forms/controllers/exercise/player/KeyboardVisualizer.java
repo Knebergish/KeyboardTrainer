@@ -133,7 +133,7 @@ class KeyboardVisualizer extends Pane {
 		                 width * (250. / 600), keySize, List.of(' ')));
 		keys.add(new Key(width * (510. / 600),
 		                 width * (80. / 600),
-		                 width * (90. / 600), keySize, List.of('\r')));
+		                 width * (90. / 600), keySize, List.of('\r', '\n')));
 	}
 	
 	void drawGoodKey(Character charFromKey) {
