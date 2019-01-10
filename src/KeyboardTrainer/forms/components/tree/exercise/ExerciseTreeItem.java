@@ -25,6 +25,7 @@ public class ExerciseTreeItem {
 		return isExercise;
 	}
 	
+	@SuppressWarnings("WeakerAccess")
 	public int getLevel() {
 		return level;
 	}

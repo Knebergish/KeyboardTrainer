@@ -35,6 +35,7 @@ public class StatisticsMagic {
 		          "Ошибки");
 	}
 	
+	@SuppressWarnings("SameParameterValue")
 	private static <T extends Number> void showChart(String title, List<T> itemsX, Integer minX, Integer maxX,
 	                                                 String XAxisText, List<T> itemsY, Integer minY, Integer maxY,
 	                                                 String YAxisText) {

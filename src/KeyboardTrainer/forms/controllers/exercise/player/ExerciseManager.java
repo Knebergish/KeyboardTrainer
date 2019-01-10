@@ -141,7 +141,7 @@ class ExerciseManager {
 		return isFinish;
 	}
 	
-	public KeyboardVisualizer getKeyboardVisualizer() {
+	KeyboardVisualizer getKeyboardVisualizer() {
 		return keyboardVisualizer;
 	}
 }

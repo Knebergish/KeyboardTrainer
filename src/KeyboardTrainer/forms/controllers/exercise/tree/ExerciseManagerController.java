@@ -4,9 +4,9 @@ package KeyboardTrainer.forms.controllers.exercise.tree;
 import KeyboardTrainer.data.exercise.Exercise;
 import KeyboardTrainer.data.exercise.ExerciseDAO;
 import KeyboardTrainer.data.exercise.ExerciseImpl;
-import KeyboardTrainer.forms.controllers.exercise.ExerciseSettingsController;
 import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.common.fxml.RootWithController;
+import KeyboardTrainer.forms.controllers.exercise.ExerciseSettingsController;
 import KeyboardTrainer.language.Language;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,7 +56,7 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 			ExerciseDAO.getInstance().set(exercise);
 			exercisesTree.getRoot().getChildren()
 			             .filtered(item -> item.getValue().isExercise()
-			                                   && item.getValue().getExercise() == selectedExercise);
+			                               && item.getValue().getExercise() == selectedExercise);
 			
 			exercisesTree.removeExercise(selectedExercise);
 			exercisesTree.addExercise(exercise);

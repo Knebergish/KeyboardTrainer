@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.172-ea">
     <ImageView fitHeight="300.0" pickOnBounds="true" preserveRatio="true" smooth="false" AnchorPane.leftAnchor="0.0"
                AnchorPane.rightAnchor="0.0">
         <Image url="file:res/logo.jpg"/>

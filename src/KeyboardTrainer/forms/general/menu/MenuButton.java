@@ -10,6 +10,7 @@ import javafx.scene.text.TextAlignment;
  * Кнопка на панели меню.
  */
 public abstract class MenuButton extends Button {
+	@SuppressWarnings("WeakerAccess")
 	protected GeneralForm generalForm;
 	
 	MenuButton(String text) {

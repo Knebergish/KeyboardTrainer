@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" VBox.vgrow="NEVER" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" VBox.vgrow="NEVER"
+      xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane>
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
             <Label text="Среднее количество ошибок:">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
             <Label fx:id="averageErrorsCountLabel">
-            <font>
-               <Font size="18.0" />
-            </font></Label>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="1">
             <Label text="Среднее время нажатия клавиш:">
-            <font>
-               <Font size="18.0" />
-            </font></Label>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
             <Label fx:id="averagePressingTimeLabel">
-            <font>
-               <Font size="18.0" />
-            </font></Label>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
             <Label text="Среднее время прохождения:">
-            <font>
-               <Font size="18.0" />
-            </font></Label>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
             <Label fx:id="averageTotalTimeLabel">
-            <font>
-               <Font size="18.0" />
-            </font></Label>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
         </HBox>
     </GridPane>
 </VBox>

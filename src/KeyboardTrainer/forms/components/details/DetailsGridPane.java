@@ -40,7 +40,7 @@ public class DetailsGridPane extends GridPane {
 		
 		// Создаём необходимое количество строк в таблице и вставляем в них поля
 		for (int i = 0; i < rowsNames.size(); i++) {
-			Label key   = new Label(rowsNames.get(i));
+			Label key = new Label(rowsNames.get(i));
 			key.setWrapText(true);
 			Label value = new Label("");
 			value.setWrapText(true);

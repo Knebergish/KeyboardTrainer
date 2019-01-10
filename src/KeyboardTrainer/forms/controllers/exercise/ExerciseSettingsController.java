@@ -108,9 +108,8 @@ public class ExerciseSettingsController {
 		
 		// Добавляем вслывающие подсказки с символами из зон
 		updateZonesTooltips(languageChoiceBox.getValue());
-		languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			updateZonesTooltips(newValue);
-		});
+		languageChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> updateZonesTooltips(newValue));
 		
 		// Автоматическое обновление длины текста
 		textTextArea.setOnKeyTyped(keyEvent -> updateTextLength());

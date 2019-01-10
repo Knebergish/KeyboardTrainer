@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 
+@SuppressWarnings("unused")
 public class AverageStatisticsController implements ContentArea {
 	private final AverageStatistics statistics;
 	

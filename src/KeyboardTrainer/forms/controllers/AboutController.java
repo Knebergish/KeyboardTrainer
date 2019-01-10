@@ -2,12 +2,14 @@ package KeyboardTrainer.forms.controllers;
 
 
 import KeyboardTrainer.forms.general.ContentArea;
+import javafx.fxml.FXML;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 
 public class AboutController implements ContentArea {
-	public WebView webView;
+	@FXML
+	private WebView webView;
 	
 	@Override
 	public void init() {

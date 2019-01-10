@@ -1,6 +1,7 @@
 package KeyboardTrainer.forms.controllers.statistics;
 
 
+@SuppressWarnings("WeakerAccess")
 public class AverageStatistics {
 	private double averageErrorsCount;
 	private double averagePressingTime;
@@ -10,20 +11,20 @@ public class AverageStatistics {
 		return averageErrorsCount;
 	}
 	
-	public void setAverageErrorsCount(double averageErrorsCount) {
-		this.averageErrorsCount = averageErrorsCount;
-	}
-	
 	public double getAveragePressingTime() {
 		return averagePressingTime;
 	}
 	
-	public void setAveragePressingTime(double averagePressingTime) {
-		this.averagePressingTime = averagePressingTime;
-	}
-	
 	public double getAverageTotalTime() {
 		return averageTotalTime;
+	}
+	
+	public void setAverageErrorsCount(double averageErrorsCount) {
+		this.averageErrorsCount = averageErrorsCount;
+	}
+	
+	public void setAveragePressingTime(double averagePressingTime) {
+		this.averagePressingTime = averagePressingTime;
 	}
 	
 	public void setAverageTotalTime(double averageTotalTime) {

@@ -81,7 +81,7 @@ public class StatisticsController implements ContentArea {
 		usersList.setUsersList(UserDAO.getInstance().getAll().parallelStream()
 		                              .filter(user -> !user.isAdmin())
 		                              .collect(Collectors.toList()));
-		usersList.setPadding(new Insets(10,10,0,10));
+		usersList.setPadding(new Insets(10, 10, 0, 10));
 		componentsGridPane.add(usersList, 1, 0);
 	}
 	

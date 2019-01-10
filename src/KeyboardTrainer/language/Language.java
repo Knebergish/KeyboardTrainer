@@ -33,7 +33,7 @@ public enum Language {
 	                            ));
 	
 	private final String                             name;
-	protected     Map<KeyboardZone, List<Character>> zonesSymbols;
+	private final Map<KeyboardZone, List<Character>> zonesSymbols;
 	
 	Language(String name, Map<KeyboardZone, List<Character>> zonesSymbols) {
 		this.name = name;
