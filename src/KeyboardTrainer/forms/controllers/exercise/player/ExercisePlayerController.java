@@ -28,6 +28,7 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Consumer;
 
 
 public class ExercisePlayerController {
@@ -40,14 +41,25 @@ public class ExercisePlayerController {
 	@FXML
 	private Button   breakButton;
 	
-	private Exercise exercise;
-	
 	private ExerciseManager           exerciseManager;
 	private ExerciseVisualizer        exerciseVisualizer;
 	private DetailsFiller<Statistics> statisticsDetailsFiller;
 	
+	private Consumer<Statistics> endHandler;
+	
 	public void init(Exercise exercise) {
-		this.exercise = exercise;
+		init(exercise, statistics -> {
+			statistics = StatisticsDAO.getInstance().create(statistics);
+			RootWithController<ExerciseResultController> rootWithController =
+					FXMLManager.load("ExerciseResult");
+			rootWithController.getController().init(exercise, statistics);
+			Stage stage = FXMLManager.createStage(rootWithController.getRoot(), "Результаты");
+			stage.show();
+		});
+	}
+	
+	public void init(Exercise exercise, Consumer<Statistics> endHandler) {
+		this.endHandler = endHandler;
 		
 		exerciseManager = new ExerciseManager(Session.getLoggedUser(),
 		                                      exercise,
@@ -104,16 +116,7 @@ public class ExercisePlayerController {
 	}
 	
 	private void endExercise(Statistics statistics) {
-		statistics = StatisticsDAO.getInstance().create(statistics);
-		
-		breakButton.setDisable(true);
-		
-		RootWithController<ExerciseResultController> rootWithController =
-				FXMLManager.load("ExerciseResult");
-		rootWithController.getController().init(exercise, statistics);
-		Stage stage = FXMLManager.createStage(rootWithController.getRoot(), "Результаты");
-		stage.setResizable(false);
-		stage.show();
+		endHandler.accept(statistics);
 		
 		Window window = gridPane.getScene().getWindow();
 		window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
