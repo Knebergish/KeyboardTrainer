@@ -143,6 +143,9 @@ public class ExerciseSettingsController {
 		
 		// Создаём валидаторы введённых параметров
 		textValidator = new Validator(List.of(
+				new Checker(() -> !lengthTextField.getText().equals(""),
+				            "Не введена длина упражнения",
+				            "Длина упражнения должна быть введена."),
 				new Checker(() -> Integer.valueOf(lengthTextField.getText()) >= 25,
 				            "Слишком маленькая длина упражнения.",
 				            "Длина упражнения должна быть не менее 25-и символов."),
