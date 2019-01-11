@@ -2,6 +2,7 @@ package KeyboardTrainer;
 
 
 import KeyboardTrainer.data.user.User;
+import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.controllers.login.LoginManager;
 import KeyboardTrainer.forms.general.AdminForm;
 import KeyboardTrainer.forms.general.GeneralForm;
@@ -24,7 +25,13 @@ public class Main extends Application {
 	
 	private void showGeneralForm(User user) {
 		Session.setLoggedUser(user);
+		
 		GeneralForm generalForm = user.isAdmin() ? new AdminForm() : new PupilForm();
-		generalForm.show();
+		var         load        = FXMLManager.load("GeneralForm", generalForm);
+		load.getController().init();
+		Stage stage = FXMLManager.createStage(load.getRoot(), generalForm.getTitle());
+		stage.setOnCloseRequest(event -> System.exit(0));
+		stage.sizeToScene(); // На всякий
+		stage.show();
 	}
 }

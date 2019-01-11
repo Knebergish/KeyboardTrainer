@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea">
+    <GridPane fx:id="menuGridPane" maxHeight="70.0" minHeight="70.0" prefHeight="70.0">
+        <rowConstraints>
+            <RowConstraints minHeight="70.0" prefHeight="70.0" maxHeight="70.0" valignment="CENTER" vgrow="SOMETIMES"/>
+        </rowConstraints>
+    </GridPane>
+    <Separator/>
+    <AnchorPane fx:id="contentAnchorPane" maxHeight="300.0" maxWidth="600.0" minHeight="300.0" minWidth="600.0"
+                prefHeight="300.0"
+                prefWidth="600.0"/>
+</VBox>

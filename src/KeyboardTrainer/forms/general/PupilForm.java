@@ -10,19 +10,23 @@ import KeyboardTrainer.forms.controllers.exercise.tree.ExerciseChooserController
 import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
 import KeyboardTrainer.forms.general.menu.CustomActionMenuButton;
+import KeyboardTrainer.forms.general.menu.MenuButton;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 
 public class PupilForm extends GeneralForm {
-	public PupilForm() {
-		setTitle("Лучший клавиатурный тренажёр");
-		addMenuButton(
-				new CustomActionMenuButton("Продолжить", this::continueAction));
-		addMenuButton(new ChangeContentMenuButton("Выбор упражнения", "ExerciseGeneral",
-		                                          ExerciseChooserController::new));
-		addMenuButton(new ChangeContentMenuButton("Статистика", "AverageStatistics",
-		                                          this::getAverageStatisticsController));
-		addMenuButton(new ChangeContentMenuButton("Справка", "About"));
+	@Override
+	protected List<MenuButton> createButtonsList() {
+		return List.of(
+				new CustomActionMenuButton("Продолжить", this::continueAction),
+				new ChangeContentMenuButton("Выбор упражнения", "ExerciseGeneral",
+				                            ExerciseChooserController::new),
+				new ChangeContentMenuButton("Статистика", "AverageStatistics",
+				                            this::getAverageStatisticsController),
+				new ChangeContentMenuButton("Справка", "About")
+		              );
 	}
 	
 	private void continueAction() {
@@ -36,5 +40,10 @@ public class PupilForm extends GeneralForm {
 		int userId     = Session.getLoggedUser().getId();
 		var statistics = StatisticsDAO.getInstance().getAverageStatisticsForUser(userId);
 		return new AverageStatisticsController(statistics);
+	}
+	
+	@Override
+	public String getTitle() {
+		return "Лучший клавиатурный тренажёр";
 	}
 }

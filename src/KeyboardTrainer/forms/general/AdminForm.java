@@ -3,16 +3,26 @@ package KeyboardTrainer.forms.general;
 
 import KeyboardTrainer.forms.controllers.exercise.tree.ExerciseManagerController;
 import KeyboardTrainer.forms.general.menu.ChangeContentMenuButton;
+import KeyboardTrainer.forms.general.menu.MenuButton;
+
+import java.util.List;
 
 
 public class AdminForm extends GeneralForm {
-	public AdminForm() {
-		setTitle("Лучшая админ-панель");
-		addMenuButton(new ChangeContentMenuButton("Управление упражнениями", "ExerciseGeneral",
-		                                          ExerciseManagerController::new));
-		addMenuButton(new ChangeContentMenuButton("Управление аккаунтами",
-		                                          "UsersManager"));
-		addMenuButton(new ChangeContentMenuButton("Статистика", "Statistics"));
-		addMenuButton(new ChangeContentMenuButton("Справка", "About"));
+	@Override
+	protected List<MenuButton> createButtonsList() {
+		return List.of(
+				new ChangeContentMenuButton("Управление упражнениями", "ExerciseGeneral",
+				                            ExerciseManagerController::new),
+				new ChangeContentMenuButton("Управление аккаунтами",
+				                            "UsersManager"),
+				new ChangeContentMenuButton("Статистика", "Statistics"),
+				new ChangeContentMenuButton("Справка", "About")
+		              );
+	}
+	
+	@Override
+	public String getTitle() {
+		return "Лучшая админ-панель";
 	}
 }
