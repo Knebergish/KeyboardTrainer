@@ -99,7 +99,7 @@ class ExerciseManager {
 	}
 	
 	private boolean isEndLine(String s) {
-		return s.equals("\n") || s.equals("\r");
+		return "\n".equals(s) || "\r".equals(s);
 	}
 	
 	private void updateState() {

@@ -3,6 +3,8 @@ package KeyboardTrainer.forms.components.details;
 
 import javafx.util.Pair;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -18,7 +20,9 @@ public class DetailsFiller<T> {
 	private final DetailsGridPane detailsGridPane;
 	
 	public DetailsFiller(List<Pair<String, Function<T, String>>> mappers) {
-		this.mappers = mappers;
+		this.mappers = new ArrayList<>();
+		Collections.copy(this.mappers, mappers);
+		
 		this.detailsGridPane = new DetailsGridPane(mappers.stream()
 		                                                  .map(Pair::getKey)
 		                                                  .collect(Collectors.toList()));

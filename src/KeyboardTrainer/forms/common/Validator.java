@@ -3,6 +3,8 @@ package KeyboardTrainer.forms.common;
 
 import javafx.scene.control.Alert;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
@@ -12,7 +14,8 @@ public class Validator {
 	private final List<Checker> checkers;
 	
 	public Validator(List<Checker> checkers) {
-		this.checkers = checkers;
+		this.checkers = new ArrayList<>();
+		Collections.copy(this.checkers, checkers);
 	}
 	
 	/**

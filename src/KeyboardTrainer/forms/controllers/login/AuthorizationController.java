@@ -26,6 +26,7 @@ public class AuthorizationController implements LoginController {
 	
 	private Consumer<User> loginUser;
 	
+	@Override
 	public void init(Consumer<User> loginUser, ActionHandler registerHandler) {
 		this.loginUser = loginUser;
 		loginButton.setOnAction(event -> login());

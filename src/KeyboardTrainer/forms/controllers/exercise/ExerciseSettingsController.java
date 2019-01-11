@@ -69,17 +69,7 @@ public class ExerciseSettingsController {
 		// Заполняем список доступных языков
 		languageChoiceBox.getItems().add(Language.RUSSIAN);
 		languageChoiceBox.getItems().add(Language.ENGLISH);
-		languageChoiceBox.converterProperty().set(new StringConverter<>() {
-			@Override
-			public String toString(Language language) {
-				return language.getName();
-			}
-			
-			@Override
-			public Language fromString(String s) {
-				return Language.valueOf(s);
-			}
-		});
+		languageChoiceBox.converterProperty().set(new LanguageStringConverter());
 		
 		// Устанавливаем ограничения на ввод символов для полей, предназначенных только для чисел
 		UnaryOperator<TextFormatter.Change> integerFilter = change -> {
@@ -143,7 +133,7 @@ public class ExerciseSettingsController {
 		
 		// Создаём валидаторы введённых параметров
 		textValidator = new Validator(List.of(
-				new Checker(() -> !lengthTextField.getText().equals(""),
+				new Checker(() -> lengthTextField.getText() != null && !lengthTextField.getText().isEmpty(),
 				            "Не введена длина упражнения",
 				            "Длина упражнения должна быть введена."),
 				new Checker(() -> Integer.valueOf(lengthTextField.getText()) >= 25,
@@ -376,5 +366,18 @@ public class ExerciseSettingsController {
 		             .map(node -> (CheckBox) node)
 		             .filter(checkBox -> zones.contains(KeyboardZone.byNumber(Integer.valueOf(checkBox.getText()))))
 		             .forEach(checkBox -> checkBox.setSelected(true));
+	}
+	
+	
+	private static class LanguageStringConverter extends StringConverter<Language> {
+		@Override
+		public String toString(Language language) {
+			return language.getName();
+		}
+		
+		@Override
+		public Language fromString(String s) {
+			return Language.valueOf(s);
+		}
 	}
 }

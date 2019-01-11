@@ -26,7 +26,7 @@ public class ExerciseChooserController extends AbstractExerciseTreeController {
 		secundoButton.setText("Статистика");
 		tertioButton.setText("Начать");
 		
-		primoButton.setOnAction(event -> controlExercise());
+		primoButton.setOnAction(event -> startControlExercise());
 		secundoButton.setOnAction(
 				event -> StatisticsMagic.showUserStatisticsForExercise(Session.getLoggedUser(), selectedExercise));
 		tertioButton.setOnAction(event -> startExercise());
@@ -41,7 +41,7 @@ public class ExerciseChooserController extends AbstractExerciseTreeController {
 		stage.show();
 	}
 	
-	private void controlExercise() {
+	private void startControlExercise() {
 		final int  maxErrorsCount         = 10;
 		final long maxAveragePressingTime = 1000;
 		Exercise exercise = new ExerciseImpl("Контрольный в голову",

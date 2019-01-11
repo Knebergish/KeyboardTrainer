@@ -9,6 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -41,18 +43,7 @@ public class UsersList extends VBox {
 	
 	private void initUsersListView(Consumer<User> selectionHandler) {
 		usersListView = new ListView<>();
-		usersListView.setCellFactory(param -> new ListCell<>() {
-			@Override
-			protected void updateItem(User item, boolean empty) {
-				super.updateItem(item, empty);
-				if (item != null && !empty) {
-					setText(item.getLogin());
-				} else {
-					setText(null);
-					setGraphic(null);
-				}
-			}
-		});
+		usersListView.setCellFactory(param -> new UserListCell());
 		usersListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			selectedUser = newValue;
 			selectionHandler.accept(selectedUser);
@@ -101,7 +92,23 @@ public class UsersList extends VBox {
 	}
 	
 	public void setUsersList(List<User> users) {
-		this.users = users;
+		this.users = new ArrayList<>();
+		Collections.copy(this.users, users);
+		
 		updateUsersListView();
+	}
+	
+	
+	private static class UserListCell extends ListCell<User> {
+		@Override
+		protected void updateItem(User item, boolean empty) {
+			super.updateItem(item, empty);
+			if (item != null && !empty) {
+				setText(item.getLogin());
+			} else {
+				setText(null);
+				setGraphic(null);
+			}
+		}
 	}
 }

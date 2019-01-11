@@ -7,7 +7,10 @@ import javafx.scene.control.DialogEvent;
 import javafx.stage.StageStyle;
 
 
-public class AlertFormManager {
+public final class AlertFormManager {
+	private AlertFormManager() {
+	}
+	
 	public static void showAlert(Alert.AlertType alertType, String title, String headerText, String text,
 	                             EventHandler<DialogEvent> closeEvent) {
 		Alert alert = new Alert(alertType);

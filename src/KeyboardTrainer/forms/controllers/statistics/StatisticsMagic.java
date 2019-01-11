@@ -14,7 +14,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
-public class StatisticsMagic {
+public final class StatisticsMagic {
+	private StatisticsMagic() {
+	}
+	
 	public static void showUserStatisticsForExercise(User user, Exercise exercise) {
 		List<Statistics> statistics =
 				StatisticsDAO.getInstance().getUserStatisticsForExercise(user.getId(), exercise.getId());

@@ -31,7 +31,7 @@ public class RegistrationController implements LoginController {
 	private Consumer<User> loginUser;
 	private Validator      validator;
 	
-	
+	@Override
 	public void init(Consumer<User> loginUser, ActionHandler cancelHandler) {
 		this.loginUser = loginUser;
 		

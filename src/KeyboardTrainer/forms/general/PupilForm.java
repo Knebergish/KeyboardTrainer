@@ -29,6 +29,11 @@ public class PupilForm extends GeneralForm {
 		              );
 	}
 	
+	@Override
+	public String getTitle() {
+		return "Лучший клавиатурный тренажёр";
+	}
+	
 	private void continueAction() {
 		Exercise exercise = ExerciseDAO.getInstance().getFirstNotPassedExercise(Session.getLoggedUser().getId());
 		
@@ -40,10 +45,5 @@ public class PupilForm extends GeneralForm {
 		int userId     = Session.getLoggedUser().getId();
 		var statistics = StatisticsDAO.getInstance().getAverageStatisticsForUser(userId);
 		return new AverageStatisticsController(statistics);
-	}
-	
-	@Override
-	public String getTitle() {
-		return "Лучший клавиатурный тренажёр";
 	}
 }

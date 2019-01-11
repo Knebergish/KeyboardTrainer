@@ -24,9 +24,6 @@ public abstract class GeneralForm {
 	@FXML
 	private AnchorPane contentAnchorPane;
 	
-	
-	protected abstract List<MenuButton> createButtonsList();
-	
 	public void init() {
 		List<MenuButton> buttons = createButtonsList();
 		
@@ -44,6 +41,8 @@ public abstract class GeneralForm {
 		RootWithController<Object> logo = FXMLManager.load("Logo");
 		setContent(logo.getRoot());
 	}
+	
+	protected abstract List<MenuButton> createButtonsList();
 	
 	public abstract String getTitle();
 	

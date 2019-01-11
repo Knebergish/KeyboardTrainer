@@ -30,12 +30,7 @@ public abstract class AbstractExerciseTreeController implements ContentArea {
 	protected ExerciseTree            exercisesTree;
 	protected DetailsFiller<Exercise> detailsFiller;
 	
-	protected Exercise selectedExercise;
-	
-	
-	protected AbstractExerciseTreeController() {
-		selectedExercise = null;
-	}
+	protected Exercise selectedExercise = null;
 	
 	@Override
 	public void init() {

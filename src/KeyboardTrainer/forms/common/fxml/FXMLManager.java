@@ -8,7 +8,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
-public class FXMLManager {
+public final class FXMLManager {
+	private FXMLManager() {
+	}
+	
 	public static <T> RootWithController<T> load(String filePath) {
 		return load(filePath, null);
 	}

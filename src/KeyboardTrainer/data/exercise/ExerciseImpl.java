@@ -47,7 +47,7 @@ public class ExerciseImpl implements Exercise {
 		       ", keyboardZones=" + keyboardZones +
 		       ", maxErrorsCount=" + maxErrorsCount +
 		       ", maxAveragePressingTime=" + maxAveragePressingTime +
-		       ", language=" + language.toString() +
+		       ", language=" + language +
 		       '}';
 	}
 	

@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -148,7 +149,7 @@ class KeyboardVisualizer extends Pane {
 		Character character = Character.toLowerCase(charFromKey);
 		Key key1 = keys.parallelStream()
 		               .filter(key -> key.getChars().contains(character))
-		               .findFirst().orElse(new Key(0, 0, 0, 0, null));
+		               .findFirst().orElse(new Key(0, 0, 0, 0, List.of()));
 		
 		double dX = imageView.getBoundsInParent().getMinX();
 		double dY = imageView.getBoundsInParent().getMinY();
@@ -160,7 +161,7 @@ class KeyboardVisualizer extends Pane {
 	}
 	
 	
-	private static class Key {
+	private static final class Key {
 		private final double          X;
 		private final double          Y;
 		private final double          width;
@@ -172,7 +173,8 @@ class KeyboardVisualizer extends Pane {
 			this.Y = Y;
 			this.width = width;
 			this.height = height;
-			this.chars = chars;
+			this.chars = new ArrayList<>();
+			Collections.copy(this.chars, chars);
 		}
 		
 		double getX() {
@@ -192,7 +194,7 @@ class KeyboardVisualizer extends Pane {
 		}
 		
 		List<Character> getChars() {
-			return chars;
+			return Collections.unmodifiableList(chars);
 		}
 	}
 }

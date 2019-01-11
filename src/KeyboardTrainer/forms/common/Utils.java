@@ -13,7 +13,10 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 
-public class Utils {
+public final class Utils {
+	private Utils() {
+	}
+	
 	public static String formatTime(long time, String format) {
 		LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault());
 		return date.format(DateTimeFormatter.ofPattern(format));

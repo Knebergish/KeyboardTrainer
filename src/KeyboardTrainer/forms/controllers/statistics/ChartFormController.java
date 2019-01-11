@@ -51,7 +51,7 @@ public class ChartFormController {
 		ObservableList<XYChart.Data<Number, Number>> dataList = lineChart.getData().get(0).getData();
 		dataList.forEach(data -> {
 			Node    node    = data.getNode();
-			Tooltip tooltip = new Tooltip('(' + data.getXValue().toString() + ';' + data.getYValue().toString() + ')');
+			Tooltip tooltip = new Tooltip('(' + data.getXValue().toString() + ';' + data.getYValue() + ')');
 			Tooltip.install(node, tooltip);
 		});
 		

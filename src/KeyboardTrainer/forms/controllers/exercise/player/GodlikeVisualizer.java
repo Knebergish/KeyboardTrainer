@@ -39,19 +39,6 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 		fillTextNodes(text);
 	}
 	
-	private void fillTextNodes(String text) {
-		Font font = new Font(FONT_SIZE);
-		
-		for (char c : text.toCharArray()) {
-			Text e = new Text(String.valueOf(c));
-			e.setFont(font);
-			e.setFill(UNPRINTED_COLOR);
-			letters.add(e);
-		}
-		
-		textFlow.getChildren().addAll(letters);
-	}
-	
 	@Override
 	public void start() {
 		reset();
@@ -94,6 +81,19 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 	@Override
 	public Region getRegion() {
 		return scrollPane;
+	}
+	
+	private void fillTextNodes(String text) {
+		Font font = new Font(FONT_SIZE);
+		
+		for (char c : text.toCharArray()) {
+			Text e = new Text(String.valueOf(c));
+			e.setFont(font);
+			e.setFill(UNPRINTED_COLOR);
+			letters.add(e);
+		}
+		
+		textFlow.getChildren().addAll(letters);
 	}
 	
 	private void setLetterDesign(int letterIndex, LetterDesign design) {
@@ -145,7 +145,7 @@ public class GodlikeVisualizer implements ExerciseVisualizer {
 		textFlow.setStyle("-fx-background-color: "
 		                  + color
 		                  + "; -fx-background-insets: "
-		                  + sbInsets.toString()
+		                  + sbInsets
 		                  + ";");
 	}
 	

@@ -4,8 +4,11 @@ package KeyboardTrainer;
 import KeyboardTrainer.data.user.User;
 
 
-public class Session {
-	private static User loggedUser;
+public final class Session {
+	private static User loggedUser = null;
+	
+	private Session() {
+	}
 	
 	public static User getLoggedUser() {
 		return loggedUser;
