@@ -36,7 +36,7 @@ public class ExerciseManagerController extends AbstractExerciseTreeController {
 				return;
 			}
 			
-			ExerciseDAO.getInstance().create(newExercise);
+			newExercise = ExerciseDAO.getInstance().create(newExercise);
 			exercisesTree.addExercise(newExercise);
 			exercisesTree.selectExercise(newExercise);
 			selectedExercise = newExercise;
