@@ -22,24 +22,20 @@ public class FXMLManager {
 	 * @return разметка и контроллер к ней
 	 */
 	public static <T> RootWithController<T> load(String fileName, T controller) {
+		final String filePath = "KeyboardTrainer/forms/layouts/" + fileName + ".fxml";
 		final Parent root;
 		
-		String     filePath = "KeyboardTrainer/forms/layouts/" + fileName + ".fxml";
-		FXMLLoader loader   = new FXMLLoader(FXMLManager.class.getClassLoader().getResource(filePath));
+		FXMLLoader loader = new FXMLLoader(FXMLManager.class.getClassLoader().getResource(filePath));
 		if (controller != null) {
 			loader.setController(controller);
-			controller = loader.getController();
 		}
 		try {
 			root = loader.load();
 		} catch (Exception e) {
-			throw new RuntimeException("Форма с таким именем не найдена: " + filePath, e);
-		}
-		if (controller == null) {
-			controller = loader.getController();
+			throw new RuntimeException("Ошибка загрузки формы: " + filePath, e);
 		}
 		
-		return new RootWithController<>(root, controller);
+		return new RootWithController<>(root, loader.getController());
 	}
 	
 	public static Stage createStage(Parent root, String title) {
