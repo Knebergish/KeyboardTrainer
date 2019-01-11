@@ -16,7 +16,7 @@ public class AdminForm extends GeneralForm {
 				                            ExerciseManagerController::new),
 				new ChangeContentMenuButton("Управление аккаунтами",
 				                            "UsersManager"),
-				new ChangeContentMenuButton("Статистика", "Statistics"),
+				new ChangeContentMenuButton("Статистика", "AdminStatistics"),
 				new ChangeContentMenuButton("Справка", "About")
 		              );
 	}

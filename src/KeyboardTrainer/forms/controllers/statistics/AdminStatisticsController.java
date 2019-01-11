@@ -1,4 +1,4 @@
-package KeyboardTrainer.forms.controllers;
+package KeyboardTrainer.forms.controllers.statistics;
 
 
 import KeyboardTrainer.data.exercise.Exercise;
@@ -9,8 +9,6 @@ import KeyboardTrainer.data.user.UserDAO;
 import KeyboardTrainer.forms.common.fxml.FXMLManager;
 import KeyboardTrainer.forms.components.UsersList;
 import KeyboardTrainer.forms.components.tree.exercise.ExerciseTree;
-import KeyboardTrainer.forms.controllers.statistics.AverageStatistics;
-import KeyboardTrainer.forms.controllers.statistics.AverageStatisticsController;
 import KeyboardTrainer.forms.general.ContentArea;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -21,7 +19,7 @@ import javafx.stage.Stage;
 import java.util.stream.Collectors;
 
 
-public class StatisticsController implements ContentArea {
+public class AdminStatisticsController implements ContentArea {
 	@FXML
 	private GridPane componentsGridPane;
 	@FXML
@@ -63,6 +61,7 @@ public class StatisticsController implements ContentArea {
 			               + selectedExercise.getName();
 			
 			showStatistics(averageStatisticsForUser, title);
+			StatisticsMagic.showUserStatisticsForExercise(selectedUser, selectedExercise);
 		});
 		updateButtonsDisable();
 	}
