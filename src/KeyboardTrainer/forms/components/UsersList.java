@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -92,8 +91,7 @@ public class UsersList extends VBox {
 	}
 	
 	public void setUsersList(List<User> users) {
-		this.users = new ArrayList<>();
-		Collections.copy(this.users, users);
+		this.users = new ArrayList<>(users);
 		
 		updateUsersListView();
 	}

@@ -173,8 +173,7 @@ class KeyboardVisualizer extends Pane {
 			this.Y = Y;
 			this.width = width;
 			this.height = height;
-			this.chars = new ArrayList<>();
-			Collections.copy(this.chars, chars);
+			this.chars = new ArrayList<>(chars);
 		}
 		
 		double getX() {
