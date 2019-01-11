@@ -133,7 +133,7 @@ public class ExerciseSettingsController {
 		
 		// Создаём валидаторы введённых параметров
 		textValidator = new Validator(List.of(
-				new Checker(() -> lengthTextField.getText() != null && !lengthTextField.getText().isEmpty(),
+				new Checker(() -> !lengthTextField.getText().isEmpty(),
 				            "Не введена длина упражнения",
 				            "Длина упражнения должна быть введена."),
 				new Checker(() -> Integer.valueOf(lengthTextField.getText()) >= 25,
@@ -170,6 +170,9 @@ public class ExerciseSettingsController {
 				new Checker(() -> Integer.valueOf(maxAveragePressingTimeTextField.getText()) <= 4000,
 				            "Слишком большое среднее время нажатия клавиш.",
 				            "Среднее время нажатия клавиш должно быть не более 4000 мс."),
+				new Checker(() -> Integer.valueOf(lengthTextField.getText()) == textTextArea.getText().length(),
+				            "Длина введённого текста не совпадает с указанной длиной упражнения.",
+				            "Проверьте правильность введённой длины упражнения."),
 				new Checker(() -> {
 					List<Character> allValidCharacters = getAllValidCharacters(
 							getCharsInZone(languageChoiceBox.getSelectionModel().getSelectedItem()));
