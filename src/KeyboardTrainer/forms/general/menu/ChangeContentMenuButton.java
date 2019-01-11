@@ -12,8 +12,8 @@ import java.util.function.Supplier;
  * Кнопка меню, меняющая содержимое главной формы.
  */
 public class ChangeContentMenuButton extends MenuButton {
-	private String                formName;
-	private Supplier<ContentArea> controllerSupplier;
+	private final String                formName;
+	private final Supplier<ContentArea> controllerSupplier;
 	
 	public ChangeContentMenuButton(String text, String formName) {
 		this(text, formName, () -> null);

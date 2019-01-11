@@ -7,7 +7,7 @@ public enum KeyboardZone {
 	ZONE_3(3),
 	ZONE_4(4);
 	
-	private int number;
+	private final int number;
 	
 	KeyboardZone(int number) {
 		this.number = number;
