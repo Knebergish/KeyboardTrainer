@@ -57,7 +57,10 @@ public class StatisticsController implements ContentArea {
 			AverageStatistics averageStatisticsForUser =
 					StatisticsDAO.getInstance().getAverageUserStatisticsForExercise(selectedUser.getId(),
 					                                                                selectedExercise.getId());
-			String title = "Статистика для";
+			String title = "Статистика пользователя "
+			               + selectedUser.getLogin()
+			               + " для упражнения "
+			               + selectedExercise.getName();
 			
 			showStatistics(averageStatisticsForUser, title);
 		});
