@@ -1,0 +1,178 @@
+ body {background-color: hsl(235,21%,70%);
+ }
+  
+.product_header {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #191970;
+}
+
+.product_image{
+ width: auto;
+  height: 300px;
+}
+
+
+.main_image{
+  text-align: center;
+  width: auto;
+  height: 400px;
+}
+
+.mobile-product-text2{
+  font-size: 24px;
+  text-align: center;
+}
+
+.site-logo-image{
+	  float: left;
+	  height: auto;
+	  width: 220px;
+  }
+
+  footer{	  
+    width: : 100%;
+    background-color: hsl(235,50%,70%);
+    border-radius: 8px;
+  }
+
+footer p {
+  color: white;
+  text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+  
+}
+
+/*----------------------- Область навигации ------------------------------ */
+  nav {
+	border-radius: 8px;
+	background-color: hsl(235,50%,70%);	
+	margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style-type: none;
+  
+}
+
+nav a{
+	float: left;
+	display: block;
+  color: white;
+  text-align: center;
+  padding: 65px 16px;
+  text-decoration: none;
+}
+
+  nav a:hover {
+    animation-name: background-color;
+    animation-duration: 500ms;
+    /* add your code below this line */
+    animation-fill-mode: forwards;
+    /* add your code above this line */
+  }
+  @keyframes background-color {
+    100% {
+      background-color: #4791d0;
+    }
+  }
+/*----------------------- Область навигации ------------------------------ */  
+
+
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.grid-item:hover {
+    animation-name: background-color-dropdown;
+    animation-duration: 500ms;
+    /* add your code below this line */
+    animation-fill-mode: forwards;
+    /* add your code above this line */
+  
+  
+  }
+  @keyframes background-color-dropdown {
+    100% {
+      background-color: white;
+    }
+  }
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.grid-item:hover {
+    color: #1A4780;
+}
+
+.grid-item:hover > a {
+    color: #191970;
+}
+.grid-item:hover > p {
+    color: #191970;
+}
+
+
+
+/*----------------------- Область обработки Grid-элемента для услуг компании ------------------------------ */
+
+
+
+.grid-container {
+  
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  padding: 10px;
+  justify-content: center;
+ 	
+}
+
+.grid-anchor{
+  font-size: 28px;
+  color: white;
+  text-decoration: none;
+  
+}
+
+.grid-anchor:after{
+	width: auto; height: 5px;
+	content: ""; background: #191970;
+	display: block; transform: translateY(30px);
+	opacity: 0; transition: 0.8s
+}
+.grid-anchor:hover:after{
+	opacity: 1; transform: translateY(0)
+}
+
+.grid-header{
+  font-size: 26px;
+  color: #EFD334;
+  text-align: left;
+  font-weight: bold;
+  text-align:  center;
+}
+.grid-item {
+  background-color: #1A4780;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  flex-basis: 600px;
+  padding: 20px;
+  font-size: 30px;
+  text-align: left;
+  color: white;
+  text-align:  center;
+}
+
+.product-image{
+	height: auto;
+	width: 220px;
+}
+
+.product-image-2{
+	height: 220px;
+	width: auto;
+}
+
+/*----------------------- Область обработки Grid-элемента для услуг компании ------------------------------ */
+  
+ 
