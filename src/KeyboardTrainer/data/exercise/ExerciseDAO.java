@@ -141,8 +141,8 @@ public class ExerciseDAO implements DAO<Exercise> {
             statement.setObject(4, createNumberFromZones(entity));
             statement.setObject(5, entity.getMaxErrorsCount());
             statement.setObject(6, entity.getMaxAveragePressingTime());
-            statement.setObject(7, entity.getId());
-	        statement.setObject(8, entity.getLanguage().toString());
+            statement.setObject(7, entity.getLanguage().toString());
+            statement.setObject(8, entity.getId());
             statement.execute();
         }
         catch (SQLException e) {
